@@ -7,5 +7,7 @@ public class DomainController {
         this.facade = facade;
     }
 
-
+    public void createProject(Project project) throws DefaultException {
+        facade.createProject(project);
+    }
 }
