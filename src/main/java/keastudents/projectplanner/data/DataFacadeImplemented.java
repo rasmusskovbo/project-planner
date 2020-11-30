@@ -19,4 +19,9 @@ public class DataFacadeImplemented implements DataFacade {
         userMapper.createUser(user);
         return user;
     }
+
+    @Override
+    public User login(User user) throws DefaultException {
+        return null;
+    }
 }
