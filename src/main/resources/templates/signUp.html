@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="basestyle.css">
+    <link rel="stylesheet" href="loginstyle.css">
+    <script src="https://kit.fontawesome.com/00d69adb96.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+
+<div class="page-wrapper">
+
+    <ul>
+        <li style="float:left"><a class="active" href="/"><h4><i class="fas fa-chart-bar"></i>Website Name</h4></a></li>
+        <li style=" margin-right: 5vw;"><a href="/logIn"><h4 class="active">Log In</h4></a></li>
+        <li><a href="/signUp"><h4>Sign Up</h4></a></li>
+    </ul>
+
+    <div class="box-left">
+
+        <div class="about-website-content">
+            <h1>heading</h1>
+            <p>About us, about us, about us, about us, about us, about us, about us, about us, about us,
+                about us, about us, about us, about us, about us, about us, about us
+                About us, about us, about us, about us, about us, about us, about us, about us, about us,
+                about us, about us, about us, about us, about us, about us, about us</p>
+        </div>
+    </div>
+
+    <div class="box-right">
+        <div class="box-content">
+            <h2>Sign Up</h2>
+
+            <form name="login" action="/signUpAction" method="POST">
+                <div class="flex-box">
+
+                    <!-- first name input -->
+                    <div class="inputfield-halfwidth">
+                        <h3><label for="firstName">First Name</label></h3>
+                        <input type="text" id="firstName" name="firstName" placeholder="Write your first name..." required>
+                    </div>
+
+                    <!-- last name input -->
+                    <div class="inputfield-halfwidth">
+                        <h3> <label for="lastName">Last Name</label></h3>
+                        <input type="text" id="lastName" name="lastName" placeholder="Write your last name...." required>
+                    </div>
+
+                    <div class="non-content-area"></div>
+
+                    <div class="inputfield-fullwidth">
+                        <h3><label for="email">E-mail</label></h3>
+                        <input type="text" id="email" name="email" placeholder="Your e-mail address...." value="" required>
+                    </div>
+
+
+                    <div class="non-content-area"></div>
+
+                    <!-- password input -->
+                    <div class="inputfield-halfwidth">
+                        <h3><label for="password1">Password</label></h3>
+                        <input type="password" id="password1" name="password1" placeholder="Your password...." value="" required>
+                    </div>
+                    <!-- repeat password-->
+                    <div class="inputfield-halfwidth">
+                        <h3><label for="password2">Confirm Password</label></h3>
+                        <input type="password" id="password2" name="password2" placeholder="Confirm password...." value="" required>
+                    </div>
+
+
+                    <div class="inputfield-fullwidth">
+                        <input type="submit" class="button" value="Sign Up">
+                    </div>
+
+
+                    <div class="inputfield-fullwidth">
+                        <a href="/logIn">Already a member? Log in here!</a>
+                    </div>
+
+                    <div class="non-content-area"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- footer content-->
+<div class="footer">
+    <h6> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h6>
+</div>
+
+</body>
+</html>

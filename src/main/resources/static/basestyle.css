@@ -1,0 +1,167 @@
+
+/*overall page body_______________________________________________________________________________*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow-y: scroll;
+}
+
+.page-wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.page-background-img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.page-background-img::after{
+    content: "";
+    background: url("https://cdn.pixabay.com/photo/2016/11/11/20/05/wave-1817646_960_720.png") no-repeat center center;
+    background-size: 100%;
+    opacity: 33%;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+}
+
+
+/* header navigation menu_______________________________________________________________________*/
+ul {
+    position: fixed;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    z-index: 99;
+    border-bottom: 0.2vw solid #7ac4c2;
+    background-color: white;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 1vw 1vw;
+    font-size: 1vw;
+    text-decoration: none;
+}
+
+li a:hover{
+    text-decoration: underline;
+}
+
+.active {
+    background-color:  #7ac4c2;
+}
+
+h4 {
+    padding: 0.3vw;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.2vw;
+    border: 0.2vw solid #7ac4c2;
+}
+
+i{
+    margin-right: 0.5vw;
+    font-size: 1.5vw;
+}
+
+/* left side content_______________________________________________________________________*/
+.img-left{
+    position: absolute;
+    max-height: 70%;
+    max-width: 70%;
+    bottom: 0;
+}
+
+/* right side content______________________________________________________________________*/
+.box-right{
+    position: absolute;
+    height: 100%;
+    width: 40%;
+    right: 0;
+}
+
+.box-content{
+    position: absolute;
+    top: 7vw;
+    width: 80%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 4.5vw;
+    font-variant: small-caps;
+    margin: 4vw 0 1vw 0;
+}
+
+p {
+    font-size: 1.5vw;
+    padding: 2vw;
+}
+
+form {
+    display: inline;
+}
+
+/* buttons styling__________________________________________________________________________*/
+.button {
+    background-color: #BFE3D6;
+    box-shadow: 0.2vw 0.3vw black;
+    padding: 1vw;
+    text-decoration: none;
+    font-size: 1.5vw;
+    margin: 2vw 1vw;
+    border-radius: 1vw;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #7ac4c2;
+    border: 0.2vw solid black;
+    box-shadow: none;
+}
+
+/* empty space content______________________________________________________________________*/
+.non-content-area{
+    height: 1.2vw;
+    width: 100%;
+}
+
+/* footer__________________________________________________________________________________*/
+.footer{
+    position: fixed;
+    width: 100%;
+    height: 1.2vw;
+    bottom: 0;
+    background-color: #7ac4c2;
+    z-index: 99;
+}
+
+h6 {
+    color: black;
+    font-size: 0.75vw;
+    text-align: center;
+    letter-spacing: 0.2vw;
+    margin-top: 0.2vw;
+}
+
+/* display on bigger bigger screens___________________________________________________________*/
+@media only screen and (min-width: 2000px){
+    .box-content{top: 6vw; bottom: 6vw}
+}

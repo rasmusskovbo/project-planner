@@ -1,0 +1,85 @@
+/*left side content_______________________________________________________________________________*/
+.box-left{
+    position: absolute;
+    height: 100%;
+    width: 60%;
+}
+
+.box-left::after{
+    content: "";
+    background: url("https://cdn.pixabay.com/photo/2016/11/11/20/05/wave-1817646_960_720.png") no-repeat center center;
+    background-size: 100%;
+    opacity: 33%;
+    width: 60%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+}
+
+
+.about-website-content {
+    position: absolute;
+    top: 10vw;
+    bottom: 10vw;
+    width: 60%;
+    right: 15vw;
+    text-align: center;
+}
+
+/*right side content_______________________________________________________________________________*/
+.box-content {
+    border: 2vw solid transparent;
+    border-image: linear-gradient(to right top, #7ac4c2, #8cccc6, #9ed4ca, #afdbd0, #bfe3d6) 10 round;
+    background-color: white;
+}
+
+.flex-box{
+    margin-top: 3vw;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    width: 100%;
+    height: 75%;
+    overflow-y: scroll;
+}
+
+.inputfield-fullwidth{
+    height: auto;
+    width: 100%;
+}
+
+.inputfield-halfwidth{
+    height: 4vw;
+    width: 50%;
+}
+
+
+input[type=text], input[type=password], select, textarea, input[type=email], input[type=date], input[type=number]{
+    width: 75%;
+    padding: 0.5vw;
+    border: 0.1vw solid black;
+    font-size: 1vw;
+    text-align-last: center;
+    border-radius: 1vw;
+}
+
+h2 {
+    font-size: 2.5vw;
+    margin: 1vw 0 1vw;
+}
+
+h3{
+    font-size: 1.3vw;
+}
+
+a{
+    font-size: 1.2vw;
+    text-decoration: none;
+    color: black;
+}
+
+/* display on bigger bigger screens___________________________________________________________*/
+@media only screen and (min-width: 2000px){
+    .about-website-content{top: 6vw; bottom: 6vw}
+    .flex-box {height: 65%}
+}
