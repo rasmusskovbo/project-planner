@@ -1,4 +1,4 @@
 package keastudents.projectplanner.Controller;
 
-public class WebController {
+public class ProjectWebController {
 }
