@@ -4,6 +4,7 @@ import keastudents.projectplanner.data.DataFacadeImplemented;
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.DomainController;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
@@ -33,6 +34,28 @@ public class UserWebController {
     @GetMapping("/overview")
     public String overview() {
         return "overview";
+    }
+
+    @GetMapping("/subprojectOverview")
+    public String subprojectOverview() {
+        return "subprojectOverview";
+    }
+    
+    @GetMapping("/taskOverview")
+    public String taskOverview() {
+        return "taskOverview";
+    }
+
+    @GetMapping("/createProject")
+    public String createProject() {
+        return "createProject";
+    }
+
+    @PostMapping("editProject")
+    public String editProject(WebRequest request, Model model) throws DefaultException {
+        //Retrieve values from HTML form via WebRequest
+        String title = request.getParameter("title");
+        return title;
     }
 
     @PostMapping("/signUpAction")

@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Overveiw</title>
-    <link rel="stylesheet" href="ganttstyle.scss">
-    <link rel="stylesheet" href="primarystyle.css">
+    <link rel="stylesheet" href="overviewstyle.css">
+    <link rel="stylesheet" href="createProjectstyle.css">
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/00d69adb96.js"></script>
 </head>
 <body>
 
@@ -14,39 +15,70 @@
         <h1>Firma navn</h1>
     <!-- navigation menu -->
     <div class="sidenav">
+    <form name="createProject" action="/createProject" method="get">
+        <a href="/createProject"><i class="fas fa-archive"></i>Create Project</a>
+    </form>
+        <a href="/popup"><i class="fas fa-user-edit"></i>Edit Project</a>
+    <div class="sidenav-login">
         <a href="/"><i  class="fas fa-sign-out-alt"></i>Log out</a>
     </div>
-</div>
-<!-- display info for project-overview 1-->
-<div class="main-content">
-<div class="w3-card-4">
-    <div class="w3-container w3-theme w3-card">
-        <h1 style="text-align: center">Project Overview</h1>
-    </div>
-    <div class="ul-content">
-    <ul class="w3-ul w3-border-top">
-        <li class="w3-theme-l4">
-            <div class="d-flex justify-content-start">
-                <h2>Projekt</h2>
-            </div>
-        </li>
-        <li class="w3-theme-l3">
-            <div class="d-flex justify-content-center">
-                <h2> Del-projekt</h2>
-            </div>
-        </li>
-        <li class="w3-theme-l2">
-            <div class="d-flex justify-content-end">
-                <h2> Opgaver</h2>
-            </div>
-        </li>
-    </ul>
     </div>
 </div>
-</div>
+
+ <!-- display info for project-overview 1-->
+    <div class="main-content">
+
+        <div class="w3-card-4">
+            <div class="w3-container w3-theme w3-card">
+                <h1 style="text-align: center">Project Overview</h1>
+            </div>
+            <div class="ul-content">
+                <ul class="w3-ul w3-border-top">
+                    <li class="w3-theme-l4">
+                        <div class="d-flex justify-content-start">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Project</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">summered Time</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <form name="subprojectOverview" action="/ubprojectOverview" method="get">
+                                <tr>
+                                    <th scope="row"><a href="/subprojectOverview"><i  class="fas fa-plus"></i></a> 1</th>
+                                    <td>Bygge-projekt</td>
+                                    <td>2020-02-01</td>
+                                    <td>60 days</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><a href="/subprojectOverview"><i  class="fas fa-plus"></i></a> 2</th>
+                                    <td>Nedrivnings-projekt</td>
+                                    <td>2019-11-12</td>
+                                    <td>10 days</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><a href="/subprojectOverview"><i  class="fas fa-plus"></i></a> 3</th>
+                                    <td>Nedrivnings-projekt</td>
+                                    <td>2019-11-12</td>
+                                    <td>10 days</td>
+                                </tr>
+                                </form>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
 <!-- footer content-->
 <div class="footer">
-    <p> WWW.PROJECTPLANNER.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@DATING.COM • TLF: +45 46 46 07 00 </p>
+    <p> WWW.PROJECTPLANNER.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@PROJECTPLANNER.COM • TLF: +45 46 46 07 00 </p>
 </div>
 
 </body>
