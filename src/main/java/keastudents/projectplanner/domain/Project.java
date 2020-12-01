@@ -1,14 +1,17 @@
 package keastudents.projectplanner.domain;
 
-import java.time.LocalDate;
+
+import java.util.Date;
 
 public class Project {
     private String title;
-    private LocalDate startDate;
+    private int id;
+    private Date start_date;
 
-    public Project(String title, LocalDate startDate) {
+    public Project(String title, int id, Date date) {
         this.title = title;
-        this.startDate = startDate;
+        this.id = id;
+        this.start_date = date;
     }
 
     public String getTitle() {
@@ -19,11 +22,20 @@ public class Project {
         this.title = title;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public int getId() {
+        return id;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
+
     }
 }

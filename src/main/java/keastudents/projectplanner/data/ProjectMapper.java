@@ -11,13 +11,19 @@ public class ProjectMapper {
 
         Connection con = DBManager.getConnection();
 
-        // Mangler konkretisering
         try {
-            String SQL = "INSERT INTO project (title) VALUES (?)";
+
+            String SQL = "INSERT INTO project (title, start_date) VALUES (?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, "");
-            ResultSet rs = ps.executeQuery();
-        } catch (SQLException e) {
+            ps.setString(1, project.getTitle());
+            ps.setDate(2, (Date) project.getStart_date());
+            ps.executeQuery();
+
+            System.out.println("Project title:"+project.getTitle());
+            System.out.println("Project start date:"+project.getStart_date());
+
+        } catch(SQLException e) {
+
             throw new DefaultException(e.getMessage());
 
         }

@@ -1,9 +1,9 @@
 package keastudents.projectplanner.domain;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Task extends Subproject {
-    public Task(String title, LocalDate startDate) {
-        super(title, startDate);
+    public Task(String title, int id, Date date) {
+        super(title, id, date);
     }
 }
