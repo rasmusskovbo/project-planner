@@ -1,12 +1,18 @@
-package keastudents.projectplanner.Controller;
+package keastudents.projectplanner.controller;
 
 import keastudents.projectplanner.data.DataFacadeImplemented;
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.DomainController;
+import keastudents.projectplanner.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
@@ -75,4 +81,34 @@ public class UserWebController {
             throw new DefaultException("The two password did not match!");
         }
     }
+
+    @PostMapping("/loginAction")
+    public String loginAction(WebRequest request) throws DefaultException {
+        //Retrieve values from HTML form via WebRequest
+        String email = request.getParameter("email");
+        String pwd = request.getParameter("password");
+
+        User user = domainController.login(email, pwd); // UserMapper checks with Database for user.
+        setSessionInfo(request, user);
+        System.out.println("så langt så godt");
+        if (user.getEmail().equals("user")) { //Fejl Her
+            return "redirect:/overview";
+        } else {
+            throw new DefaultException("Wrong Email or Password!");
+        }
+    }
+
+    private void setSessionInfo(WebRequest request, User user) {
+        // Place user info on session
+        request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
+        request.setAttribute("id", user.getId(), WebRequest.SCOPE_SESSION);
+    }
+
+    /*
+    @ExceptionHandler(Exception.class)
+    public String anotherError(Model model, Exception exception) {
+        model.addAttribute("message",exception.getMessage());
+        return "exceptionPage";
+    }
+     */
 }

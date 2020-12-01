@@ -42,4 +42,27 @@ public class UserMapper {
             throw new DefaultException(ex.getMessage());
         }
     }
+
+    public User login(String email, String password) throws DefaultException {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * from users "
+                    + "JOIN login_info using (idusers) "
+                    + "WHERE email=? AND pword=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("idusers");
+                User user = new User(email, password);
+                user.setId(id);
+                return user;
+            } else {
+                throw new DefaultException("Could not validate user");
+            }
+        } catch (SQLException ex) {
+            throw new DefaultException(ex.getMessage());
+        }
+    }
 }
