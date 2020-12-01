@@ -11,12 +11,14 @@
 
 <div class="page-wrapper">
 
+    <!-- header navigation menu-->
     <ul>
         <li style="float:left"><a class="active" href="/"><h4><i class="fas fa-chart-bar"></i>Website Name</h4></a></li>
         <li style=" margin-right: 5vw;"><a href="/logIn"><h4 class="active">Log In</h4></a></li>
         <li><a href="/signUp"><h4>Sign Up</h4></a></li>
     </ul>
 
+    <!-- left side content-->
     <div class="box-left">
         <div class="about-website-content">
             <h1>heading</h1>
@@ -27,15 +29,18 @@
         </div>
     </div>
 
+    <!-- right side content-->
     <div class="box-right">
         <div class="box-content">
             <h2>Log In</h2>
 
+            <!-- log in form-->
             <form name="login" action="/loginAction" method="POST">
                 <div class="flex-box">
 
                     <div class="non-content-area"></div>
 
+                    <!-- email input -->
                     <div class="inputfield-fullwidth">
                         <h3><label for="email">E-mail</label></h3>
                         <input type="text" id="email" name="email" placeholder="Your e-mail address...." value="" required>
@@ -43,17 +48,20 @@
 
                     <div class="non-content-area"></div>
 
+                    <!-- password input -->
                     <div class="inputfield-fullwidth">
                         <h3><label for="password">Password</label></h3>
                         <input type="password" id="password" name="password" placeholder="Your password...." value="" required>
                     </div>
 
+                    <!-- log in button -->
                     <div class="inputfield-fullwidth">
                         <input type="submit" class="button" value="Log In">
                     </div>
 
                     <div class="non-content-area"></div>
 
+                    <!-- redirect to sign up page -->
                     <div class="inputfield-fullwidth">
                         <a href="/signUp">Not a member? Sign up now!</a>
                     </div>

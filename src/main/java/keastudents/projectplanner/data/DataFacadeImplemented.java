@@ -3,6 +3,7 @@ package keastudents.projectplanner.data;
 import keastudents.projectplanner.domain.DataFacade;
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.Project;
+import keastudents.projectplanner.domain.User;
 
 public class DataFacadeImplemented implements DataFacade {
     private ProjectMapper projectMapper = new ProjectMapper();
@@ -11,5 +12,16 @@ public class DataFacadeImplemented implements DataFacade {
     @Override
     public void createProject(Project project) throws DefaultException {
         projectMapper.createProject(project);
+    }
+
+    @Override
+    public User createUser(User user) throws DefaultException{
+        userMapper.createUser(user);
+        return user;
+    }
+
+    @Override
+    public User login(User user) throws DefaultException {
+        return null;
     }
 }
