@@ -32,11 +32,9 @@ public class UserWebController {
         return "beforeLogin/signUpPage";
     }
 
-    @GetMapping("/projectsOverview")
+    @GetMapping("/overviewPage")
     public String projectsOverview(WebRequest request, Model model) throws DefaultException {
-
-//        Gets User ID from WebRequest (Established upon log-in)
-       int id = (int) request.getAttribute("id",WebRequest.SCOPE_SESSION);
+        int id = (int) request.getAttribute("id",WebRequest.SCOPE_SESSION);
         // Retrieves project and user info, packs them and sends to html page.
         model.addAttribute("user", domainController.getUser(id));
 
@@ -45,7 +43,7 @@ public class UserWebController {
             model.addAttribute("project", domainController.getProject(id));
         }
          */
-        return "afterLogin/projectsOverview";
+        return "afterLogin/overviewPage";
     }
 
 
@@ -62,7 +60,7 @@ public class UserWebController {
         if (password.equals(confirmedPassword)) {
             domainController.createUser(firstName, lastName, email, password);
             // setSessionInfo
-            return "redirect:/projectsOverview";
+            return "redirect:/overviewPage";
         } else {
             throw new DefaultException("The two password did not match!");
         }
@@ -72,18 +70,13 @@ public class UserWebController {
     public String loginAction(WebRequest request) throws DefaultException {
         //Retrieve values from HTML form via WebRequest
         String email = request.getParameter("email");
-        String pwd = request.getParameter("password");
+        String password = request.getParameter("password");
 
         // Try/Catch her?
-        //Nullpointer in login method????
-        try {
-            User user = domainController.login(email, pwd); // UserMapper checks with Database for user. Returns user ID if true
-            setSessionInfo(request, user);
-        } catch (NullPointerException ex) {
-            System.out.println("User missing");
-        }
+        User user = domainController.login(email, password);
+        setSessionInfo(request, user);
 
-        return "redirect:/projectsOverview";
+        return "redirect:/overviewPage";
     }
 
     private void setSessionInfo(WebRequest request, User user) {
