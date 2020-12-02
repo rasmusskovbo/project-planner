@@ -35,10 +35,10 @@ public class UserWebController {
     @GetMapping("/projectsOverview")
     public String projectsOverview(WebRequest request, Model model) throws DefaultException {
 
-        //Gets User ID from WebRequest (Established upon log-in)
-//       int id = (int) request.getAttribute("id",WebRequest.SCOPE_SESSION);
+//        Gets User ID from WebRequest (Established upon log-in)
+       int id = (int) request.getAttribute("id",WebRequest.SCOPE_SESSION);
         // Retrieves project and user info, packs them and sends to html page.
-//        model.addAttribute("user", domainController.getUser(id));
+        model.addAttribute("user", domainController.getUser(id));
 
         /* TODO Check om der et projekt først, hvis går videre, ellers load
         if (domainController.getProject(id) != null) {
