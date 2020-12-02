@@ -3,19 +3,12 @@ package keastudents.projectplanner.controller;
 import keastudents.projectplanner.data.DataFacadeImplemented;
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.DomainController;
-import keastudents.projectplanner.domain.Project;
 import keastudents.projectplanner.domain.User;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
-
-
-
-import java.sql.Date;
-import java.sql.SQLException;
 
 @Controller
 public class UserWebController {
@@ -24,46 +17,36 @@ public class UserWebController {
     //show welcome-/frontpage
     @GetMapping("/")
     public String frontpage() {
-        return "frontpage";
+        return "beforeLogin/frontpage";
     }
 
     //show log in page
-    @GetMapping("/logIn")
-    public String logIn() {
-        return "logIn";
+    @GetMapping("/logInPage")
+    public String logInPage() {
+        return "beforeLogin/logInPage";
     }
 
     //show sign up page
-    @GetMapping("/signUp")
-    public String signUp() {
-        return "signUp";
+    @GetMapping("/signUpPage")
+    public String signUpPage() {
+        return "beforeLogin/signUpPage";
     }
 
-    @GetMapping("/overview")
-    public String overview(WebRequest request, Model model) throws DefaultException {
+    @GetMapping("/projectsOverview")
+    public String projectsOverview(WebRequest request, Model model) throws DefaultException {
 
         //Gets User ID from WebRequest (Established upon log-in)
-        int id = (int) request.getAttribute("id",WebRequest.SCOPE_SESSION);
+//       int id = (int) request.getAttribute("id",WebRequest.SCOPE_SESSION);
         // Retrieves project and user info, packs them and sends to html page.
-        model.addAttribute("user", domainController.getUser(id));
+//        model.addAttribute("user", domainController.getUser(id));
 
         /* TODO Check om der et projekt først, hvis går videre, ellers load
         if (domainController.getProject(id) != null) {
             model.addAttribute("project", domainController.getProject(id));
         }
          */
-        return "overview";
+        return "afterLogin/projectsOverview";
     }
-    /* //skal højst sansynligt slettes
-    @PostMapping("createProject")
-    public String createProject(WebRequest request, Project project) throws DefaultException {
-        //Retrieve values from HTML form via WebRequest
-        String title = request.getParameter("title");
-        String start_date = request.getParameter("date");
-        return "overview#popup"; //
-    }
-
-     */
 
 
     @PostMapping("/signUpAction")
@@ -79,7 +62,7 @@ public class UserWebController {
         if (password.equals(confirmedPassword)) {
             domainController.createUser(firstName, lastName, email, password);
             // setSessionInfo
-            return "redirect:/overview";
+            return "redirect:/projectsOverview";
         } else {
             throw new DefaultException("The two password did not match!");
         }
@@ -92,9 +75,15 @@ public class UserWebController {
         String pwd = request.getParameter("password");
 
         // Try/Catch her?
-        User user = domainController.login(email, pwd); // UserMapper checks with Database for user. Returns user ID if true
-        setSessionInfo(request, user);
-        return "redirect:/overview";
+        //Nullpointer in login method????
+        try {
+            User user = domainController.login(email, pwd); // UserMapper checks with Database for user. Returns user ID if true
+            setSessionInfo(request, user);
+        } catch (NullPointerException ex) {
+            System.out.println("User missing");
+        }
+
+        return "redirect:/projectsOverview";
     }
 
     private void setSessionInfo(WebRequest request, User user) {

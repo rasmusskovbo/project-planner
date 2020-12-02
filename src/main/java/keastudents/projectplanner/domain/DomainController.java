@@ -10,17 +10,7 @@ public class DomainController {
         this.facade = facade;
     }
 
-
-    public void createProject(String title, String startDate) throws DefaultException {
-        facade.createProject(title, startDate);
-    }
-
-    public Project getProject(int id) throws DefaultException {
-        return facade.getProject(id);
-    }
-
     // TODO Kan simplificeres
-
     public User createUser(String firstName, String lastName, String email, String password) throws DefaultException{
         User userCreate = new User(firstName, lastName, email, password);
         facade.createUser(userCreate);
@@ -33,5 +23,13 @@ public class DomainController {
 
     public User login(String email, String password) throws DefaultException {
         return facade.login(email, password);
+    }
+
+    public void createProject(int id, String projectName, String startDate) throws DefaultException{
+        facade.createProject(id, projectName, startDate);
+    }
+
+    public Project getProject(int id) throws DefaultException {
+        return facade.getProject(id);
     }
 }

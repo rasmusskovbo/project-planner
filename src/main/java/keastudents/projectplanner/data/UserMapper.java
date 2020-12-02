@@ -44,17 +44,21 @@ public class UserMapper {
     }
 
     public User login(String email, String password) throws DefaultException {
+
         try {
             Connection con = DBManager.getConnection();
+
+            //user table in first column id needs to be named user_id too? otherwise cant join with other tables on that specific id?
             String SQL = "SELECT * FROM user "
-                    + "JOIN login_info using (id) "
+                    + "JOIN login_info using (user_id) "
+//                    + "JOIN login_info using (id) "
                     + "WHERE email=? AND pword=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("user_id");
                 User user = new User(email, password);
                 user.setId(id);
                 return user;
@@ -93,5 +97,6 @@ public class UserMapper {
             throw new DefaultException(e.getMessage());
         }
     }
+
 }
 

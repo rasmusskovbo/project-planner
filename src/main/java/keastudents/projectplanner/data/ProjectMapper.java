@@ -9,30 +9,42 @@ import java.time.LocalDate;
 public class ProjectMapper {
     Connection con = DBManager.getConnection();
 
-    public void createProject(String title, String startDate) throws DefaultException {
-
+    public void createProject(int id, String title, String startDate) throws DefaultException {
         try {
+            Connection con = DBManager.getConnection();
 
-            String SQL = "INSERT INTO project (title, start_date) VALUES (?, ?)";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, title);
-            ps.setString(2, startDate);
-            ResultSet rs = ps.executeQuery();
+            String createProjectSQL = "INSERT INTO project (user_id, title, start_date) VALUE (?, ?, ?)";
+            PreparedStatement psProject = con.prepareStatement(createProjectSQL);
+            psProject.setInt(1, id);
+            psProject.setString(2, title);
+            psProject.setString(3, startDate);
+            psProject.executeUpdate();
 
-            if (rs.next()) {
-                Project project = new Project(
-                        rs.getString("title"),
-                        LocalDate.parse(rs.getString("start_date"))
-                );
-            } else {
-                throw new DefaultException("Could not create project (Input or database error");
-            }
-
-        } catch(SQLException e) {
-
-            throw new DefaultException(e.getMessage());
-
+        } catch (SQLException ex) {
+            throw new DefaultException(ex.getMessage());
         }
+//        try {
+//
+//            String SQL = "INSERT INTO project (title, start_date) VALUES (?, ?)";
+//            PreparedStatement ps = con.prepareStatement(SQL);
+//            ps.setString(1, title);
+//            ps.setString(2, startDate);
+//            ResultSet rs = ps.executeQuery();
+//
+//            if (rs.next()) {
+//                Project project = new Project(
+//                        rs.getString("title"),
+//                        LocalDate.parse(rs.getString("start_date"))
+//                );
+//            } else {
+//                throw new DefaultException("Could not create project (Input or database error");
+//            }
+//
+//        } catch(SQLException e) {
+//
+//            throw new DefaultException(e.getMessage());
+//
+//        }
     }
 
     public Project getProject(int id) throws DefaultException {

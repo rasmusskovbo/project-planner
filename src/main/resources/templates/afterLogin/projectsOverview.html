@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects Overview</title>
+    <link rel="stylesheet" href="basestyle.css">
+    <link rel="stylesheet" href="afterLogin/overviewstyle.css">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/00d69adb96.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <!-- left side content/ nav menu-->
+    <div class="left-content">
+        <div class="sidenav">
+            <a href="/overview"><i class="fas fa-tasks"></i>Project overview</a>
+            <a href="/"><i class="fas fa-sign-out-alt"></i>Log out</a>
+        </div>
+    </div>
+
+    <!-- main content middle-->
+    <div class="main-content">
+        <div class="table-content">
+            <table>
+
+                <!-- table header -->
+                <thead>
+                <tr>
+                    <th>My Projects</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <!-- include more-->
+                </tr>
+                </thead>
+
+                <!-- thymeleaf start = get all projects-->
+                <tr>
+                    <tbody class="project-content">
+                    <tr>
+                        <td>
+                            <label for="project">Project Name: Build House</label> <!-- thymeleaf: project name-->
+                            <input type="checkbox" name="project" id="project" data-toggle="toggle">
+                        </td>
+                        <td colspan="2">
+                            <label for="projectStart">2020-12-01</label> <!-- thymeleaf: project start date-->
+                            <input type="checkbox" name="projectStart" id="projectStart" data-toggle="toggle">
+                        </td>
+                    </tr>
+                    </tbody>
+                </tr>
+
+                <!-- thymeleaf = get all subprojects-->
+                <tbody class="hide-content">
+                <!-- subproject -->
+                <tr class="subproject-content">
+                    <td>
+                        <label for="subproject">Subproject: Walls</label> <!-- thymeleaf: subproject name-->
+                        <input type="checkbox" name="subproject" id="subproject" data-toggle="toggle">
+                        <!-- create tasks button-->
+                        <a href="#popupTasks"><p>Add task</p></a>
+                    </td>
+                    <td>2020-15-01</td> <!-- thymeleaf: subproject start date-->
+                    <td>2020-17-01</td> <!-- thymeleaf: subproject end date / in the beginning null-->
+
+
+                    <!-- thymeleaf = get all subproject-tasks-->
+                    <tbody class="hide-content">
+                        <!-- tasks -->
+                        <tr class="tasks-content">
+                            <td>Tasks: Get Materials</td> <!-- thymeleaf: tasks name-->
+                            <td>2020-15-01</td> <!-- thymeleaf: tasks start date-->
+                            <td>2020-16-01</td> <!-- thymeleaf: tasks end date / in the beginning null-->
+                        </tr>
+
+                        <tr class="tasks-content">
+                            <td>Tasks: Take Measurements</td> <!-- thymeleaf: tasks name-->
+                            <td>2020-16-01</td> <!-- thymeleaf: tasks start date-->
+                            <td>2020-17-01</td> <!-- thymeleaf: tasks end date / in the beginning null-->
+                        </tr>
+                    </tbody>
+                </tr>
+                </tbody>
+
+                <!-- create subproject button-->
+                <tr class="create-subproject-button">
+                    <td colspan="3">
+                        <i class="far fa-plus-square"></i>
+                        <a href="#popupSubproject"><input type="submit" value="Create Subproject"></a>
+                    </td>
+                </tr>
+                <!-- thymeleaf stop -->
+
+                <!-- create project button-->
+                <tfoot class="create-project-button">
+                <tr>
+                    <td colspan="3">
+                        <i class="far fa-plus-square"></i>
+                        <a href="#popupProject"><input type="submit" value="Create Project"></a>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- popup for creating a project-->
+<div id="popupProject" class="overlay">
+    <div class="popup">
+        <h1>create project</h1>
+        <a class="close" href="#">&times;</a>
+        <div class="popup-content">
+            <form name="createProjectAction" action="/createProjectAction" method="POST">
+
+                <div class="start-project">
+                    <h2><label for="projectName">project name</label></h2>
+                    <input type="text" id="projectName" name="projectName" th:value="${title}" required>
+                </div>
+
+                <div class="start-project">
+                    <h2><label for="startDate">start date</label></h2>
+                    <input type="date" id="startDate" name="startDate" th:value="${start_date}" required>
+                </div>
+
+                <input type="submit" class="button" onclick="return confirm('Create Project?')" value="Create Project">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- popup for creating a subproject-->
+<div id="popupSubproject" class="overlay">
+    <div class="popup">
+        <h1>create subproject</h1>
+        <a class="close" href="#">&times;</a>
+        <div class="popup-content">
+            <form name="createSubprojectAction" action="/createSubprojectAction" method="POST">
+
+                <div class="start-project">
+                    <h2><label for="subprojectName">subproject name</label></h2>
+                    <input type="text" id="subprojectName" name="subprojectName" th:value="${title}" required>
+                </div>
+
+                <div class="start-project">
+                    <h2><label for="subprojectStartDate">start date</label></h2>
+                    <input type="date" id="subprojectStartDate" name="subprojectStartDate" th:value="${start_date}"
+                           required>
+                </div>
+
+                <input type="submit" class="button" onclick="return confirm('Create Project?')" value="Create Project">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- popup for creating a tasks-->
+<div id="popupTasks" class="overlay">
+    <div class="popup">
+        <h1>create task</h1>
+        <a class="close" href="#">&times;</a>
+        <div class="popup-content">
+            <form name="createTaskAction" action="/createTaskAction" method="POST">
+
+                <div class="start-project">
+                    <h2><label for="taskName">task name</label></h2>
+                    <input type="text" id="taskName" name="taskName" th:value="${title}" required>
+                </div>
+
+                <div class="start-project">
+                    <h2><label for="taskStartDate">start date</label></h2>
+                    <input type="date" id="taskStartDate" name="taskStartDate" th:value="${start_date}" required>
+                </div>
+
+                <input type="submit" class="button" onclick="return confirm('Create Project?')" value="Create Project">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- footer content-->
+<div class="footer">
+    <h6> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h6>
+</div>
+
+<!-- script for collapsing table rows onclick-->
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="toggle"]').change(function(){
+            $(this).parents().next('.hide-content').toggle();
+            //Doesnt hide all child tables properly - Needs to be fixed
+        });
+    });
+</script>
+
+</body>
+</html>

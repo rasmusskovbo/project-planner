@@ -1,0 +1,245 @@
+
+/*left side sidenav content_________________________________________________________________________________*/
+.left-content{
+    left: 0;
+    position: fixed;
+    width: 17vw;
+    top: 0;
+    bottom: 1vw;
+    background: linear-gradient(to right top, #7ac4c2, #8cccc6, #9ed4ca, #afdbd0, #bfe3d6);
+    z-index: 95;
+}
+
+.sidenav {
+    height: 100%;
+    width: 100%;
+    padding-top: 5vw;
+}
+
+.sidenav a {
+    color: black;
+    text-align: justify;
+    text-decoration: none;
+    font-size: 1.5vw;
+    padding-left:2vw;
+    margin-bottom: 2vw;
+    display: block;
+}
+
+.sidenav i {
+    padding-right: 0.5vw;
+}
+
+:root {
+    --mainColor: white;
+}
+
+.sidenav a:hover {
+    background:
+            linear-gradient(
+                    to right,
+                    var(--mainColor) 0%,
+                    var(--mainColor) 1vw,
+                    transparent
+            );
+}
+
+/* Main/table content _________________________________________________________________________________*/
+.main-content{
+    height: 100%;
+    left: 19vw;
+    right: 2vw;
+    top:5vw;
+    position: absolute;
+}
+
+.table-content {
+    position: absolute;
+    height: auto;
+    width: 100%;
+    border-right:0.2vw solid black;
+    border-left:0.2vw solid black;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    height: auto;
+    word-break: break-all;
+}
+
+/* table header*/
+th {
+    background: #3498db;
+    color: white;
+    font-weight: bold;
+    font-size: 2vw;
+}
+
+/* table cell and table header*/
+td, th {
+    padding: 0.5vw;
+    border: 0.1vw solid #ccc;
+}
+
+
+.project-content tr td {
+    background-color: #2cc16a;
+    font-weight: bold;
+    color: #fff;
+    text-align: left;
+    font-size: 1.5vw;
+}
+
+.project-content tr td label {
+    display: block;
+}
+
+.subproject-content td{
+    padding-left: 3vw;
+    font-size: 1.3vw;
+}
+
+.tasks-content td {
+    padding-left: 5vw;
+    font-size: 1.1vw;
+}
+
+.hide-content .subproject-content {
+    background-color: #beedca;
+}
+
+.hide-content .tasks-content {
+    background-color: #eef0d5;
+}
+
+.hide-content p {
+    font-size: 1vw;
+    text-align: right;
+    padding: 0;
+    text-decoration: underline;
+    color: black;
+}
+
+.hide-content p:hover {
+    background-color: white;
+}
+
+.create-project-button {
+    font-size: 1.5vw;
+    text-align: center;
+}
+
+.create-subproject-button {
+    font-size: 1.2vw;
+    background-color: #beedca ;
+}
+
+input[type=submit] {
+    background-color: #BFE3D6;
+    box-shadow: 0.1vw 0.2vw black;
+    padding: 0.3vw;
+    text-decoration: none;
+    font-size: 1vw;
+    margin: 1vw 0.5vw;
+    border-radius: 1vw;
+    text-align: center;
+}
+
+input[type=submit]:hover {
+    background-color: #7ac4c2;
+    border: 0.1vw solid black;
+    box-shadow: none;
+}
+
+[data-toggle="toggle"]{
+    display: none;
+}
+
+.overlay {
+    height: 100%;
+    left: 17vw;
+    right: 0;
+    top:0;
+    position: fixed;
+    bottom: 1vw;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    top: 25%;
+    margin: auto;
+    padding: 2vw;
+    border-radius: 0.2vw;
+    width: 20vw;
+    height: auto;
+    position: relative;
+    transition: all 1s ease-in-out;
+    background: linear-gradient(to right top, #7ac4c2, #8cccc6, #9ed4ca, #afdbd0, #bfe3d6);
+}
+
+.popup h1 {
+    width: 100%;
+    height: auto;
+    font-size: 1.8vw;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    font-variant: small-caps;
+    border-bottom: 0.2vw solid #520404;
+    text-align: center;
+}
+
+.popup-content{
+    text-align: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding:0.3vw;
+}
+
+.popup-content p {
+    font-size: 1vw;
+    text-align: justify;
+    color: black;
+}
+
+.popup .close {
+    position: absolute;
+    top: 0.5vw;
+    right: 1.5vw;
+    transition: all 200ms;
+    font-size: 3vw;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.popup .close:hover {
+    color: #7ac4c2;
+}
+
+.start-project {
+    height: auto;
+    width: 100%;
+}
+
+.start-project h2 {
+    font-size: 1.2vw;
+    font-variant: small-caps;
+}
+
+input[type=text], input[type=date] {
+    width: 80%;
+    padding: 0.5vw;
+    border: 0.1vw solid black;
+    font-size: 1vw;
+    text-align-last: center;
+    margin-bottom: 1vw;
+}
