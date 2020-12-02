@@ -46,6 +46,8 @@ public class UserWebController {
     @GetMapping("/overview")
     public String overview(WebRequest request, Model model) throws DefaultException {
 
+            return "overview";
+
     }
 
     @PostMapping("createProject")
