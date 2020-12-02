@@ -5,20 +5,16 @@ import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.DomainController;
 import keastudents.projectplanner.domain.Project;
 import keastudents.projectplanner.domain.User;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-import org.springframework.web.bind.annotation.ExceptionHandler;
-
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.context.request.WebRequest;
 
 
-import java.sql.Date;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 @Controller
@@ -46,33 +42,28 @@ public class UserWebController {
     @GetMapping("/overview")
     public String overview(WebRequest request, Model model) throws DefaultException {
 
-            return "overview";
+        //Gets User ID from WebRequest (Established upon log-in)
+        int id = (int) request.getAttribute("id",WebRequest.SCOPE_SESSION);
+        // Retrieves project and user info, packs them and sends to html page.
+        model.addAttribute("user", domainController.getUser(id));
 
+        /* TODO Check om der et projekt først, hvis går videre, ellers load
+        if (domainController.getProject(id) != null) {
+            model.addAttribute("project", domainController.getProject(id));
+        }
+         */
+        return "overview";
     }
-
+    /* //skal højst sansynligt slettes
     @PostMapping("createProject")
     public String createProject(WebRequest request, Project project) throws DefaultException {
         //Retrieve values from HTML form via WebRequest
         String title = request.getParameter("title");
         String start_date = request.getParameter("date");
         return "overview#popup"; //
-        }
-
-    @GetMapping("/subprojectOverview")
-    public String subprojectOverview() {
-        return "subprojectOverview";
-    }
-    
-    @GetMapping("/taskOverview")
-    public String taskOverview() {
-        return "taskOverview";
     }
 
-    @GetMapping("/createProject")
-    public String createProject() {
-        return "createProject";
-    }
-
+     */
 
 
     @PostMapping("/signUpAction")
