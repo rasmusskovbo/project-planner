@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.context.request.WebRequest;
 
+
 import java.sql.Date;
+
+import java.sql.SQLException;
 
 @Controller
 public class UserWebController {
@@ -41,8 +44,8 @@ public class UserWebController {
     }
 
     @GetMapping("/overview")
-    public String overview() {
-        return "overview";
+    public String overview(WebRequest request, Model model) throws DefaultException {
+
     }
 
     @PostMapping("createProject")
@@ -63,21 +66,12 @@ public class UserWebController {
         return "taskOverview";
     }
 
-   /* @GetMapping("/createProject")
+    @GetMapping("/createProject")
     public String createProject() {
         return "createProject";
     }
 
 
-    */
-
-
-    @PostMapping("editProject")
-    public String editProject(WebRequest request, Project project) throws DefaultException {
-        //Retrieve values from HTML form via WebRequest
-        String title = request.getParameter("title");
-        return title;
-    }
 
     @PostMapping("/signUpAction")
     public String signUpAction(WebRequest request) throws DefaultException {
@@ -91,6 +85,7 @@ public class UserWebController {
         //Check if first password value matches confirmed password value
         if (password.equals(confirmedPassword)) {
             domainController.createUser(firstName, lastName, email, password);
+            // setSessionInfo
             return "redirect:/overview";
         } else {
             throw new DefaultException("The two password did not match!");
@@ -103,14 +98,10 @@ public class UserWebController {
         String email = request.getParameter("email");
         String pwd = request.getParameter("password");
 
-        User user = domainController.login(email, pwd); // UserMapper checks with Database for user.
+        // Try/Catch her?
+        User user = domainController.login(email, pwd); // UserMapper checks with Database for user. Returns user ID if true
         setSessionInfo(request, user);
-        System.out.println("så langt så godt");
-        if (user.getEmail().equals("user")) { //Fejl Her
-            return "redirect:/overview";
-        } else {
-            throw new DefaultException("Wrong Email or Password!");
-        }
+        return "redirect:/overview";
     }
 
     private void setSessionInfo(WebRequest request, User user) {

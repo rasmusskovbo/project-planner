@@ -46,15 +46,15 @@ public class UserMapper {
     public User login(String email, String password) throws DefaultException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT * from users "
-                    + "JOIN login_info using (idusers) "
+            String SQL = "SELECT * FROM user "
+                    + "JOIN login_info using (id) "
                     + "WHERE email=? AND pword=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                int id = rs.getInt("idusers");
+                int id = rs.getInt("id");
                 User user = new User(email, password);
                 user.setId(id);
                 return user;
@@ -65,4 +65,33 @@ public class UserMapper {
             throw new DefaultException(ex.getMessage());
         }
     }
+
+    public User getUser(int id) throws DefaultException {
+        Connection con = DBManager.getConnection();
+
+        try {
+            String SQL = "SELECT * FROM user " +
+                    "JOIN user_info USING (id) " +
+                    "WHERE user_id=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                User user = new User(
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email")
+                );
+
+                return user;
+
+            } else {
+                throw new DefaultException("Could not validate user (ID not found in database)");
+            }
+        } catch (SQLException e) {
+            throw new DefaultException(e.getMessage());
+        }
+    }
 }
+
