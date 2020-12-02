@@ -45,32 +45,11 @@ public class UserWebController {
         // Gets User ID from WebRequest (Established upon log-in)
         int id = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
 
-        // Packages user+info and sends to html site.
+        // Retrieves project and user info, packs them and sends to html page.
         model.addAttribute("user", domainController.getUser(id));
+        model.addAttribute("project", domainController.getProject(id));
 
         return "overview";
-    }
-
-    @GetMapping("/subprojectOverview")
-    public String subprojectOverview() {
-        return "subprojectOverview";
-    }
-    
-    @GetMapping("/taskOverview")
-    public String taskOverview() {
-        return "taskOverview";
-    }
-
-    @GetMapping("/createProject")
-    public String createProject() {
-        return "createProject";
-    }
-
-    @PostMapping("editProject")
-    public String editProject(WebRequest request, Model model) throws DefaultException {
-        //Retrieve values from HTML form via WebRequest
-        String title = request.getParameter("title");
-        return title;
     }
 
     @PostMapping("/signUpAction")

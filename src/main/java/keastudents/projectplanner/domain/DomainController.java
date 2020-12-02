@@ -9,18 +9,13 @@ public class DomainController {
         this.facade = facade;
     }
 
-    public void createProject(Project project) throws DefaultException {
-        facade.createProject(project);
+    public void createProject(String title, String startDate) throws DefaultException {
+        facade.createProject(title, startDate);
     }
 
-/* // hvis vi skal gemme de oprettede projekter i databasen ?
-    public Project createProject(String title, LocalDate startDate) throws DefaultException {
-        Project project = new Project(title, startDate);
-        facade.createProject(project);
-        return project;
+    public Project getProject(int id) throws DefaultException {
+        return facade.getProject(id);
     }
-
- */
 
     // TODO Kan simplificeres
     public User createUser(String firstName, String lastName, String email, String password) throws DefaultException{

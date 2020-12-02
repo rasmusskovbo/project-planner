@@ -67,9 +67,9 @@ public class UserMapper {
     }
 
     public User getUser(int id) throws DefaultException {
-        try {
-            Connection con = DBManager.getConnection();
+        Connection con = DBManager.getConnection();
 
+        try {
             String SQL = "SELECT * FROM user " +
                     "JOIN user_info USING (id) " +
                     "WHERE user_id=?";
@@ -90,9 +90,8 @@ public class UserMapper {
                 throw new DefaultException("Could not validate user (ID not found in database)");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new DefaultException(e.getMessage());
         }
-        return null; // TODO Denne burde ikke kræves når der er try/catch og throws
     }
 }
 

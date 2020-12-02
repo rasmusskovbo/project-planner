@@ -1,8 +1,12 @@
 package keastudents.projectplanner.domain;
 
+import java.time.LocalDate;
+
 public interface DataFacade {
 
-    public void createProject(Project project) throws DefaultException;
+    public void createProject(String title, String startDate) throws DefaultException;
+
+    public Project getProject(int id) throws DefaultException;
 
     public User createUser(User user) throws DefaultException;
 
