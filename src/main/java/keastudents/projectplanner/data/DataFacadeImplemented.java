@@ -10,8 +10,9 @@ public class DataFacadeImplemented implements DataFacade {
     private UserMapper userMapper = new UserMapper();
 
     @Override
-    public void createProject(Project project) throws DefaultException {
+    public Project createProject(Project project) throws DefaultException {
         projectMapper.createProject(project);
+        return project;
     }
 
     @Override

@@ -96,6 +96,79 @@ ul li:hover{
     margin: 5px;
 }
 
+.overlay {
+    position: fixed;
+    top: 7vw;
+    bottom: 1vw;
+    left: 18vw;
+    right: 18vw;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    top: 3vw;
+    margin: auto;
+    padding: 2vw;
+    border-radius: 5px;
+    width: 35%;
+    height: 30vw;
+    position: relative;
+    transition: all 1s ease-in-out;
+    background-color: white;
+    overflow-x: hidden;
+}
+
+.popup h1 {
+    width: 100%;
+    height: auto;
+    font-size: 1.5vw;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    font-variant: small-caps;
+    border-bottom: 0.2vw solid #520404;
+    text-align: center;
+}
+
+.popup-content{
+    text-align: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding:0.3vw;
+}
+
+.popup-content p {
+    font-size: 1vw;
+    text-align: justify;
+    color: black;
+}
+
+.popup .close {
+    position: absolute;
+    top: 0.5vw;
+    right: 1.5vw;
+    transition: all 200ms;
+    font-size: 3vw;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.popup .close:hover {
+    color: darkred;
+}
+
+.button:hover {
+    background-color: #525453;
+}
+
 /*Footer content -----------------------------------------------------------------------------------------------------*/
 .footer{
     position: fixed;

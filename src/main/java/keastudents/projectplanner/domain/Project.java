@@ -13,7 +13,10 @@ public class Project {
         this.id = id;
         this.start_date = date;
     }
-
+    public Project(String title, Date date) {
+        this.title = title;
+        this.start_date = date;
+    }
     public String getTitle() {
         return title;
     }
