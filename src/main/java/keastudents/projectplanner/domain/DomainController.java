@@ -20,7 +20,6 @@ public class DomainController {
         return project;
     }
 
-
  */
     public User createUser(String firstName, String lastName, String email, String password) throws DefaultException{
         User userCreate = new User(firstName, lastName, email, password);
@@ -29,8 +28,6 @@ public class DomainController {
     }
 
     public User login(String email, String password) throws DefaultException {
-        User userLogin = new User(email, password);
-        facade.login(userLogin);
-        return userLogin;
+        return facade.login(email, password);
     }
 }

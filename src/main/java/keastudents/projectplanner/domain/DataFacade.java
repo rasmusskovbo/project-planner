@@ -6,6 +6,6 @@ public interface DataFacade {
 
     public User createUser(User user) throws DefaultException;
 
-    public User login(User user) throws DefaultException;
+    public User login(String email, String password) throws DefaultException;
 
 }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.context.request.WebRequest;
 
+import java.sql.SQLException;
+
 @Controller
 public class UserWebController {
     DomainController domainController = new DomainController(new DataFacadeImplemented());
@@ -76,6 +78,7 @@ public class UserWebController {
         //Check if first password value matches confirmed password value
         if (password.equals(confirmedPassword)) {
             domainController.createUser(firstName, lastName, email, password);
+            // setSessionInfo
             return "redirect:/overview";
         } else {
             throw new DefaultException("The two password did not match!");
@@ -88,14 +91,11 @@ public class UserWebController {
         String email = request.getParameter("email");
         String pwd = request.getParameter("password");
 
-        User user = domainController.login(email, pwd); // UserMapper checks with Database for user.
-        setSessionInfo(request, user);
-        System.out.println("så langt så godt");
-        if (user.getEmail().equals("user")) { //Fejl Her
+
+            User user = domainController.login(email, pwd); // UserMapper checks with Database for user. Returns user ID if true
+            setSessionInfo(request, user);
             return "redirect:/overview";
-        } else {
-            throw new DefaultException("Wrong Email or Password!");
-        }
+
     }
 
     private void setSessionInfo(WebRequest request, User user) {

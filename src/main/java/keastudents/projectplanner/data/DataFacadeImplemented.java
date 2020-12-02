@@ -20,8 +20,9 @@ public class DataFacadeImplemented implements DataFacade {
         return user;
     }
 
+    // TODO RASMUS
     @Override
-    public User login(User user) throws DefaultException {
-        return null;
+    public User login(String email, String password) throws DefaultException {
+        return userMapper.login(email, password);
     }
 }

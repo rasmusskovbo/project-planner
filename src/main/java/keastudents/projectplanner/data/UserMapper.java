@@ -46,15 +46,15 @@ public class UserMapper {
     public User login(String email, String password) throws DefaultException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT * from users "
-                    + "JOIN login_info using (idusers) "
+            String SQL = "SELECT * FROM user "
+                    + "JOIN login_info using (id) "
                     + "WHERE email=? AND pword=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                int id = rs.getInt("idusers");
+                int id = rs.getInt("id");
                 User user = new User(email, password);
                 user.setId(id);
                 return user;
