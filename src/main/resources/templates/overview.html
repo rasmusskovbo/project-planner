@@ -20,6 +20,12 @@
     </form>
         <a href="/popup"><i class="fas fa-user-edit"></i>Edit Project</a>
     <div class="sidenav-login">
+        <div>
+            <h2>Currently logged in as:</h2>
+            <p th:text="${user.firstName}"></p><p th:text="${user.lastName}"></p>
+
+        </div>
+
         <a href="/"><i  class="fas fa-sign-out-alt"></i>Log out</a>
     </div>
     </div>

@@ -21,10 +21,16 @@ public class DomainController {
     }
 
  */
+
+    // TODO Kan simplificeres
     public User createUser(String firstName, String lastName, String email, String password) throws DefaultException{
         User userCreate = new User(firstName, lastName, email, password);
         facade.createUser(userCreate);
         return userCreate;
+    }
+
+    public User getUser(int id) throws DefaultException {
+        return facade.getUser(id);
     }
 
     public User login(String email, String password) throws DefaultException {

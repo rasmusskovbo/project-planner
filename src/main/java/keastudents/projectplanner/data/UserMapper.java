@@ -65,4 +65,34 @@ public class UserMapper {
             throw new DefaultException(ex.getMessage());
         }
     }
+
+    public User getUser(int id) throws DefaultException {
+        try {
+            Connection con = DBManager.getConnection();
+
+            String SQL = "SELECT * FROM user " +
+                    "JOIN user_info USING (id) " +
+                    "WHERE user_id=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                User user = new User(
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email")
+                );
+
+                return user;
+
+            } else {
+                throw new DefaultException("Could not validate user (ID not found in database)");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // TODO Denne burde ikke kræves når der er try/catch og throws
+    }
 }
+

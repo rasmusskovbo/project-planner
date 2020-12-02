@@ -40,7 +40,14 @@ public class UserWebController {
     }
 
     @GetMapping("/overview")
-    public String overview() {
+    public String overview(WebRequest request, Model model) throws DefaultException {
+
+        // Gets User ID from WebRequest (Established upon log-in)
+        int id = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
+
+        // Packages user+info and sends to html site.
+        model.addAttribute("user", domainController.getUser(id));
+
         return "overview";
     }
 
@@ -91,11 +98,10 @@ public class UserWebController {
         String email = request.getParameter("email");
         String pwd = request.getParameter("password");
 
-
-            User user = domainController.login(email, pwd); // UserMapper checks with Database for user. Returns user ID if true
-            setSessionInfo(request, user);
-            return "redirect:/overview";
-
+        // Try/Catch her?
+        User user = domainController.login(email, pwd); // UserMapper checks with Database for user. Returns user ID if true
+        setSessionInfo(request, user);
+        return "redirect:/overview";
     }
 
     private void setSessionInfo(WebRequest request, User user) {

@@ -7,6 +7,7 @@ public class User {
     private String email;
     private String password;
 
+    // Constructor for registering
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -14,9 +15,16 @@ public class User {
         this.password = password;
     }
 
+    // Constructor for login
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
 
     public int getId() {
