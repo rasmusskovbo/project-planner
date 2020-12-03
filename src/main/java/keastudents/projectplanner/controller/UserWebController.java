@@ -76,12 +76,8 @@ public class UserWebController {
 
         // Try/Catch her?
         //Nullpointer in login method????
-        try {
             User user = domainController.login(email, pwd); // UserMapper checks with Database for user. Returns user ID if true
             setSessionInfo(request, user);
-        } catch (NullPointerException ex) {
-            System.out.println("User missing");
-        }
 
         return "redirect:/projectsOverview";
     }

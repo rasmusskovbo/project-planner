@@ -17,6 +17,15 @@
         <div class="sidenav">
             <a href="/projectsOverview"><i class="fas fa-tasks"></i>Project overview</a>
             <a href="/"><i class="fas fa-sign-out-alt"></i>Log out</a>
+            <h3>Currently logged in as:</h3>
+            <tr>
+                <h3>
+                <th th:text="${user.firstName}"> </th>
+                <th th:text="${user.lastName}"> </th>
+                </h3>
+            </tr>
+
+
         </div>
     </div>
 

@@ -50,8 +50,7 @@ public class UserMapper {
 
             //user table in first column id needs to be named user_id too? otherwise cant join with other tables on that specific id?
             String SQL = "SELECT * FROM user "
-                    + "JOIN login_info using (user_id) "
-//                    + "JOIN login_info using (id) "
+                    + "JOIN login_info using (id) "
                     + "WHERE email=? AND pword=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, email);
