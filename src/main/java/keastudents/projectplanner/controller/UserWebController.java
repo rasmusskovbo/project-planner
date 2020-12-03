@@ -45,6 +45,7 @@ public class UserWebController {
             model.addAttribute("project", project);
         }
 
+
         return "afterLogin/overviewPage";
     }
 

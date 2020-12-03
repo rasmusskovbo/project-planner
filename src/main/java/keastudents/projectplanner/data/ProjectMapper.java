@@ -7,6 +7,7 @@ import keastudents.projectplanner.domain.Task;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class ProjectMapper {
     Connection con = DBManager.getConnection();
@@ -42,10 +43,10 @@ public class ProjectMapper {
                         rs.getString("title"),
                         LocalDate.parse(rs.getString("start_date"))
                 );
+                project.setId(rs.getInt("id"));
 
-
-                // TODO While loop der tilføjer subprojects og tasks.
-
+                // Appends all subprojects to task
+                project.setSubprojects(getSubproject(project.getId()));
 
                 return project;
             } else {
@@ -56,6 +57,67 @@ public class ProjectMapper {
 
             throw new DefaultException(e.getMessage());
 
+        }
+    }
+
+    public ArrayList<Subproject> getSubproject(int project_id) throws DefaultException {
+
+        ArrayList<Subproject> subprojects = new ArrayList<>();
+
+        try {
+            String SQL = "SELECT * FROM subproject " +
+                    "WHERE project_id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, project_id);
+            ResultSet rs = ps.executeQuery();
+
+            // Loops through subprojects if found
+            while (rs.next()) {
+                Subproject subproject = new Subproject(
+                        rs.getString("title"),
+                        LocalDate.parse(rs.getString("start_date"))
+                );
+                subproject.setId(rs.getInt("id"));
+
+                // Appends all tasks to subproject
+                subproject.setTasks(getTasks(subproject.getId()));
+
+                subprojects.add(subproject);
+            }
+
+            return subprojects;
+
+        } catch (SQLException e) {
+            throw new DefaultException(e.getMessage());
+        }
+    }
+
+    public ArrayList<Task> getTasks(int subproject_id) throws DefaultException {
+
+        ArrayList<Task> tasks = new ArrayList<>();
+
+        try {
+            String SQL = "SELECT * FROM task " +
+                    "WHERE subproject_id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, subproject_id);
+            ResultSet rs = ps.executeQuery();
+
+            // Loops through subprojects if found
+            while (rs.next()) {
+                Task task = new Task(
+                        rs.getString("title"),
+                        LocalDate.parse(rs.getString("start_date"))
+                );
+                task.setId(rs.getInt("id"));
+
+                tasks.add(task);
+            }
+
+            return tasks;
+
+        } catch (SQLException e) {
+            throw new DefaultException(e.getMessage());
         }
     }
 

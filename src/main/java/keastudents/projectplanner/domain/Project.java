@@ -29,6 +29,10 @@ public class Project {
         // subprojects.sort(); TODO Implementer sortering pr. dato
     }
 
+    public String subprojectsToString() {
+        return subprojects.toString();
+    }
+
     public Project(String title, LocalDate startDate) {
         this.title = title;
         this.startDate = startDate;
@@ -56,6 +60,24 @@ public class Project {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+    public ArrayList<Subproject> getSubprojects() {
+        return subprojects;
+    }
+
+    public void setSubprojects(ArrayList<Subproject> subprojects) {
+        this.subprojects = subprojects;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "title='" + title + '\'' +
+                ", id=" + id +
+                ", startDate=" + startDate +
+                ", subprojects=" + subprojects +
+                '}';
     }
 }
 

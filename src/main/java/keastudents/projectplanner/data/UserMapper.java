@@ -73,7 +73,7 @@ public class UserMapper {
 
         try {
             String SQL = "SELECT * FROM user " +
-                    "JOIN user_info USING (id) " +
+                    "LEFT JOIN user_info ON user_info.user_id = user.id " +
                     "WHERE user_id=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, id);
