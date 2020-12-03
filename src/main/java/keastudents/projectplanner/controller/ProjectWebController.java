@@ -33,6 +33,8 @@ public class ProjectWebController {
     public String createProjectAction(WebRequest request) throws DefaultException {
         // Takes info from WebRequest and creates project in database, afterwards redirecting to overview
         String title = request.getParameter("title");
+
+        //HTML tager date ind automatisk ind som YYYY-MM-DD - skal selv formattere til YYYY-MM-DD
         String startDate = request.getParameter("startDate");// Format SKAL være YYYY-MM-DD så vi kan parse til LocalDate (skal bruges til beregninger) LocalDate.parse(STRING)
 
         //To get projects from current user
