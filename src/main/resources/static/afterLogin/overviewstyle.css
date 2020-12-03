@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro&family=Cuprum&family=Open+Sans:wght@300&display=swap');
 
 /*left side sidenav content_________________________________________________________________________________*/
 .left-content{
@@ -51,6 +52,7 @@
     right: 2vw;
     top:5vw;
     position: absolute;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .table-content {
