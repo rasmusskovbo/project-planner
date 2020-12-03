@@ -37,10 +37,13 @@ public class ProjectWebController {
         //HTML tager date ind automatisk ind som YYYY-MM-DD - skal selv formattere til YYYY-MM-DD
         String startDate = request.getParameter("startDate");// Format SKAL være YYYY-MM-DD så vi kan parse til LocalDate (skal bruges til beregninger) LocalDate.parse(STRING)
 
+        System.out.println("Title: "+title);
+        System.out.println("Start date: "+startDate);
+
         //To get projects from current user
         int id = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
-
         domainController.createProject(id, title, startDate);
+
         return "redirect:/projectsOverview";
     }
 

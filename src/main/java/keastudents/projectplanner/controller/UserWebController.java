@@ -3,6 +3,7 @@ package keastudents.projectplanner.controller;
 import keastudents.projectplanner.data.DataFacadeImplemented;
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.DomainController;
+import keastudents.projectplanner.domain.Project;
 import keastudents.projectplanner.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,13 +37,14 @@ public class UserWebController {
     public String projectsOverview(WebRequest request, Model model) throws DefaultException {
         int id = (int) request.getAttribute("id",WebRequest.SCOPE_SESSION);
         // Retrieves project and user info, packs them and sends to html page.
+        Project project = domainController.getProject(id);
         model.addAttribute("user", domainController.getUser(id));
 
-        /* TODO Check om der et projekt først, hvis går videre, ellers load
-        if (domainController.getProject(id) != null) {
-            model.addAttribute("project", domainController.getProject(id));
+        // If user has active project(s), add to model.
+        if (project != null) {
+            model.addAttribute("project", project);
         }
-         */
+
         return "afterLogin/overviewPage";
     }
 
@@ -72,7 +74,7 @@ public class UserWebController {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        // Try/Catch her?
+        // TODO Try/Catch her?
         User user = domainController.login(email, password);
         setSessionInfo(request, user);
 

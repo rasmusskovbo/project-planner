@@ -7,10 +7,11 @@ import java.sql.*;
 
 public class UserMapper {
 
+    private Connection con = DBManager.getConnection(); // Burde være nok kun at kalde én gang per class.
+
     public void createUser(User user) throws DefaultException {
 
         try {
-            Connection con = DBManager.getConnection();
 
             //Insert created user's email into "user" parent table
             String userSQL = "INSERT INTO user (email) VALUES (?)";
@@ -46,19 +47,17 @@ public class UserMapper {
     public User login(String email, String password) throws DefaultException {
 
         try {
-            Connection con = DBManager.getConnection();
 
             //user table in first column id needs to be named user_id too? otherwise cant join with other tables on that specific id?
-            String SQL = "SELECT * FROM user "
-                    + "JOIN login_info using (id) "
-//                    + "JOIN login_info using (id) "
-                    + "WHERE email=? AND pword=?";
+            String SQL = "SELECT * FROM user " +
+                    "LEFT JOIN login_info ON login_info.user_id = user.id " +
+                    "WHERE email=? AND pword=?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                int id = rs.getInt("user_id");
+                int id = rs.getInt("id");
                 User user = new User(email, password);
                 user.setId(id);
                 return user;
@@ -71,7 +70,6 @@ public class UserMapper {
     }
 
     public User getUser(int id) throws DefaultException {
-        Connection con = DBManager.getConnection();
 
         try {
             String SQL = "SELECT * FROM user " +
