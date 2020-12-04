@@ -49,6 +49,11 @@ public class UserMapper {
         try {
 
             //user table in first column id needs to be named user_id too? otherwise cant join with other tables on that specific id?
+/*
+            String SQL = "SELECT * FROM user "
+                    + "JOIN login_info using (id) "
+                    + "WHERE email=? AND pword=?";
+ */
 
             String SQL = "SELECT * FROM user " +
                     "LEFT JOIN login_info ON login_info.user_id = user.id " +
