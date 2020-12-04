@@ -46,7 +46,7 @@ public class ProjectMapper {
                 project.setId(rs.getInt("id"));
 
                 // Appends all subprojects to task
-                project.setSubprojects(getSubproject(project.getId()));
+                project.setSubprojects(getSubprojects(project.getId()));
 
                 return project;
             } else {
@@ -60,7 +60,7 @@ public class ProjectMapper {
         }
     }
 
-    public ArrayList<Subproject> getSubproject(int project_id) throws DefaultException {
+    public ArrayList<Subproject> getSubprojects(int project_id) throws DefaultException {
 
         ArrayList<Subproject> subprojects = new ArrayList<>();
 

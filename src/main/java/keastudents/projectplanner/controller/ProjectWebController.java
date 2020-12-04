@@ -9,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Controller
 public class ProjectWebController {
     DomainController domainController = new DomainController(new DataFacadeImplemented());
@@ -36,6 +39,9 @@ public class ProjectWebController {
 
         //HTML tager date ind automatisk ind som YYYY-MM-DD - skal selv formattere til YYYY-MM-DD
         String startDate = request.getParameter("startDate");// Format SKAL være YYYY-MM-DD så vi kan parse til LocalDate (skal bruges til beregninger) LocalDate.parse(STRING)
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+//        LocalDate startDateFormatted = LocalDate.parse(startDate, formatter);
+//        System.out.println(startDateFormatted);
 
         System.out.println("Title: "+title);
         System.out.println("Start date: "+startDate);

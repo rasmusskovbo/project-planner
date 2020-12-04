@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro&family=Open+Sans:wght@300&display=swap');
 
 /*overall page body_______________________________________________________________________________*/
 * {
@@ -7,13 +8,13 @@
 
 body {
     overflow-y: scroll;
+    font-family: 'Cuprum', sans-serif;
 }
 
 .page-wrapper {
     position: absolute;
     height: 100%;
     width: 100%;
-    font-family: Georgia, Times, "Times New Roman", serif;
 }
 
 .page-background-img{
