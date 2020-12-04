@@ -2,16 +2,35 @@ package keastudents.projectplanner.domain;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Project {
     private String title;
     private int id;
     private LocalDate startDate;
+    private ArrayList<Subproject> subprojects;
 
     public Project(String title, int id, LocalDate startDate) {
         this.title = title;
         this.id = id;
         this.startDate = startDate;
+        this.subprojects = new ArrayList<Subproject>();
+    }
+
+    public void addSubproject(Subproject subproject) {
+        subprojects.add(subproject);
+    }
+
+    public void removeSubproject(Subproject subproject) {
+        subproject.removeSubproject(subproject);
+    }
+
+    public void sortSubprojects() {
+        // subprojects.sort(); TODO Implementer sortering pr. dato
+    }
+
+    public String subprojectsToString() {
+        return subprojects.toString();
     }
 
     public Project(String title, LocalDate startDate) {
@@ -41,6 +60,24 @@ public class Project {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+    public ArrayList<Subproject> getSubprojects() {
+        return subprojects;
+    }
+
+    public void setSubprojects(ArrayList<Subproject> subprojects) {
+        this.subprojects = subprojects;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "title='" + title + '\'' +
+                ", id=" + id +
+                ", startDate=" + startDate +
+                ", subprojects=" + subprojects +
+                '}';
     }
 }
 

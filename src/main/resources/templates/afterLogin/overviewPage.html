@@ -43,29 +43,33 @@
                     <!-- include more-->
                 </tr>
                 </thead>
-
                 <!-- thymeleaf start = get all projects-->
                 <tr>
                     <tbody class="project-content">
                     <tr>
                         <td>
-                            <label for="project">Project Name: Build House</label> <!-- thymeleaf: project name-->
+                            <label for="project">Project Name: </label>
+                            <h3 th:text="${project.title}"></h3>
                             <input type="checkbox" name="project" id="project" data-toggle="toggle">
                         </td>
                         <td colspan="2">
-                            <label for="projectStart">2020-12-01</label> <!-- thymeleaf: project start date-->
+                            <label for="projectStart"></label>
+                            <h3 th:text="${project.startDate}"></h3>
                             <input type="checkbox" name="projectStart" id="projectStart" data-toggle="toggle">
                         </td>
                     </tr>
                     </tbody>
                 </tr>
-
                 <!-- thymeleaf = get all subprojects-->
+                <h3 th:each="project: ${subprojects}"></h3>
                 <tbody class="hide-content">
                 <!-- subproject -->
                 <tr class="subproject-content">
                     <td>
-                        <label for="subproject">Subproject: Walls</label> <!-- thymeleaf: subproject name-->
+                        <label for="subproject">Subproject:</label>
+                        <h3 th:text="${project.title}"></h3>
+
+
                         <input type="checkbox" name="subproject" id="subproject" data-toggle="toggle">
                         <!-- create tasks button-->
                         <a href="#popupTasks"><p>Add task</p></a>
@@ -124,8 +128,8 @@
             <form name="createProjectAction" action="/createProjectAction" method="POST">
 
                 <div class="start-project">
-                    <h2><label for="projectName">project name</label></h2>
-                    <input type="text" id="projectName" name="projectName" th:value="${title}" required>
+                    <h2><label for="title">project name</label></h2>
+                    <input type="text" id="title" name="title" th:value="${title}" required>
                 </div>
 
                 <div class="start-project">
