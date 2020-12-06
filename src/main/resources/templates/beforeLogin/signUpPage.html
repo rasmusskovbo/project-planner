@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
@@ -73,6 +73,10 @@
                         <input type="password" id="password2" name="password2" placeholder="Confirm password...." required>
                     </div>
 
+                    <!-- Hidden text field for dynamic error messages  TODO Implement pop-up?-->
+                    <div class="inputfield-fullwidth">
+                        <p style="font-size: 18px; color: darkred" th:text="${errorMsg}"></p>
+                    </div>
 
                     <!-- create user button -->
                     <div class="inputfield-fullwidth">

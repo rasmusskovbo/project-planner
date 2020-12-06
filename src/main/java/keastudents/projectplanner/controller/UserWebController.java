@@ -14,7 +14,8 @@ import org.springframework.web.context.request.WebRequest;
 
 @Controller
 public class UserWebController {
-    DomainController domainController = new DomainController(new DataFacadeImplemented());
+    private DomainController domainController = new DomainController(new DataFacadeImplemented());
+    private ValidationController validationController = new ValidationController();
 
     //show welcome-/frontpage
     @GetMapping("/")
@@ -51,7 +52,7 @@ public class UserWebController {
 
 
     @PostMapping("/signUpAction")
-    public String signUpAction(WebRequest request) throws DefaultException {
+    public String signUpAction(WebRequest request, Model model) throws DefaultException {
         //Retrieve values from HTML signUp form via WebRequest
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
@@ -61,7 +62,13 @@ public class UserWebController {
 
         //Check if first password value matches confirmed password value
         if (password.equals(confirmedPassword)) {
-            domainController.createUser(firstName, lastName, email, password);
+            String validationStatus = validationController.validate(firstName, lastName, email); //Checks input against regex. Returns "" if OK
+            if (validationStatus.equals("")) {
+                domainController.createUser(firstName, lastName, email, password);
+            } else {
+                model.addAttribute("errorMsg", validationStatus);
+                return "beforeLogin/signUpPage";
+            }
             // setSessionInfo
             return "redirect:/overviewPage";
         } else {
