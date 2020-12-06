@@ -1,20 +1,24 @@
 package keastudents.projectplanner.controller;
 
+
 import keastudents.projectplanner.data.DataFacadeImplemented;
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.DomainController;
+import keastudents.projectplanner.domain.Project;
 import keastudents.projectplanner.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 @Controller
 public class ProjectWebController {
     DomainController domainController = new DomainController(new DataFacadeImplemented());
+
 
 //No separate HTML sites for subprojects and task overview = redundant?
 //    @GetMapping("/subprojectOverview")
@@ -74,4 +78,9 @@ public class ProjectWebController {
         return title;
     }
 
+    @ExceptionHandler(Exception.class)
+    public String anotherError(Model model, Exception exception) {
+        model.addAttribute("message",exception.getMessage());
+        return "exceptionPage";
+    }
 }

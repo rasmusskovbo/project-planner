@@ -27,6 +27,8 @@ public class ProjectMapper {
         }
     }
 
+
+
     public Project getProject(int id) throws DefaultException {
         try {
 
@@ -59,7 +61,7 @@ public class ProjectMapper {
 
         }
     }
-
+    
     public ArrayList<Subproject> getSubprojects(int project_id) throws DefaultException {
 
         ArrayList<Subproject> subprojects = new ArrayList<>();

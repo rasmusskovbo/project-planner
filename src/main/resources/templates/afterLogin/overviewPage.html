@@ -44,9 +44,10 @@
                 </tr>
                 </thead>
                 <!-- thymeleaf start = get all projects-->
+
                 <tr>
                     <tbody class="project-content">
-                    <tr>
+                        <tr th:each="project: ${projects}">
                         <td>
                             <label for="project">Project Name: </label>
                             <h3 th:text="${project.title}"></h3>
@@ -67,8 +68,6 @@
                 <tr class="subproject-content">
                     <td>
                         <label for="subproject">Subproject:</label>
-
-
 
                         <input type="checkbox" name="subproject" id="subproject" data-toggle="toggle">
                         <!-- create tasks button-->
@@ -161,8 +160,8 @@
                     <input type="date" id="subprojectStartDate" name="subprojectStartDate" th:value="${start_date}"
                            required>
                 </div>
-
                 <input type="submit" class="button" onclick="return confirm('Create Project?')" value="Create Project">
+
             </form>
         </div>
     </div>
