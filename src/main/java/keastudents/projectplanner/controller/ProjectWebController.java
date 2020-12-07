@@ -76,6 +76,7 @@ public class ProjectWebController {
         //Retrieve values from HTML form via WebRequest
         String title = request.getParameter("title");
         return title;
+
     }
 
     @ExceptionHandler(Exception.class)

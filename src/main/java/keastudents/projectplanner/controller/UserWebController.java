@@ -96,6 +96,7 @@ public class UserWebController {
         setSessionInfo(request, user);
 
         return "redirect:/overviewPage";
+
     }
 
 
