@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.ArrayList;
+
 @Controller
 public class UserWebController {
     private DomainController domainController = new DomainController(new DataFacadeImplemented());
@@ -37,14 +39,14 @@ public class UserWebController {
 
     @GetMapping("/overviewPage")
     public String projectsOverview(WebRequest request, Model model) throws DefaultException {
-        int id = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
         // Retrieves project and user info, packs them and sends to html page.
-        Project project = domainController.getProject(id);
-        model.addAttribute("user", domainController.getUser(id));
+        int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
+        model.addAttribute("user", domainController.getUser(userId));
 
+        ArrayList<Project> projects = domainController.getProjects(userId);
         // If user has active project(s), add to model.
-        if (project != null) {
-            model.addAttribute("project", project);
+        if (projects !=null) {
+            model.addAttribute("projectList", projects);
         }
 
         return "afterLogin/overviewPage";
@@ -70,6 +72,9 @@ public class UserWebController {
                 return "beforeLogin/signUpPage";
             }
             // setSessionInfo
+            User user = domainController.login(email, password);
+            setSessionInfo(request, user);
+
             return "redirect:/overviewPage";
         } else {
             throw new DefaultException("The two password did not match!");
@@ -81,14 +86,6 @@ public class UserWebController {
         //Retrieve values from HTML form via WebRequest
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
-
-        // Try/Catch her?
-
-        //Nullpointer in login method????
-        //   User user = domainController.login(email, pwd); // UserMapper checks with Database for user. Returns user ID if true
-        //   setSessionInfo(request, user);
-
 
         // TODO Try/Catch her?
 

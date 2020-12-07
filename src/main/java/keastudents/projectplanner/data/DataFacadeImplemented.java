@@ -6,6 +6,7 @@ import keastudents.projectplanner.domain.Project;
 import keastudents.projectplanner.domain.User;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class DataFacadeImplemented implements DataFacade {
     private ProjectMapper projectMapper = new ProjectMapper();
@@ -24,17 +25,28 @@ public class DataFacadeImplemented implements DataFacade {
     }
 
     @Override
-    public User getUser(int id) throws DefaultException {
-        return userMapper.getUser(id);
+    public User getUser(int userId) throws DefaultException {
+        return userMapper.getUser(userId);
     }
 
     @Override
-    public void createProject(int id, String projectName, String startDate) throws DefaultException {
-        projectMapper.createProject(id, projectName, startDate);
+    public void createProject(int userId, String projectTitle, LocalDate startDate) throws DefaultException {
+        projectMapper.createProject(userId, projectTitle, startDate);
     }
 
     @Override
-    public Project getProject(int id) throws DefaultException {
-        return projectMapper.getProject(id);
+    public void createSubproject(int projectId, String subprojectTitle, LocalDate startDateFormatted) throws DefaultException {
+        projectMapper.createSubproject(projectId, subprojectTitle, startDateFormatted);
+    }
+
+    @Override
+    public void createTask(int subprojectId, String taskTitle, LocalDate startDateFormatted) throws DefaultException {
+        projectMapper.createTask(subprojectId,taskTitle, startDateFormatted);
+    }
+
+    //For when user can have more than one project
+    @Override
+    public ArrayList<Project> getProjects(int userId) throws DefaultException {
+        return projectMapper.getProjects(userId);
     }
 }

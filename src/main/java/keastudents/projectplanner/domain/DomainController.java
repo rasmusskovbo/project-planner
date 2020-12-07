@@ -1,7 +1,7 @@
 package keastudents.projectplanner.domain;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class DomainController {
     private DataFacade facade = null;
@@ -17,19 +17,27 @@ public class DomainController {
         return userCreate;
     }
 
-    public User getUser(int id) throws DefaultException {
-        return facade.getUser(id);
+    public User getUser(int userId) throws DefaultException {
+        return facade.getUser(userId);
     }
 
     public User login(String email, String password) throws DefaultException {
         return facade.login(email, password);
     }
 
-    public void createProject(int id, String projectName, String startDate) throws DefaultException{
-        facade.createProject(id, projectName, startDate);
+    public void createProject(int userId, String projectTitle, LocalDate startDate) throws DefaultException{
+        facade.createProject(userId, projectTitle, startDate);
     }
 
-    public Project getProject(int id) throws DefaultException {
-        return facade.getProject(id);
+    public void createSubproject(int projectId, String subprojectTitle, LocalDate startDateFormatted) throws DefaultException{
+        facade.createSubproject(projectId, subprojectTitle, startDateFormatted);
+    }
+
+    public void createTask(int subprojectId, String taskTitle, LocalDate startDateFormatted) throws DefaultException{
+        facade.createTask(subprojectId, taskTitle, startDateFormatted);
+    }
+
+    public ArrayList<Project> getProjects(int userId) throws DefaultException {
+        return facade.getProjects(userId);
     }
 }

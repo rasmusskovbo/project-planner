@@ -1,0 +1,95 @@
+/* header navigation menu_____________________________________________________________________________________________*/
+.header-nav-container {
+    position: fixed;
+    z-index: 1;
+    overflow: hidden;
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-bottom: 0.2vw solid #7ac4c2;
+    background-color: white;
+}
+
+.header-nav-container h1 {
+    padding: 0.5vw;
+    border-radius: 0.2vw;
+    background-color: #7ac4c2;
+    font-size: 1vw;
+    color: black;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    padding: 1vw 1vw;
+    text-align: center;
+    text-decoration: none;
+}
+
+li a:hover{
+    text-decoration: underline;
+}
+
+.menu-item-wrapper1 {
+    float: left;
+}
+
+.menu-item-wrapper2 {
+    margin-right: 5vw;
+}
+
+.frontpage-logo {
+    background-color:  #7ac4c2;
+}
+
+/* right side/main content_________________________________________________________________________________________________*/
+.right-side-container {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 40%;
+}
+
+.right-box-wrapper {
+    position: absolute;
+    top: 7vw;
+    width: 80%;
+    text-align: center;
+}
+
+.right-box-wrapper h1 {
+    font-size: 4vw;
+    font-variant: small-caps;
+}
+
+form {
+    display: inline;
+}
+
+/*button styling*/
+.button {
+    padding: 1vw;
+    margin: 2vw 1vw;
+    border-radius: 1vw;
+    box-shadow: 0.2vw 0.3vw black;
+    background-color: #BFE3D6;
+    font-size: 1.5vw;
+    text-decoration: none;
+    text-align: center;
+}
+
+.button:hover {
+    border: 0.2vw solid black;
+    box-shadow: none;
+    background-color: #7ac4c2;
+}
+
+/* empty space content______________________________________________________________________*/
+.non-content-wrapper{
+    height: 1.2vw;
+    width: 100%;
+}

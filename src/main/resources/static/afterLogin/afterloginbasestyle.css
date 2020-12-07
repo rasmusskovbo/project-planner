@@ -1,0 +1,59 @@
+/*left side sidenav menu content______________________________________________________________________________________*/
+.sidenav-container {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    bottom: 1vw;
+    width: 17vw;
+    background: linear-gradient(to right top, #7ac4c2, #8cccc6, #9ed4ca, #afdbd0, #bfe3d6);
+}
+
+.sidenav-wrapper{
+    height: 100%;
+    width: 100%;
+}
+
+.sidenav-wrapper a {
+    display: block;
+    padding: 1vw 1vw 1vw 2vw;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+    text-decoration: none;
+}
+
+.sidenav-wrapper h1 {
+    font-size: 1.5vw;
+    color: black;
+    text-align: justify;
+}
+
+.sidenav-wrapper h2 {
+    font-size: 1vw;
+    margin-bottom: 2vw;
+    color: #913737;
+}
+
+.sidenav-item-top {
+    position: absolute;
+    top: 0;
+}
+
+.sidenav-item-bottom {
+    position: absolute;
+    bottom: 0;
+}
+
+:root {
+    --mainColor: white;
+}
+
+.sidenav-wrapper a:hover {
+    background:
+            linear-gradient(
+                    to right,
+                    var(--mainColor) 0%,
+                    var(--mainColor) 1vw,
+                    transparent
+            );
+}

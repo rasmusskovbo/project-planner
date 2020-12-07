@@ -1,28 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="basestyle.css">
+    <link rel="stylesheet" href="generalbasestyle.css">
+    <link rel="stylesheet" href="beforeLogin/beforeloginbasestyle.css">
     <link rel="stylesheet" href="beforeLogin/loginstyle.css">
     <script src="https://kit.fontawesome.com/00d69adb96.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-
-
-<div class="page-wrapper">
+<div class="page-container">
 
     <!-- header navigation menu-->
-    <ul>
-        <li style="float:left"><a class="active" href="/"><h4><i class="fas fa-chart-bar"></i>Website Name</h4></a></li>
-        <li style=" margin-right: 5vw;"><a href="/logInPage"><h4 class="active">Log In</h4></a></li>
-        <li><a href="/signUpPage"><h4>Sign Up</h4></a></li>
+    <ul class="header-nav-container">
+        <li class="menu-item-wrapper1">
+            <a class="frontpage-logo" href="/">
+                <h1><i class="fas fa-chart-bar"></i>Website Name</h1>
+            </a>
+        </li>
+        <li class="menu-item-wrapper2">
+            <a href="/logInPage">
+                <h1 class="active">Log In</h1>
+            </a>
+        </li>
+        <li>
+            <a href="/signUpPage">
+                <h1>Sign Up</h1>
+            </a>
+        </li>
     </ul>
 
     <!-- left side content-->
-    <div class="box-left">
-        <div class="about-website-content">
+    <div class="left-side-container">
+        <div class="left-box-wrapper">
             <h1>heading</h1>
             <p>About us, about us, about us, about us, about us, about us, about us, about us, about us,
                 about us, about us, about us, about us, about us, about us, about us
@@ -32,73 +43,68 @@
     </div>
 
     <!-- right side content-->
-    <div class="box-right">
-        <div class="box-content">
-            <h2>Sign Up</h2>
+    <div class="right-side-container">
+        <div class="right-box-wrapper">
+            <h1>sign up</h1>
 
             <!-- create user form -->
             <form name="login" action="/signUpAction" method="POST">
-                <div class="flex-box">
+                <div class="flex-box-container">
 
                     <!-- first name input -->
-                    <div class="inputfield-halfwidth">
+                    <div class="inputfield-halfwidth-wrapper">
                         <h3><label for="firstName">First Name</label></h3>
                         <input type="text" id="firstName" name="firstName" placeholder="Write your first name..." required>
                     </div>
 
                     <!-- last name input -->
-                    <div class="inputfield-halfwidth">
+                    <div class="inputfield-halfwidth-wrapper">
                         <h3> <label for="lastName">Last Name</label></h3>
                         <input type="text" id="lastName" name="lastName" placeholder="Write your last name...." required>
                     </div>
 
-                    <div class="non-content-area"></div>
+                    <div class="non-content-wrapper"></div>
 
                     <!-- email input -->
-                    <div class="inputfield-fullwidth">
+                    <div class="inputfield-fullwidth-wrapper">
                         <h3><label for="email">E-mail</label></h3>
                         <input type="text" id="email" name="email" placeholder="Your e-mail address...." required>
                     </div>
 
-                    <div class="non-content-area"></div>
+                    <div class="non-content-wrapper"></div>
 
                     <!-- password input -->
-                    <div class="inputfield-halfwidth">
+                    <div class="inputfield-halfwidth-wrapper">
                         <h3><label for="password1">Password</label></h3>
                         <input type="password" id="password1" name="password1" placeholder="Your password...." required>
                     </div>
                     <!-- repeat password-->
-                    <div class="inputfield-halfwidth">
+                    <div class="inputfield-halfwidth-wrapper">
                         <h3><label for="password2">Confirm Password</label></h3>
                         <input type="password" id="password2" name="password2" placeholder="Confirm password...." required>
                     </div>
 
-                    <!-- Hidden text field for dynamic error messages  TODO Implement pop-up?-->
-                    <div class="inputfield-fullwidth">
-                        <p style="font-size: 18px; color: darkred" th:text="${errorMsg}"></p>
-                    </div>
 
                     <!-- create user button -->
-                    <div class="inputfield-fullwidth">
+                    <div class="inputfield-fullwidth-wrapper">
                         <input type="submit" class="button" onclick="return confirm('Submit information?')" value="Sign Up">
                     </div>
 
                     <!-- redirect to log in page -->
-                    <div class="inputfield-fullwidth">
+                    <div class="inputfield-fullwidth-wrapper">
                         <a href="/logInPage">Already a member? Log in here!</a>
                     </div>
 
-                    <div class="non-content-area"></div>
+                    <div class="non-content-wrapper"></div>
                 </div>
             </form>
-
         </div>
-    </div>
-</div>
 
-<!-- footer content-->
-<div class="footer">
-    <h6> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h6>
+    </div>
+    <!-- footer content-->
+    <div class="footer">
+        <h1> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h1>
+    </div>
 </div>
 
 </body>
