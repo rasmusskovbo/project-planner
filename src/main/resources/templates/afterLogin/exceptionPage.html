@@ -7,13 +7,18 @@
     <link rel="stylesheet" href="errorstyle.css">
 </head>
 <body>
+<div class="page-background-img ">
 
     <div class ="error-msg">
-        <h1>an error occured!</h1>
+        <h1>An error occured!</h1>
         <!-- thymeleaf: text message-->
-        <p><span> prøv igen </span></p>
+        <p><span th:text="${message}"> </span></p>
     </div>
 
+    <div class ="error-msg">
+        <img src="https://cdn.pixabay.com/photo/2016/11/11/20/05/wave-1817646_960_720.png")  alt="backgroumd" width="100%" height="100%">
+    </div>
 
+</div>
 </body>
 </html>
