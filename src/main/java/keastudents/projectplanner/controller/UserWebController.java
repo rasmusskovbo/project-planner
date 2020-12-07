@@ -1,10 +1,7 @@
 package keastudents.projectplanner.controller;
 
 import keastudents.projectplanner.data.DataFacadeImplemented;
-import keastudents.projectplanner.domain.DefaultException;
-import keastudents.projectplanner.domain.DomainController;
-import keastudents.projectplanner.domain.Project;
-import keastudents.projectplanner.domain.User;
+import keastudents.projectplanner.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,7 +14,7 @@ import java.util.ArrayList;
 @Controller
 public class UserWebController {
     private DomainController domainController = new DomainController(new DataFacadeImplemented());
-    private ValidationController validationController = new ValidationController();
+    private ValidationService validationService = new ValidationService();
 
     //show welcome-/frontpage
     @GetMapping("/")
@@ -62,22 +59,18 @@ public class UserWebController {
         String password = request.getParameter("password1");
         String confirmedPassword = request.getParameter("password2");
 
-        //Check if first password value matches confirmed password value
-        if (password.equals(confirmedPassword)) {
-            String validationStatus = validationController.validate(firstName, lastName, email); //Checks input against regex. Returns "" if OK
-            if (validationStatus.equals("")) {
-                domainController.createUser(firstName, lastName, email, password);
-            } else {
-                model.addAttribute("errorMsg", validationStatus);
-                return "beforeLogin/signUpPage";
-            }
-            // setSessionInfo
+        // Validates input. Returns custom error message if any errors, if not returns an empty string ""
+        String validationStatus = validationService.validate(firstName, lastName, email, password, confirmedPassword);
+
+        // Creates user if no validatoin error, if not reloads page and passes error message on
+        if (validationStatus.equals("")) {
+            domainController.createUser(firstName, lastName, email, password);
             User user = domainController.login(email, password);
             setSessionInfo(request, user);
-
             return "redirect:/overviewPage";
         } else {
-            throw new DefaultException("The two password did not match!");
+            model.addAttribute("errorMsg", validationStatus);
+            return "beforeLogin/signUpPage";
         }
     }
 
