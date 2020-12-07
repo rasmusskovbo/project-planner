@@ -5,20 +5,45 @@
     <title>Error</title>
     <link rel="stylesheet" href="basestyle.css">
     <link rel="stylesheet" href="errorstyle.css">
+    <script src="https://kit.fontawesome.com/00d69adb96.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-<div class="page-background-img ">
 
-    <div class ="error-msg">
-        <h1>An error occured!</h1>
-        <!-- thymeleaf: text message-->
-        <p><span th:text="${message}"> </span></p>
+<div class="page-wrapper">
+
+
+    <div class="page-background-img">
+
+        <!-- right side content -->
+        <div class="box-right">
+
+            <div class="box-content">
+
+                <div class="non-content-area"></div>
+                <div class="non-content-area"></div>
+
+                <thead>
+                <tr>
+                    <th ><h1>An error occured!</h1></th>
+                </tr>
+                </thead>
+
+                <h1>heading</h1>
+                <p>About us, about us, about us, about us, about us, about us, about us, about us, about us,
+                    about us, about us, about us, about us, about us, about us, about us</p>
+                <p><span th:text="${message}"></span></p>
+                <div class="non-content-area"></div>
+
+
+            </div>
+        </div>
     </div>
-
-    <div class ="error-msg">
-        <img src="https://cdn.pixabay.com/photo/2016/11/11/20/05/wave-1817646_960_720.png")  alt="backgroumd" width="100%" height="100%">
-    </div>
-
 </div>
+<!-- footer content-->
+<div class="footer">
+    <h6> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h6>
+</div>
+
 </body>
 </html>
