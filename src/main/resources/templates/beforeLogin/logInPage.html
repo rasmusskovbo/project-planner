@@ -2,25 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Log In</title>
-    <link rel="stylesheet" href="basestyle.css">
+    <title>Log in</title>
+    <link rel="stylesheet" href="generalbasestyle.css">
+    <link rel="stylesheet" href="beforeLogin/beforeloginbasestyle.css">
     <link rel="stylesheet" href="beforeLogin/loginstyle.css">
-    <script src="https://kit.fontawesome.com/00d69adb96.js" crossorigin="anonymous"></script></head>
+    <script src="https://kit.fontawesome.com/00d69adb96.js" crossorigin="anonymous"></script>
+</head>
 <body>
 
-
-<div class="page-wrapper">
+<div class="page-container">
 
     <!-- header navigation menu-->
-    <ul>
-        <li style="float:left"><a class="active" href="/"><h4><i class="fas fa-chart-bar"></i>Website Name</h4></a></li>
-        <li style=" margin-right: 5vw;"><a href="/logInPage"><h4 class="active">Log In</h4></a></li>
-        <li><a href="/signUpPage"><h4>Sign Up</h4></a></li>
+    <ul class="header-nav-container">
+        <li class="menu-item-wrapper1">
+            <a class="frontpage-logo" href="/">
+                <h1><i class="fas fa-chart-bar"></i>Website Name</h1>
+            </a>
+        </li>
+        <li class="menu-item-wrapper2">
+            <a href="/logInPage">
+                <h1 class="active">Log In</h1>
+            </a>
+        </li>
+        <li>
+            <a href="/signUpPage">
+                <h1>Sign Up</h1>
+            </a>
+        </li>
     </ul>
 
     <!-- left side content-->
-    <div class="box-left">
-        <div class="about-website-content">
+    <div class="left-side-container">
+        <div class="left-box-wrapper">
             <h1>heading</h1>
             <p>About us, about us, about us, about us, about us, about us, about us, about us, about us,
                 about us, about us, about us, about us, about us, about us, about us
@@ -30,52 +43,50 @@
     </div>
 
     <!-- right side content-->
-    <div class="box-right">
-        <div class="box-content">
-            <h2>Log In</h2>
+    <div class="right-side-container">
+        <div class="right-box-wrapper">
+            <h1>log in</h1>
 
             <!-- log in form-->
             <form name="login" action="/loginAction" method="POST">
-                <div class="flex-box">
-
-                    <div class="non-content-area"></div>
+                <div class="flex-box-container">
 
                     <!-- email input -->
-                    <div class="inputfield-fullwidth">
-                        <h3><label for="email">E-mail</label></h3>
-                        <input type="text" id="email" name="email" placeholder="Your e-mail address...." value="" required>
+                    <div class="inputfield-fullwidth-wrapper">
+                        <h2><label for="email">E-mail</label></h2>
+                        <input type="text" id="email" name="email" placeholder="Your e-mail address...." required>
                     </div>
 
-                    <div class="non-content-area"></div>
+                    <div class="non-content-wrapper"></div>
 
                     <!-- password input -->
-                    <div class="inputfield-fullwidth">
-                        <h3><label for="password">Password</label></h3>
-                        <input type="password" id="password" name="password" placeholder="Your password...." value="" required>
+                    <div class="inputfield-fullwidth-wrapper">
+                        <h2><label for="password">Password</label></h2>
+                        <input type="password" id="password" name="password" placeholder="Your password...." required>
                     </div>
 
                     <!-- log in button -->
-                    <div class="inputfield-fullwidth">
+                    <div class="inputfield-fullwidth-wrapper">
                         <input type="submit" class="button" value="Log In">
                     </div>
 
-                    <div class="non-content-area"></div>
+                    <div class="non-content-wrapper"></div>
 
                     <!-- redirect to sign up page -->
-                    <div class="inputfield-fullwidth">
+                    <div class="inputfield-fullwidth-wrapper">
                         <a href="/signUpPage">Not a member? Sign up now!</a>
                     </div>
 
-                    <div class="non-content-area"></div>
+                    <div class="non-content-wrapper"></div>
                 </div>
             </form>
         </div>
     </div>
-</div>
 
-<!-- footer content-->
-<div class="footer">
-    <h6> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h6>
+    <!-- footer content-->
+    <div class="footer">
+        <h1> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h1>
+    </div>
 </div>
 
 </body>

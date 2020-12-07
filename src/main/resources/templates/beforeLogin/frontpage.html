@@ -3,41 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
-    <link rel="stylesheet" href="basestyle.css">
+    <link rel="stylesheet" href="generalbasestyle.css">
+    <link rel="stylesheet" href="beforeLogin/beforeloginbasestyle.css">
+    <link rel="stylesheet" href="/beforeLogin/frontpagestyle.css">
     <script src="https://kit.fontawesome.com/00d69adb96.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
 
-<div class="page-wrapper">
+<div class="page-container">
 
-    <!-- header navigation menu-->
-    <ul>
-        <li style="float:left"><a class="active" href="/"><h4><i class="fas fa-chart-bar"></i>Website Name</h4></a></li>
-        <li style=" margin-right: 5vw;"><a href="/logInPage"><h4 class="active">Log In</h4></a></li>
-        <li><a href="/signUpPage"><h4>Sign Up</h4></a></li>
-    </ul>
-
+    <!--frontpage background-->
     <div class="page-background-img">
 
+        <!-- header navigation menu-->
+        <ul class="header-nav-container">
+            <li class="menu-item-wrapper1">
+                <a class="frontpage-logo" href="/">
+                    <h1><i class="fas fa-chart-bar"></i>Website Name</h1>
+                </a>
+            </li>
+            <li class="menu-item-wrapper2">
+                <a href="/logInPage">
+                    <h1 class="active">Log In</h1>
+                </a>
+            </li>
+            <li>
+                <a href="/signUpPage">
+                    <h1>Sign Up</h1>
+                </a>
+            </li>
+        </ul>
+
         <!-- left side img -->
-        <div class="img-left">
+        <div class="left-side-img">
             <img src="https://cdn.pixabay.com/photo/2020/09/17/18/05/people-5579977_960_720.png"
                  alt="Group of People Planning" width="100%" height="100%">
         </div>
 
-        <!-- right side content -->
-        <div class="box-right">
-            <div class="box-content">
-
-                <div class="non-content-area"></div>
-                <div class="non-content-area"></div>
+        <!-- right side/main content -->
+        <div class="right-side-container">
+            <div class="right-box-wrapper">
 
                 <h1>heading</h1>
                 <p>About us, about us, about us, about us, about us, about us, about us, about us, about us,
-                    about us, about us, about us, about us, about us, about us, about us</p>
-
-                <div class="non-content-area"></div>
+                    about us, about us, about us, about us, about us, about us, about us
+                    About us, about us, about us, about us, about us, about us, about us, about us, about us,
+                    about us, about us, about us, about us, about us, about us, about us
+                </p>
 
                 <!-- redirect to log in page -->
                 <form name="signUp" action="/signUpPage" method="get">
@@ -52,11 +64,11 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- footer content-->
-<div class="footer">
-    <h6> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h6>
+    <!-- footer content-->
+    <div class="footer">
+        <h1> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h1>
+    </div>
 </div>
 
 </body>

@@ -48,13 +48,6 @@ public class UserMapper {
 
         try {
 
-            //user table in first column id needs to be named user_id too? otherwise cant join with other tables on that specific id?
-/*
-            String SQL = "SELECT * FROM user "
-                    + "JOIN login_info using (id) "
-                    + "WHERE email=? AND pword=?";
- */
-
             String SQL = "SELECT * FROM user " +
                     "LEFT JOIN login_info ON login_info.user_id = user.id " +
                     "WHERE email=? AND pword=?";
@@ -76,14 +69,14 @@ public class UserMapper {
         }
     }
 
-    public User getUser(int id) throws DefaultException {
+    public User getUser(int userId) throws DefaultException {
 
         try {
             String SQL = "SELECT * FROM user " +
                     "LEFT JOIN user_info ON user_info.user_id = user.id " +
                     "WHERE user_id=?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, id);
+            ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {

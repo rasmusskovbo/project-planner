@@ -4,8 +4,6 @@ package keastudents.projectplanner.controller;
 import keastudents.projectplanner.data.DataFacadeImplemented;
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.DomainController;
-import keastudents.projectplanner.domain.Project;
-import keastudents.projectplanner.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,60 +11,51 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 @Controller
 public class ProjectWebController {
     DomainController domainController = new DomainController(new DataFacadeImplemented());
 
-
-//No separate HTML sites for subprojects and task overview = redundant?
-//    @GetMapping("/subprojectOverview")
-//    public String subprojectOverview() {
-//        return "subprojectOverview";
-//    }
-//
-//    @GetMapping("/taskOverview")
-//    public String taskOverview() {
-//        return "taskOverview";
-//    }
-//
-//    @GetMapping("/createProject")
-//    public String createProject() {
-//        return "createProject";
-//    }
-
     @PostMapping("/createProjectAction")
     public String createProjectAction(WebRequest request) throws DefaultException {
         // Takes info from WebRequest and creates project in database, afterwards redirecting to overview
-        String title = request.getParameter("title");
+        String projectTitle = request.getParameter("projectTitle");
+        String startDate = request.getParameter("startDate");
 
-        //HTML tager date ind automatisk ind som YYYY-MM-DD - skal selv formattere til YYYY-MM-DD
-        String startDate = request.getParameter("startDate");// Format SKAL være YYYY-MM-DD så vi kan parse til LocalDate (skal bruges til beregninger) LocalDate.parse(STRING)
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
-//        LocalDate startDateFormatted = LocalDate.parse(startDate, formatter);
-//        System.out.println(startDateFormatted);
+        LocalDate startDateFormatted = localDateFormatter(startDate);
 
-        System.out.println("Title: "+title);
-        System.out.println("Start date: "+startDate);
 
         //To get projects from current user
-        int id = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
-        domainController.createProject(id, title, startDate);
+        int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
+        domainController.createProject(userId, projectTitle, startDateFormatted);
 
         return "redirect:/overviewPage";
     }
 
     @PostMapping("/createSubprojectAction")
     public String createSubprojectAction(WebRequest request) throws DefaultException {
-        //Create subproject in db
+        //Takes info from WebRequest and creates/adds subproject to project through project id
+        String projectId = request.getParameter("projectId");
+        String subprojectTitle = request.getParameter("subprojectTitle");
+        String startDate = request.getParameter("subprojectStartDate");
+
+        LocalDate startDateFormatted = localDateFormatter(startDate);
+
+        domainController.createSubproject(Integer.parseInt(projectId), subprojectTitle, startDateFormatted);
 
         return "redirect:/overviewPage";
     }
 
     @PostMapping("/createTaskAction")
     public String createTask(WebRequest request) throws DefaultException {
-        //Create task in db
+        //Takes info from WebRequest and creates/adds task to subproject through subproject id
+        String subprojectId = request.getParameter("subprojectId");
+        String taskTitle = request.getParameter("taskTitle");
+        String startDate = request.getParameter("taskStartDate");
+
+        LocalDate startDateFormatted = localDateFormatter(startDate);
+
+        domainController.createTask(Integer.parseInt(subprojectId), taskTitle, startDateFormatted);
 
         return "redirect:/overviewPage";
     }
@@ -77,6 +66,12 @@ public class ProjectWebController {
         String title = request.getParameter("title");
         return title;
 
+    }
+
+    private LocalDate localDateFormatter(String date) {
+        //Formats input String Date to LocalDate
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+        return LocalDate.parse(date, formatter);
     }
 
     @ExceptionHandler(Exception.class)
