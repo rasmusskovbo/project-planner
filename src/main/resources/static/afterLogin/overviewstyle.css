@@ -1,178 +1,178 @@
 @import url('https://fonts.googleapis.com/css2?family=Advent+Pro&family=Cuprum&family=Open+Sans:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Advent+Pro&family=Open+Sans:wght@300&display=swap');
 
-/*left side sidenav content_________________________________________________________________________________*/
-.left-content{
-    left: 0;
+
+/* Overall Main content/table-project content styling_________________________________________________________________________*/
+.main-content-container {
     position: fixed;
-    width: 17vw;
-    top: 0;
-    bottom: 1vw;
-    background: linear-gradient(to right top, #7ac4c2, #8cccc6, #9ed4ca, #afdbd0, #bfe3d6);
-    z-index: 95;
-}
-
-.sidenav {
-    height: 100%;
-    width: 100%;
-    padding-top: 5vw;
-}
-
-.sidenav a {
-    color: black;
-    text-align: justify;
-    text-decoration: none;
-    font-size: 1.5vw;
-    padding-left:2vw;
-    margin-bottom: 2vw;
-    display: block;
-}
-.sidenav b{
-    padding-top: 20vw;
-}
-
-.sidenav i {
-    padding-right: 0.5vw;
-}
-
-:root {
-    --mainColor: white;
-}
-
-.sidenav a:hover {
-    background:
-            linear-gradient(
-                    to right,
-                    var(--mainColor) 0%,
-                    var(--mainColor) 1vw,
-                    transparent
-            );
-}
-
-/* Main/table content _________________________________________________________________________________*/
-.main-content{
-    height: 100%;
-    left: 19vw;
-    right: 2vw;
-    top:5vw;
-    position: absolute;
+    left: 20vw;
+    right: 3vw;
+    top:3vw;
+    bottom: 4vw;
+    border:  0.2vw solid black;
+    background-color:  white;
     font-family: 'Open Sans', sans-serif;
+    text-align: center;
 }
 
-.table-content {
+.table-container {
     position: absolute;
-    height: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
     width: 100%;
-    border-right:0.2vw solid black;
-    border-left:0.2vw solid black;
 }
 
-table {
+.parent-table {
     table-layout: fixed;
+    overflow-y: scroll;
+    border-collapse: collapse;
     width: 100%;
-    height: auto;
-    word-break: break-all;
 }
 
-/* table header*/
+/*table header styling*/
 th {
-    background: #3498db;
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    padding: 0.5vw;
+    height: 5vw;
+    width: 100%;
+    background-color: #048a81;
+    font-size: 2.5vw;
     color: white;
     font-weight: bold;
-    font-size: 2vw;
 }
 
-/* table cell and table header*/
-td, th {
-    padding: 0.5vw;
-    border: 0.1vw solid #ccc;
-}
-
-
-.project-content tr td {
-    background-color: #2cc16a;
-    font-weight: bold;
-    color: #fff;
-    text-align: left;
+/* table rows styling */
+.row-container h1{
+    display: inline-block;
+    width: auto;
     font-size: 1.5vw;
+    letter-spacing: 0.1vw;
+    color:white;
 }
 
-.project-content tr td label {
-    display: block;
+/*Overall collapsible rows styling____________________________________________________________________________________*/
+input[type="checkbox"] {
+    position:absolute;
+    opacity:0;
+    height: 5vw;
+    width:100%;
+    cursor:pointer;
 }
 
-.subproject-content td{
-    padding-left: 3vw;
-    font-size: 1.3vw;
+input[type="checkbox"]:hover ~ span{
+    background-color: #84c4c1;
 }
 
-.tasks-content td {
-    padding-left: 5vw;
-    font-size: 1.1vw;
+span {
+    display:inline-block;
+    transition:all .3s ease;
+    height:5vw;
+    width: 100%;
+    line-height: 5vw;
 }
 
-.hide-content .subproject-content {
-    background-color: #beedca;
+.row-container span+span, .collapsible-nested-table {
+    display:none;
+}
+.row-container input[type="checkbox"]:checked ~ span {
+    display:none;
+}
+.row-container input[type="checkbox"]:checked ~ span+span{
+    display:inline-block;
 }
 
-.hide-content .tasks-content {
-    background-color: #eef0d5;
+.row-container input[type="checkbox"]:checked ~ .collapsible-nested-table  {
+    display:table;
 }
 
-.hide-content p {
-    font-size: 1vw;
-    text-align: right;
-    padding: 0;
-    text-decoration: underline;
-    color: black;
+/*nested table styling*/
+.collapsible-nested-table {
+    border: 0.5vw solid white;
+    table-layout: fixed;
+    width: 100%;
 }
 
-.hide-content p:hover {
-    background-color: white;
-}
-
-.create-project-button {
-    font-size: 1.5vw;
-    text-align: center;
-}
-
-.create-subproject-button {
+/*nested table rows and createProject button styling*/
+.collapsible-nested-table tr, .create-project-button-wrapper{
+    height: 5vw;
     font-size: 1.2vw;
-    background-color: #beedca ;
 }
 
+/*project rows styling*/
+.span-project-item-wrapper {
+    padding-left: 5vw;
+    text-align: left;
+}
+
+/*project row styling*/
+.span-project-item-wrapper, .project-row-wrapper {
+    background-color:  #56a3a6;
+}
+
+.span-project-item-wrapper, .span-subproject-item-wrapper, .span-task-item-wrapper{
+    border-top: 0.5vw solid white;
+}
+
+/*subproject row styling*/
+.span-subproject-item-wrapper, .subproject-row-wrapper, .create-subproject-inputfield-wrapper {
+    background-color: #43aa8b;
+}
+
+/*task row styling*/
+.span-task-item-wrapper, .task-row-wrapper, .create-task-inputfield-wrapper {
+    background-color: #90be6d ;
+}
+
+/*nested rows styling*/
+.project-row-wrapper, .subproject-row-wrapper, .create-subproject-inputfield-wrapper, .task-row-wrapper, .create-task-inputfield-wrapper {
+    filter: brightness(80%);
+}
+
+/*input submit button styling*/
 input[type=submit] {
-    background-color: #BFE3D6;
-    box-shadow: 0.1vw 0.2vw black;
     padding: 0.3vw;
-    text-decoration: none;
-    font-size: 1vw;
     margin: 1vw 0.5vw;
     border-radius: 1vw;
-    text-align: center;
+    box-shadow: 0.1vw 0.2vw black;
+    background-color: #BFE3D6;
+    font-size: 1vw;
+    text-decoration: none;
 }
 
 input[type=submit]:hover {
-    background-color: #7ac4c2;
     border: 0.1vw solid black;
     box-shadow: none;
+    background-color: #7ac4c2;
 }
 
-[data-toggle="toggle"]{
-    display: none;
+/*input text field/create object styling*/
+input[type=text], input[type=date] {
+    width: 80%;
+    padding: 0.5vw;
+    margin-bottom: 1vw;
+    border: 0.1vw solid black;
+    font-size: 1vw;
+    text-align-last: center;
 }
 
+.create-subproject-inputfield-wrapper h2, .create-task-inputfield-wrapper h2{
+    font-size: 1.2vw;
+    color: white;
+}
+
+/*popup for create project styling____________________________________________________________________________________*/
 .overlay {
-    height: 100%;
+    position: fixed;
     left: 17vw;
     right: 0;
-    top:0;
-    position: fixed;
-    bottom: 1vw;
-    background: rgba(0, 0, 0, 0.7);
     transition: opacity 500ms;
     visibility: hidden;
     opacity: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .overlay:target {
@@ -181,39 +181,39 @@ input[type=submit]:hover {
 }
 
 .popup {
-    top: 25%;
+    position: relative;
+    overflow-x: hidden;
+    transition: all 0.2s ease-in-out;
+    top: 10vw;
     margin: auto;
     padding: 2vw;
-    border-radius: 0.2vw;
-    width: 20vw;
-    height: auto;
-    position: relative;
-    transition: all 1s ease-in-out;
-    background: linear-gradient(to right top, #7ac4c2, #8cccc6, #9ed4ca, #afdbd0, #bfe3d6);
+    border-radius: 5px;
+    width: 20%;
+    height: 40%;
+    background-color: white;
 }
 
 .popup h1 {
     width: 100%;
     height: auto;
-    font-size: 1.8vw;
     margin-top: 1vw;
     margin-bottom: 1vw;
-    font-variant: small-caps;
     border-bottom: 0.2vw solid #520404;
+    font-size: 1.5vw;
+    font-variant: small-caps;
     text-align: center;
+}
+
+.popup h2 {
+    font-size: 1.5vw;
+    font-variant: small-caps;
 }
 
 .popup-content{
-    text-align: center;
     overflow-y: auto;
     overflow-x: hidden;
     padding:0.3vw;
-}
-
-.popup-content p {
-    font-size: 1vw;
-    text-align: justify;
-    color: black;
+    text-align: center;
 }
 
 .popup .close {
@@ -228,24 +228,11 @@ input[type=submit]:hover {
 }
 
 .popup .close:hover {
-    color: #7ac4c2;
+    color: #913737;
 }
 
-.start-project {
-    height: auto;
-    width: 100%;
+.button:hover {
+    background-color: #525453;
 }
 
-.start-project h2 {
-    font-size: 1.2vw;
-    font-variant: small-caps;
-}
 
-input[type=text], input[type=date] {
-    width: 80%;
-    padding: 0.5vw;
-    border: 0.1vw solid black;
-    font-size: 1vw;
-    text-align-last: center;
-    margin-bottom: 1vw;
-}
