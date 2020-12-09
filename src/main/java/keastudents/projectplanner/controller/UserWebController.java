@@ -18,7 +18,10 @@ import java.util.ArrayList;
 public class UserWebController {
     private DomainController domainController = new DomainController(new DataFacadeImplemented());
     private ValidationController validationController = new ValidationController();
-
+    @GetMapping("/exceptionpage")
+    public String exceptionPage() {
+        return "afterLogin/exceptionPage";
+    }
     //show welcome-/frontpage
     @GetMapping("/")
     public String frontpage() {
