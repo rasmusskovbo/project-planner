@@ -3,21 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Error</title>
-    <link rel="stylesheet" href="generalbasestyle.css">
-    <link rel="stylesheet" href="errorstyle.css">
+    <link rel="stylesheet" href="/errorstyle.css">
+    <link rel="stylesheet" href="/generalbasestyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
+
 <body>
-<div class="page-background-img ">
 
-    <div class ="error-msg">
-        <h1>An error occured!</h1>
-        <!-- thymeleaf: text message-->
-        <p><span th:text="${message}"> </span></p>
+<div class="page-container">
+
+    <!--frontpage background-->
+    <div class="page-background-img">
+
+        <!-- right side/main content -->
+        <div class="right-side-container">
+            <div class="right-box-wrapper">
+
+                <div class ="error-msg">
+                    <h3>An error occured!</h3>
+                    <p><span th:text="${message}"></span></p>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <div class ="error-msg">
-        <img src="https://cdn.pixabay.com/photo/2016/11/11/20/05/wave-1817646_960_720.png")  alt="background" width="100%" height="100%">
-    </div>
+<!-- footer content-->
+<div class="footer">
+    <h6> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h6>
+</div>
 
 </div>
 </body>

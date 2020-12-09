@@ -14,6 +14,7 @@ import java.util.ArrayList;
 @Controller
 public class UserWebController {
     private DomainController domainController = new DomainController(new DataFacadeImplemented());
+   // private ValidationController validationController = new ValidationController();
     private ValidationService validationService = new ValidationService();
 
     //show welcome-/frontpage
@@ -48,7 +49,10 @@ public class UserWebController {
 
         return "afterLogin/overviewPage";
     }
-
+    @GetMapping("/exceptionpage")
+    public String exceptionPage() {
+        return "beforeLogin/exceptionPage";
+    }
 
     @PostMapping("/signUpAction")
     public String signUpAction(WebRequest request, Model model) throws DefaultException {
@@ -62,7 +66,7 @@ public class UserWebController {
         // Validates input. Returns custom error message if any errors, if not returns an empty string ""
         String validationStatus = validationService.validate(firstName, lastName, email, password, confirmedPassword);
 
-        // Creates user if no validatoin error, if not reloads page and passes error message on
+        // Creates user if no validation error, if not reloads page and passes error message on
         if (validationStatus.equals("")) {
             domainController.createUser(firstName, lastName, email, password);
             User user = domainController.login(email, password);

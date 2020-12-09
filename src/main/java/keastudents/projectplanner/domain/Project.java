@@ -5,9 +5,23 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Project {
-    private String title;
+    // Variables for project creation/edit project
     private int id;
-    private LocalDate startDate;
+    private String title;                       // input
+    private LocalDate startDate;                // input
+    private LocalDate deadline;                 // input
+    private int baselineManHourCost;            // input
+    private int baselineHoursPrWorkday;         // input
+
+    // Variables for calculating and showing info to user
+    private int totalWorkHours;                 // calculated
+    private int totalWorkDays;                  // calculated
+    private LocalDate estFinishedByDate;        // calculated
+    private String deadlineDifference;          // deadline - estFinishedByDate displayed in days and hours using remainder op -> %
+    private int changeToWorkHoursNeeded;        // calculated
+    private int estTotalCost;                   // calculated
+
+    // Variables related to business logic
     private ArrayList<Subproject> subprojects;
 
     public Project(String title, int id, LocalDate startDate) {
@@ -64,6 +78,62 @@ public class Project {
 
     public ArrayList<Subproject> getSubprojects() {
         return subprojects;
+    }
+
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
+    }
+
+    public int getTotalWorkHours() {
+        return totalWorkHours;
+    }
+
+    public void setTotalWorkHours(int totalWorkHours) {
+        this.totalWorkHours = totalWorkHours;
+    }
+
+    public int getTotalWorkDays() {
+        return totalWorkDays;
+    }
+
+    public void setTotalWorkDays(int totalWorkDays) {
+        this.totalWorkDays = totalWorkDays;
+    }
+
+    public LocalDate getEstFinishedByDate() {
+        return estFinishedByDate;
+    }
+
+    public void setEstFinishedByDate(LocalDate estFinishedByDate) {
+        this.estFinishedByDate = estFinishedByDate;
+    }
+
+    public String getDeadlineDifference() {
+        return deadlineDifference;
+    }
+
+    public void setDeadlineDifference(String deadlineDifference) {
+        this.deadlineDifference = deadlineDifference;
+    }
+
+    public int getChangeToWorkHoursNeeded() {
+        return changeToWorkHoursNeeded;
+    }
+
+    public void setChangeToWorkHoursNeeded(int changeToWorkHoursNeeded) {
+        this.changeToWorkHoursNeeded = changeToWorkHoursNeeded;
+    }
+
+    public int getEstTotalCost() {
+        return estTotalCost;
+    }
+
+    public void setEstTotalCost(int estTotalCost) {
+        this.estTotalCost = estTotalCost;
     }
 
     public void setSubprojects(ArrayList<Subproject> subprojects) {

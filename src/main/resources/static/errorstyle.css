@@ -1,3 +1,12 @@
+
+/* right side content______________________________________________________________________________________________________*/
+.right-box-wrapper {
+
+    border: 2vw solid transparent;
+    border-image: linear-gradient(to right top, #7ac4c2, #8cccc6, #9ed4ca, #afdbd0, #bfe3d6) 10 round;
+    background-color: white;
+}
+
 .error-msg{
     top: 50%;
     left: 50%;
