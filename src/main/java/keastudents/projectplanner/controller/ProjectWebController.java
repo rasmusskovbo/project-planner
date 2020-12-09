@@ -77,6 +77,6 @@ public class ProjectWebController {
     @ExceptionHandler(Exception.class)
     public String anotherError(Model model, Exception exception) {
         model.addAttribute("message",exception.getMessage());
-        return "exceptionPage";
+        return "afterLogin/exceptionPage";
     }
 }

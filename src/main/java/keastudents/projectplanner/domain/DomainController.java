@@ -10,7 +10,7 @@ public class DomainController {
         this.facade = facade;
     }
 
-    // TODO Kan simplificeres
+    // TODO Kan simplificeres, User ikke nødvendigt
     public User createUser(String firstName, String lastName, String email, String password) throws DefaultException{
         User userCreate = new User(firstName, lastName, email, password);
         facade.createUser(userCreate);
