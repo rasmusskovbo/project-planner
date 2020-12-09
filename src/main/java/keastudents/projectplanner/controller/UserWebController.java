@@ -84,7 +84,6 @@ public class UserWebController {
 
         User user = domainController.login(email, password);
         setSessionInfo(request, user);
-
         return "redirect:/overviewPage";
 
     }

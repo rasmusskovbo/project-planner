@@ -85,7 +85,6 @@ public class UserMapper {
                         rs.getString("last_name"),
                         rs.getString("email")
                 );
-
                 return user;
 
             } else {
