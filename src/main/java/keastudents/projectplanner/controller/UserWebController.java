@@ -62,7 +62,7 @@ public class UserWebController {
         // Validates input. Returns custom error message if any errors, if not returns an empty string ""
         String validationStatus = validationService.validate(firstName, lastName, email, password, confirmedPassword);
 
-        // Creates user if no validatoin error, if not reloads page and passes error message on
+        // Creates user if no validation error, if not reloads page and passes error message on
         if (validationStatus.equals("")) {
             domainController.createUser(firstName, lastName, email, password);
             User user = domainController.login(email, password);
