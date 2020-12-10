@@ -30,8 +30,8 @@ public class DataFacadeImplemented implements DataFacade {
     }
 
     @Override
-    public void createProject(int userId, String projectTitle, LocalDate startDate) throws DefaultException {
-        projectMapper.createProject(userId, projectTitle, startDate);
+    public void createProject(int userId, String projectTitle, LocalDate startDate, LocalDate deadline, int baselineManHourCost, int baselineHoursPrWorkday) throws DefaultException {
+        projectMapper.createProject(userId, projectTitle, startDate, deadline, baselineManHourCost, baselineHoursPrWorkday);
     }
 
     @Override

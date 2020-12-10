@@ -21,13 +21,26 @@ public class ProjectWebController {
         // Takes info from WebRequest and creates project in database, afterwards redirecting to overview
         String projectTitle = request.getParameter("projectTitle");
         String startDate = request.getParameter("startDate");
-
         LocalDate startDateFormatted = localDateFormatter(startDate);
+        String deadline;
+        LocalDate deadlineFormatted = null;
+        String baselineManHourCost = null;
+        String baselineHoursPrWorkday = null;
 
+        if (request.getParameter("deadline") != null) {
+            deadline = request.getParameter("deadline");
+            deadlineFormatted = localDateFormatter(deadline);
+        }
+        if (request.getParameter("baselineManHourCost") != null) {
+            baselineManHourCost = request.getParameter("baselineManHourCost");
+        }
+        if (request.getParameter("baselineHoursPrWorkday") != null) {
+            baselineManHourCost = request.getParameter("baselineHoursPrWorkday");
+        }
 
         //To get projects from current user
         int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
-        domainController.createProject(userId, projectTitle, startDateFormatted);
+        domainController.createProject(userId, projectTitle, startDateFormatted, deadlineFormatted, baselineManHourCost, baselineHoursPrWorkday );
 
         return "redirect:/overviewPage";
     }
@@ -74,9 +87,11 @@ public class ProjectWebController {
         return LocalDate.parse(date, formatter);
     }
 
+    /*
     @ExceptionHandler(Exception.class)
     public String anotherError(Model model, Exception exception) {
         model.addAttribute("message",exception.getMessage());
         return "afterLogin/exceptionPage";
     }
+     */
 }

@@ -14,7 +14,7 @@ public interface DataFacade {
 
     public User login(String email, String password) throws LoginException;
 
-    public void createProject(int userId, String projectTitle, LocalDate startDate) throws DefaultException;
+    public void createProject(int userId, String projectTitle, LocalDate startDate, LocalDate deadline, int baselineManHourCost, int baselineHoursPrWorkday) throws DefaultException;
 
     public void createSubproject(int projectId, String subprojectTitle, LocalDate startDateFormatted) throws DefaultException;
 
