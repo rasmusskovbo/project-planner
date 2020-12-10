@@ -2,6 +2,7 @@ package keastudents.projectplanner.data;
 
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.User;
+import org.apache.juli.logging.Log;
 
 import java.sql.*;
 
@@ -44,7 +45,7 @@ public class UserMapper {
         }
     }
 
-    public User login(String email, String password) throws DefaultException {
+    public User login(String email, String password) throws LoginException {
 
         try {
 
@@ -62,10 +63,10 @@ public class UserMapper {
                 user.setId(id);
                 return user;
             } else {
-                throw new DefaultException("Could not validate user");
+                throw new LoginException("Could not validate user.");
             }
         } catch (SQLException ex) {
-            throw new DefaultException(ex.getMessage());
+            throw new LoginException(ex.getMessage());
         }
     }
 
@@ -85,7 +86,6 @@ public class UserMapper {
                         rs.getString("last_name"),
                         rs.getString("email")
                 );
-
                 return user;
 
             } else {

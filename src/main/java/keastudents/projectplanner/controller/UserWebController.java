@@ -1,7 +1,9 @@
 package keastudents.projectplanner.controller;
 
 import keastudents.projectplanner.data.DataFacadeImplemented;
+import keastudents.projectplanner.data.LoginException;
 import keastudents.projectplanner.domain.*;
+import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -55,7 +57,7 @@ public class UserWebController {
     }
 
     @PostMapping("/signUpAction")
-    public String signUpAction(WebRequest request, Model model) throws DefaultException {
+    public String signUpAction(WebRequest request, Model model) throws LoginException, DefaultException {
         //Retrieve values from HTML signUp form via WebRequest
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
@@ -64,7 +66,7 @@ public class UserWebController {
         String confirmedPassword = request.getParameter("password2");
 
         // Validates input. Returns custom error message if any errors, if not returns an empty string ""
-        String validationStatus = validationService.validate(firstName, lastName, email, password, confirmedPassword);
+        String validationStatus = validationService.validateNewUser(firstName, lastName, email, password, confirmedPassword);
 
         // Creates user if no validation error, if not reloads page and passes error message on
         if (validationStatus.equals("")) {
@@ -79,18 +81,26 @@ public class UserWebController {
     }
 
     @PostMapping("/loginAction")
-    public String loginAction(WebRequest request) throws DefaultException {
+    public String loginAction(WebRequest request, Model model) throws LoginException {
         //Retrieve values from HTML form via WebRequest
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        // TODO Try/Catch her?
-
-        User user = domainController.login(email, password);
-        setSessionInfo(request, user);
-
+        try {
+            User user = domainController.login(email, password);
+            setSessionInfo(request, user);
+        } catch (LoginException e) {
+            model.addAttribute("errorMsg", "Could not validate the user. Please check your e-mail and password and try again.");
+            return "beforeLogin/logInPage.html";
+        }
         return "redirect:/overviewPage";
 
+    }
+
+    @PostMapping("/logoutAction")
+    public String logoutAction(WebRequest request) throws DefaultException {
+        setSessionInfo(request, new User(null, null));
+        return "beforeLogin/frontpage.html";
     }
 
 
