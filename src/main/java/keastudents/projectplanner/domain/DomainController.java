@@ -1,5 +1,7 @@
 package keastudents.projectplanner.domain;
 
+import keastudents.projectplanner.data.LoginException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -21,7 +23,7 @@ public class DomainController {
         return facade.getUser(userId);
     }
 
-    public User login(String email, String password) throws DefaultException {
+    public User login(String email, String password) throws LoginException {
         return facade.login(email, password);
     }
 

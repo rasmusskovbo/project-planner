@@ -1,5 +1,7 @@
 package keastudents.projectplanner.domain;
 
+import keastudents.projectplanner.data.LoginException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -10,7 +12,7 @@ public interface DataFacade {
 
     public User getUser(int userId) throws DefaultException;
 
-    public User login(String email, String password) throws DefaultException;
+    public User login(String email, String password) throws LoginException;
 
     public void createProject(int userId, String projectTitle, LocalDate startDate) throws DefaultException;
 

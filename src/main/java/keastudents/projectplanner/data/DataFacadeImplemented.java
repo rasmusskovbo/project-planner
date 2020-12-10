@@ -20,7 +20,7 @@ public class DataFacadeImplemented implements DataFacade {
     }
 
     @Override
-    public User login(String email, String password) throws DefaultException {
+    public User login(String email, String password) throws LoginException {
         return userMapper.login(email, password);
     }
 

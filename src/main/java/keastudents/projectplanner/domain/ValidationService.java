@@ -7,7 +7,7 @@ public class ValidationService {
     public ValidationService() {
     }
 
-    public String validate(String firstName, String lastName, String email, String password, String confirmedPassword) {
+    public String validateNewUser(String firstName, String lastName, String email, String password, String confirmedPassword) {
         String errorMsg = "";
         if (!firstName.matches(namePattern) || !lastName.matches(namePattern)) {
             errorMsg += "Name can only contain letters.";
@@ -21,6 +21,5 @@ public class ValidationService {
         }
         return errorMsg;
     }
-
 
 }

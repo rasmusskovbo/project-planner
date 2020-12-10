@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Log in</title>
@@ -62,6 +62,11 @@
                     <div class="inputfield-fullwidth-wrapper">
                         <h2><label for="password">Password</label></h2>
                         <input type="password" id="password" name="password" placeholder="Your password...." required>
+                    </div>
+
+                    <!-- Text field for error msg -->
+                    <div class="inputfield-fullwidth-wrapper">
+                        <p style="color: darkred; font-size: 12px" th:text="${errorMsg}"></p>
                     </div>
 
                     <!-- log in button -->
