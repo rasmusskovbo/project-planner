@@ -97,6 +97,12 @@ public class UserWebController {
 
     }
 
+    @PostMapping("/logoutAction")
+    public String logoutAction(WebRequest request) throws DefaultException {
+        setSessionInfo(request, new User(null, null));
+        return "beforeLogin/frontpage.html";
+    }
+
 
 
     private void setSessionInfo(WebRequest request, User user) {
