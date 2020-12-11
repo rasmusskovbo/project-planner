@@ -76,7 +76,7 @@ public class ProjectMapper {
         try {
 
             String SQL = "SELECT * FROM project " +
-                    "LEFT JOIN project_object_info ON project_object_info.project_id = project.id " +
+//                    "LEFT JOIN project_object_info ON project_object_info.project_id = project.id " +
                     "WHERE user_id= ?;";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, userId);
@@ -103,6 +103,35 @@ public class ProjectMapper {
         }
     }
 
+    public Project getProject(int projectId) throws DefaultException{
+        try {
+
+            String SQL = "SELECT * FROM project WHERE id= ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Project project = new Project(
+                        rs.getString("title"),
+                        LocalDate.parse(rs.getString("start_date"))
+                );
+                project.setId(rs.getInt("id"));
+
+                // Appends all subprojects to task
+                project.setSubprojects(getSubprojects(project.getId()));
+
+                return project;
+            } else {
+                return null;
+            }
+        } catch(SQLException e) {
+
+            throw new DefaultException(e.getMessage());
+
+        }
+    }
+
 
     // TODO Når objektet laves skal al information fra result set sættes ind
     public ArrayList<Subproject> getSubprojects(int projectId) throws DefaultException {
@@ -111,7 +140,7 @@ public class ProjectMapper {
 
         try {
             String SQL = "SELECT * FROM subproject " +
-                    "LEFT JOIN project_object_info ON project_object_info.subproject_id = subproject.id " +
+//                    "LEFT JOIN project_object_info ON project_object_info.subproject_id = subproject.id " +
                     "WHERE subproject.project_id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, projectId);
@@ -144,7 +173,7 @@ public class ProjectMapper {
 
         try {
             String SQL = "SELECT * FROM task " +
-                    "LEFT JOIN project_object_info ON project_object_info.task_id = task.id " +
+//                    "LEFT JOIN project_object_info ON project_object_info.task_id = task.id " +
                     "WHERE task.subproject_id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, subprojectId);

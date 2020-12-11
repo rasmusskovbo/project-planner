@@ -1,3 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro&family=Cuprum&family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro&family=Open+Sans:wght@300&display=swap');
+
+
+/* Overall Main content/table-project content styling_________________________________________________________________________*/
+.main-content-container {
+    position: fixed;
+    left: 17vw;
+    right: 0;
+    top:0;
+    bottom: 1.2vw;
+    background-color:  white;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.table-container {
+    position: absolute;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.parent-table {
+    table-layout: fixed;
+    overflow-y: scroll;
+    width: 100%;
+    height: auto;
+}
+
+/*table header styling*/
+th {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    height: 5vw;
+    width: 100%;
+    padding: 0.5vw 0.5vw 0.5vw 0.5vw;
+    background: linear-gradient(to left top, #7ac4c2, #8cccc6, #9ed4ca, #afdbd0, #bfe3d6);
+    font-size: 2.5vw;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* select option styling______________________________________________________________________________________________*/
+.select-project-container td{
+    padding-top: 5vw;
+    text-align: center;
+}
+
+.select-project-container label {
+    font-size: 1vw;
+}
+
+.select-project-container select {
+    width: 75%;
+    padding: 0.5vw 1vw 0.5vw 1vw;
+    font-size: 1.2vw;
+}
+
+.select-project-button {
+    padding-left: 0.5vw;
+    border: none;
+}
+
 /*left side sidenav menu content______________________________________________________________________________________*/
 .sidenav-container {
     position: fixed;
@@ -12,20 +78,18 @@
 .sidenav-wrapper{
     height: 100%;
     width: 100%;
+    overflow-y: scroll;
 }
 
 .sidenav-wrapper a {
     display: block;
-    padding: 1vw 1vw 1vw 2vw;
-    margin-top: 2vw;
-    margin-bottom: 2vw;
+    padding: 2vw 1vw 2vw 2vw;
     text-decoration: none;
 }
 
 .sidenav-wrapper h1 {
     font-size: 1.5vw;
     color: black;
-    text-align: justify;
 }
 
 .sidenav-wrapper h2 {
@@ -34,14 +98,8 @@
     color: #913737;
 }
 
-.sidenav-item-top {
-    position: absolute;
-    top: 0;
-}
-
 .sidenav-item-bottom {
-    position: absolute;
-    bottom: 0;
+    margin-top: 17vw;
 }
 
 :root {
@@ -56,4 +114,103 @@
                     var(--mainColor) 1vw,
                     transparent
             );
+}
+
+/*popup for create project styling____________________________________________________________________________________*/
+.overlay {
+    position: fixed;
+    z-index: 10;
+    left: 17vw;
+    right: 0;
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    position: relative;
+    overflow-x: hidden;
+    transition: all 0.2s ease-in-out;
+    top: 10%;
+    margin: auto;
+    padding: 2vw;
+    border-radius: 5px;
+    max-width: 40%;
+    max-height: 70%;
+    background-color: white;
+}
+
+.popup h1 {
+    width: 100%;
+    height: auto;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    border-bottom: 0.2vw solid #520404;
+    font-size: 2vw;
+    font-variant: small-caps;
+    text-align: center;
+}
+
+.popup h2 {
+    font-size: 1.5vw;
+    font-variant: small-caps;
+}
+
+.popup-content{
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding:0.3vw;
+    text-align: center;
+}
+
+.popup .close {
+    position: absolute;
+    top: 0.5vw;
+    right: 1.5vw;
+    transition: all 200ms;
+    font-size: 3vw;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.popup .close:hover {
+    color: #913737;
+}
+
+.button:hover {
+    background-color: #525453;
+}
+
+/*input text field/create object styling*/
+input[type=text], input[type=date], input[type=number] {
+    width: 80%;
+    padding: 0.5vw;
+    margin-bottom: 1vw;
+    border: 0.1vw solid black;
+    font-size: 1vw;
+    text-align-last: center;
+}
+
+input[type=submit] {
+    padding: 0.3vw;
+    margin: 1vw 0.5vw;
+    border-radius: 1vw;
+    box-shadow: 0.1vw 0.2vw black;
+    background-color: #BFE3D6;
+    font-size: 1vw;
+    text-decoration: none;
+}
+
+input[type=submit]:hover {
+    border: 0.1vw solid black;
+    box-shadow: none;
+    background-color: #7ac4c2;
 }

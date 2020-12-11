@@ -21,4 +21,6 @@ public interface DataFacade {
     public void createTask(int subprojectId, String taskTitle, LocalDate startDateFormatted) throws DefaultException;
 
     public ArrayList<Project> getProjects(int userId) throws DefaultException;
+
+    public Project getProject(int projectId) throws DefaultException;
 }

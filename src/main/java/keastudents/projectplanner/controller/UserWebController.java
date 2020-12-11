@@ -50,10 +50,6 @@ public class UserWebController {
 
         return "afterLogin/overviewPage";
     }
-    @GetMapping("/exceptionpage")
-    public String exceptionPage() {
-        return "beforeLogin/exceptionPage";
-    }
 
     @PostMapping("/signUpAction")
     public String signUpAction(WebRequest request, Model model) throws LoginException, DefaultException {
@@ -90,7 +86,7 @@ public class UserWebController {
             setSessionInfo(request, user);
         } catch (LoginException e) {
             model.addAttribute("errorMsg", "Could not validate the user. Please check your e-mail and password and try again.");
-            return "beforeLogin/logInPage.html";
+            return "beforeLogin/logInPage";
         }
         return "redirect:/overviewPage";
 
@@ -99,7 +95,7 @@ public class UserWebController {
     @PostMapping("/logoutAction")
     public String logoutAction(WebRequest request) throws DefaultException {
         setSessionInfo(request, new User(null, null));
-        return "beforeLogin/frontpage.html";
+        return "beforeLogin/frontpage";
     }
 
 
@@ -108,6 +104,11 @@ public class UserWebController {
         // Place user info on session
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("id", user.getId(), WebRequest.SCOPE_SESSION);
+    }
+
+    @GetMapping("/exceptionPage")
+    public String exceptionPage() {
+        return "exceptionPage";
     }
 
 

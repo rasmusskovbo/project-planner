@@ -66,4 +66,8 @@ public class DomainController {
     public ArrayList<Project> getProjects(int userId) throws DefaultException {
         return facade.getProjects(userId);
     }
+
+    public Project getProject(int projectId) throws DefaultException{
+        return facade.getProject(projectId);
+    }
 }

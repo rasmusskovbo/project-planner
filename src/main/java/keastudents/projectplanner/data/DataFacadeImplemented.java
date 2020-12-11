@@ -44,10 +44,14 @@ public class DataFacadeImplemented implements DataFacade {
         projectMapper.createTask(subprojectId,taskTitle, startDateFormatted);
     }
 
-    //For when user can have more than one project
     @Override
     public ArrayList<Project> getProjects(int userId) throws DefaultException {
         return projectMapper.getProjects(userId);
+    }
+
+    @Override
+    public Project getProject(int projectId) throws DefaultException {
+        return projectMapper.getProject(projectId);
     }
 }
 
