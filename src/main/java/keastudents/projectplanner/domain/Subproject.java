@@ -12,6 +12,10 @@ public class Subproject extends Project {
         this.tasks = new ArrayList<Task>();
     }
 
+    public Subproject() {
+
+    }
+
     public void sortTasks() {
         // tasks.sort(); TODO Implementer sortering pr. dato
     }

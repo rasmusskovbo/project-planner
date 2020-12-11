@@ -31,12 +31,22 @@ public class Project {
         this.subprojects = new ArrayList<Subproject>();
     }
 
+    public Project() {
+
+    }
+
     public void addSubproject(Subproject subproject) {
         subprojects.add(subproject);
     }
 
     public void removeSubproject(Subproject subproject) {
         subproject.removeSubproject(subproject);
+    }
+    //tests
+    public void addSubproject(int index) {
+    }
+    //tests
+    public void removeSubproject(int index) {
     }
 
     public void sortSubprojects() {
@@ -149,5 +159,8 @@ public class Project {
                 ", subprojects=" + subprojects +
                 '}';
     }
+
+
+
 }
 
