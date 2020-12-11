@@ -24,6 +24,10 @@ public class Project {
     // Variables related to business logic
     private ArrayList<Subproject> subprojects;
 
+    public Project() {
+        this.subprojects = new ArrayList<Subproject>();
+    }
+
     public Project(String title, int id, LocalDate startDate) {
         this.title = title;
         this.id = id;
@@ -36,7 +40,11 @@ public class Project {
     }
 
     public void removeSubproject(Subproject subproject) {
-        subproject.removeSubproject(subproject);
+        subprojects.remove(subproject);
+    }
+
+    public void removeSubproject(int index) {
+        subprojects.remove(index);
     }
 
     public void sortSubprojects() {

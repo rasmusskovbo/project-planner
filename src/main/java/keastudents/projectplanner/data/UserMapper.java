@@ -8,7 +8,13 @@ import java.sql.*;
 
 public class UserMapper {
 
-    private Connection con = DBManager.getConnection(); // Burde være nok kun at kalde én gang per class.
+    private Connection con = DBManager.getConnection();
+
+    public UserMapper() {
+    }
+    public UserMapper(Connection connection) {
+        con = connection;
+    }
 
     public void createUser(User user) throws DefaultException {
 

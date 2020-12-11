@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class DomainController {
     private DataFacade facade = null;
     private LocalDate defaultDate = LocalDate.of(2099, 12, 31); // Arbitrary default date;
-    private int defaultBaselineManHourCost = 0;
-    private int defaultBaselineHoursPrWorkday = 0;
+    private int defaultBaselineManHourCost = 0; // Ikke optional
+    private int defaultBaselineHoursPrWorkday = 0; // Ikke optional
 
     public DomainController(DataFacade facade) {
         this.facade = facade;
@@ -39,6 +39,7 @@ public class DomainController {
             deadline = defaultDate;
         }
 
+        // TODO Skal forceres
         if (baselineManHourCost != null) {
             baselineMHC = Integer.parseInt(baselineManHourCost);
         } else {

@@ -3,10 +3,8 @@ package keastudents.projectplanner.controller;
 import keastudents.projectplanner.data.DataFacadeImplemented;
 import keastudents.projectplanner.data.LoginException;
 import keastudents.projectplanner.domain.*;
-import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
@@ -38,9 +36,10 @@ public class UserWebController {
     }
 
     @GetMapping("/overviewPage")
-    public String projectsOverview(WebRequest request, Model model) throws DefaultException {
+    public String projectsOverview(WebRequest request, Model model) throws DefaultException, UserNotLoggedInException {
         // Retrieves project and user info, packs them and sends to html page.
         int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
+
         model.addAttribute("user", domainController.getUser(userId));
 
         ArrayList<Project> projects = domainController.getProjects(userId);

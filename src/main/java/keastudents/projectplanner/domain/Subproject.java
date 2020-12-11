@@ -7,6 +7,10 @@ public class Subproject extends Project {
 
     private ArrayList<Task> tasks;
 
+    public Subproject() {
+
+    }
+
     public Subproject(String title, LocalDate startDate) {
         super(title, startDate);
         this.tasks = new ArrayList<Task>();
@@ -31,4 +35,5 @@ public class Subproject extends Project {
     public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+
 }
