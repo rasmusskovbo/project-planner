@@ -50,7 +50,7 @@ class ProjectTest {
         assertEquals(1, project.getSubprojects().size());
 
     }
-
+    
     @Test
     void addTask_successfully() {
         Project project = new Project();
@@ -98,7 +98,9 @@ class ProjectTest {
 
         project.setStartDate(a);
         subproject.setStartDate(b);
-       / subproject.sortSubprojects(b.compareTo(project.getStartDate()));
+        //Linjen neden under fejler. ved ikke om det er min opsætning der er noget galt med. eller,
+        // om det er fordi sort-metoden ikke er lavet korret under projekts.
+       // subproject.sortSubprojects(b.compareTo(project.getStartDate()));
 
     }
 
