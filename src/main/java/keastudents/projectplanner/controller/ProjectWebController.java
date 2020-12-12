@@ -30,7 +30,7 @@ public class ProjectWebController {
 
         ArrayList<Project> projects = domainController.getProjects(userId);
         // If user has active project(s), add to model.
-        if (projects !=null) {
+        if (projects != null) {
             model.addAttribute("projectList", projects);
         }
 

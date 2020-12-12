@@ -76,7 +76,7 @@ public class ProjectMapper {
         try {
 
             String SQL = "SELECT * FROM project " +
-//                    "LEFT JOIN project_object_info ON project_object_info.project_id = project.id " +
+                    "LEFT JOIN project_object_info ON project_object_info.project_id = project.id " +
                     "WHERE user_id= ?;";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, userId);
@@ -106,7 +106,9 @@ public class ProjectMapper {
     public Project getProject(int projectId) throws DefaultException{
         try {
 
-            String SQL = "SELECT * FROM project WHERE id= ?;";
+            String SQL = "SELECT * FROM project " +
+                    "LEFT JOIN project_object_info ON project_object_info.project_id = project.id " +
+                    "WHERE user_id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, projectId);
             ResultSet rs = ps.executeQuery();
@@ -140,7 +142,7 @@ public class ProjectMapper {
 
         try {
             String SQL = "SELECT * FROM subproject " +
-//                    "LEFT JOIN project_object_info ON project_object_info.subproject_id = subproject.id " +
+                    "LEFT JOIN project_object_info ON project_object_info.subproject_id = subproject.id " +
                     "WHERE subproject.project_id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, projectId);
@@ -173,7 +175,7 @@ public class ProjectMapper {
 
         try {
             String SQL = "SELECT * FROM task " +
-//                    "LEFT JOIN project_object_info ON project_object_info.task_id = task.id " +
+                    "LEFT JOIN project_object_info ON project_object_info.task_id = task.id " +
                     "WHERE task.subproject_id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, subprojectId);
