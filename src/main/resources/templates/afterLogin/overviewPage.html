@@ -4,215 +4,115 @@
     <meta charset="UTF-8">
     <title>Projects Overview</title>
     <link rel="stylesheet" href="generalbasestyle.css">
-    <link rel="stylesheet" href="afterLogin/overviewstyle.css">
     <link rel="stylesheet" href="afterLogin/afterloginbasestyle.css">
     <script src="https://kit.fontawesome.com/00d69adb96.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <div class="page-container">
-    <div class="page-background-img">
 
-        <!-- left side content/ nav menu-->
-        <div class="sidenav-container">
-            <div class="sidenav-wrapper">
-                <a href="/overviewPage" class="sidenav-item-top">
-                    <h1><i class="fas fa-tasks"></i>Project overview</h1>
-                </a>
-                <a href="/" class="sidenav-item-bottom">
-                    <!-- thymeleaf: user logged in-->
-                    <h2>Currently logged in as: <br>
-                        <th th:text="${user.firstName}"></th>
-                        <th th:text="${user.lastName}"></th>
-                    </h2>
+    <!-- left side content/ nav menu-->
+    <div class="sidenav-container">
+        <div class="sidenav-wrapper">
+            <a href="/overviewPage"><h1><i class="fas fa-tasks"></i>Project overview</h1></a>
 
-                    <!-- TODO form skal implementeres sammen med billede og tekst -->
-                    <form name="logout" action="/logoutAction" method="POST">
-                        <input type="submit" class="button"><h1><i class="fas fa-sign-out-alt"></i>Log out</h1>
-                    </form>
-                    
-                </a>
-            </div>
-        </div>
+            <a href="#popupCreateProject"><h1><i class="fas fa-plus"></i>Create New Project</h1></a>
 
-        <!-- Main content/table-project content-->
-        <div class="main-content-container">
-            <div class="table-container">
-                <table class="parent-table">
-                    <!-- header content-->
-                    <thead>
-                    <tr>
-                        <th>My Projects</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <!-- include more-->
-                    </tr>
-                    </thead>
+            <a href="/" class="sidenav-item-bottom">
+                <!-- thymeleaf: user logged in-->
+                <h2>Currently logged in as: <br>
+                    <th th:text="${user.firstName}"></th>
+                    <th th:text="${user.lastName}"></th>
+                </h2>
 
-
-                    <!-- get arraylist of projects from projectList-->
-                    <th:block th:each="project: ${projectList}">
-                        <!--if there are projects-->
-                        <tbody th:if="${project != null}">
-                        <tr>
-                            <td class="row-container" colspan="3">
-                                <input type="checkbox"/>
-                                <span class="span-project-item-wrapper"><i class="fas fa-plus"></i>
-                                    <h1 th:text="${project.title}"></h1>
-                                    <!-- make sure that name is max 70 characters-->
-                                </span>
-                                <span class="span-project-item-wrapper"><i class="fas fa-minus"></i>
-                                   <h1 th:text="${project.title}"></h1> <!-- make sure that name is max 70 characters-->
-                                </span>
-
-                                <!-- project info row-->
-                                <table class="collapsible-nested-table">
-                                    <tr class="project-row-wrapper">
-                                        <td th:text="${project.title}"></td>
-                                        <td th:text="${project.startDate}"></td>
-                                        <td>Project End Date</td>
-                                    </tr>
-                                    <tr>
-                                        <!-- span row for subproject(s)-->
-                                        <td class="row-container" colspan="3">
-                                            <input type="checkbox"/>
-                                            <span class="span-subproject-item-wrapper"><i class="fas fa-plus"></i> <h1>Show Subprojects</h1></span>
-                                            <span class="span-subproject-item-wrapper"><i class="fas fa-minus"></i> <h1>Hide Subprojects</h1></span>
-
-                                            <!-- nested subproject(s) table-->
-                                            <table class="collapsible-nested-table">
-                                                <!-- create subproject action-->
-                                                <form name="createSubprojectAction" action="/createSubprojectAction"
-                                                      method="POST">
-                                                    <tr class="create-subproject-inputfield-wrapper">
-                                                        <input type="hidden" name="projectId" th:value="${project.id}">
-                                                        <td>
-                                                            <h2><label for="subprojectTitle">Subproject Title</label>
-                                                            </h2>
-                                                            <input type="text" id="subprojectTitle" name="subprojectTitle" placeholder="Write subproject title.." required>
-                                                        </td>
-                                                        <td>
-                                                            <h2><label for="subprojectStartDate">Start Date</label></h2>
-                                                            <input type="date" id="subprojectStartDate" name="subprojectStartDate" required>
-                                                        </td>
-                                                        <td>
-                                                            <h2><label for="subprojectEndDate">End Date</label></h2>
-                                                            <input type="date" id="subprojectEndDate" name="subprojectEndDate">
-                                                        </td>
-                                                    </tr>
-                                                    <tr class="create-subproject-inputfield-wrapper">
-                                                        <td colspan="3">
-                                                            <input type="submit" value="+ Add Subproject">
-                                                        </td>
-                                                    </tr>
-                                                </form>
-
-                                                <!-- subproject(s) row info-->
-                                                <th:block th:each="subproject: ${project.subprojects}">
-                                                    <tr class="subproject-row-wrapper">
-                                                        <td th:text="${subproject.title}"></td>
-                                                        <td th:text="${subproject.startDate}"></td>
-                                                        <td>Date1</td>
-                                                    </tr>
-
-                                                    <!-- span row for task(s)-->
-                                                    <tr>
-                                                        <td class="row-container" colspan="3">
-                                                            <input type="checkbox"/>
-                                                            <span class="span-task-item-wrapper"><h1><i class="fas fa-plus"></i>Show Tasks</h1></span>
-                                                            <span class="span-task-item-wrapper"><h1><i class="fas fa-minus"></i>Hide Tasks</h1></span>
-
-                                                            <!-- nested task(s) table-->
-                                                            <table class="collapsible-nested-table">
-                                                                <!-- create task action-->
-                                                                <form name="createTaskAction" action="/createTaskAction" method="POST">
-                                                                    <tr class="create-task-inputfield-wrapper">
-                                                                        <input type="hidden" name="subprojectId" th:value="${subproject.id}">
-                                                                        <td>
-                                                                            <h2><label for="taskTitle">Task Title</label></h2>
-                                                                            <input type="text" id="taskTitle" name="taskTitle" placeholder="Write task title.." required>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h2><label for="taskStartDate">Start Date</label></h2>
-                                                                            <input type="date" id="taskStartDate" name="taskStartDate" required>
-                                                                        </td>
-                                                                        <td>
-                                                                            <h2><label for="taskEndDate">End Date</label></h2>
-                                                                            <input type="date" id="taskEndDate" name="taskEndDate">
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr class="create-task-inputfield-wrapper">
-                                                                        <td colspan="3">
-                                                                            <input type="submit" value="+ Add Task">
-                                                                        </td>
-                                                                    </tr>
-                                                                </form>
-
-                                                                <!-- task(s) info row-->
-                                                                <th:block th:each="task: ${subproject.tasks}">
-                                                                    <tr class="task-row-wrapper">
-                                                                        <td th:text="${task.title}"></td>
-                                                                        <td th:text="${task.startDate}"></td>
-                                                                        <td>Date1</td>
-                                                                    </tr>
-                                                                </th:block>
-
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                </th:block>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </th:block>
-
-                    <!-- create project button-->
-                    <tfoot>
-                    <tr class="create-project-button-wrapper">
-                        <td colspan="3">
-                            <a href="#popupProject"><input type="submit" value="+ Create New Project"></a>
-                        </td>
-                    </tr>
-                    </tfoot>
-
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- popup for creating a project-->
-    <div id="popupProject" class="overlay">
-        <div class="popup">
-            <h1>create project</h1>
-            <a class="close" href="#">&times;</a>
-            <div class="popup-content">
-                <form name="createProjectAction" action="/createProjectAction" method="POST">
-
-                    <div>
-                        <h2><label for="projectTitle">project title</label></h2>
-                        <input type="text" id="projectTitle" name="projectTitle" th:value="${title}" required>
-                    </div>
-
-                    <div>
-                        <h2><label for="startDate">start date</label></h2>
-                        <input type="date" id="startDate" name="startDate" th:value="${start_date}" required>
-                    </div>
-
-                    <input type="submit" class="button"
-                           onclick="return confirm('Create Project?')" value="Create Project">
+                <!-- TODO form skal implementeres sammen med billede og tekst -->
+                <form name="logout" action="/logoutAction" method="POST">
+<!--                    <input type="submit" class="button">-->
+                    <h1><i class="fas fa-sign-out-alt"></i>Log out</h1>
                 </form>
-            </div>
+            </a>
         </div>
     </div>
+
+    <!-- Main content/table-project content-->
+    <div class="main-content-container">
+        <div class="table-container">
+            <table class="parent-table">
+
+                <!-- header content-->
+                <thead>
+                <tr>
+                    <th>Project overview</th>
+                </tr>
+                </thead>
+
+                <tfoot>
+                <!-- select Project to view-->
+                <tr class="select-project-container">
+                    <td colspan="9">
+                        <form name="selectedProjectOverview" action="/selectedProjectOverview" method="GET">
+                            <label for="project">Select Project To View:</label>
+                            <select name="projectId" id="project">
+                                <th:block th:each="project: ${projectList}">
+                                    <option th:value="${project.id}"><h1 th:text="${project.title}"></h1></option>
+                                </th:block>
+                            </select>
+                            <button type="submit" class="select-project-button"><i class="far fa-check-circle"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tfoot>
+
+            </table>
+        </div>
+    </div>
+
 
     <!--page footer-->
     <div class="footer">
         <h1> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h1>
+    </div>
+</div>
+
+
+<!-- popup for creating a project -->
+<div id="popupCreateProject" class="overlay">
+    <div class="popup">
+        <h1>create project</h1>
+        <a class="close" href="#">&times;</a>
+        <div class="popup-content">
+            <form name="createProjectAction" action="/createProjectAction" method="POST">
+
+                <div>
+                    <h2><label for="title">project title</label></h2>
+                    <input type="text" id="title" name="projectTitle" placeholder="Write project title..." th:value="${title}" required>
+                </div>
+
+                <div>
+                    <h2><label for="startDate">start date</label></h2>
+                    <input type="date" id="startDate" name="projectStartDate" th:value="${startDate}" required>
+                </div>
+
+                <div>
+                    <h2><label for="deadline">deadline (optional)</label></h2>
+                    <input type="date" id="deadline" name="projectDeadline" th:value="${deadline}">
+                </div>
+
+                <div>
+                    <h2><label for="baseSalary">base salary</label></h2>
+                    <input type="number" id="baseSalary" name="projectBaseSalary" placeholder="DKK" th:value="${baselineManHourCost}">
+                </div>
+
+                <div>
+                    <h2><label for="workHoursPerDay">work hours per day</label></h2>
+                    <input type="number" id="workHoursPerDay" name="projectWorkHoursPerDay" placeholder="0" th:value="${baselineHoursPrWorkday}">
+                </div>
+
+                <input type="submit" class="button"
+                       onclick="return confirm('Create Project?')" value="Create Project">
+            </form>
+        </div>
     </div>
 </div>
 

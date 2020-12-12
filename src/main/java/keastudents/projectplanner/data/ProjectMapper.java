@@ -12,15 +12,31 @@ import java.util.ArrayList;
 public class ProjectMapper {
     Connection con = DBManager.getConnection();
 
-    public void createProject(int userId, String projectTitle, LocalDate startDate) throws DefaultException {
+    // TODO Deadline og baseline inputs skal sættes til en default værdi (e.g. 31122021 og 0, 0) hvis ikke bruger ønsker at taste det ind ved oprettelse. Alternativt skal vi force at de gør det)
+    public void createProject(int userId, String projectTitle, LocalDate startDate, LocalDate deadline, int baselineManHourCost, int baselineHoursPrWorkday) throws DefaultException {
         try {
 
-            String createProjectSQL = "INSERT INTO project (user_id, title, start_date) VALUES (?, ?, ?)";
-            PreparedStatement psProject = con.prepareStatement(createProjectSQL);
+            // create project
+            String createProjectSQL = "INSERT INTO project (user_id) VALUES (?)";
+            PreparedStatement psProject = con.prepareStatement(createProjectSQL, Statement.RETURN_GENERATED_KEYS);
             psProject.setInt(1, userId);
-            psProject.setString(2, projectTitle);
-            psProject.setDate(3, Date.valueOf(startDate));
             psProject.executeUpdate();
+
+            ResultSet id = psProject.getGeneratedKeys();
+            id.next();
+            int project_id = id.getInt(1);
+
+            // Set object info
+            String setProjectInfoSQL = "INSERT INTO project_object_info (title, start_date, deadline, baseline_man_hour_cost, baseline_hours_pr_workday, project_id) " +
+                                    "VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement psObjectInfo = con.prepareStatement(setProjectInfoSQL);
+            psObjectInfo.setString(1, projectTitle);
+            psObjectInfo.setDate(2, Date.valueOf(startDate));
+            psObjectInfo.setDate(3, Date.valueOf(deadline));
+            psObjectInfo.setInt(4, baselineManHourCost);
+            psObjectInfo.setInt(5, baselineHoursPrWorkday);
+            psObjectInfo.setInt(6, project_id);
+            psObjectInfo.executeUpdate();
 
         } catch (SQLException ex) {
             throw new DefaultException(ex.getMessage());
@@ -34,7 +50,7 @@ public class ProjectMapper {
             psProject.setInt(1, projectId);
             psProject.setString(2, subprojectTitle);
             psProject.setString(3, String.valueOf(startDate));
-            psProject.executeUpdate();
+            psProject.executeQuery();
 
         } catch (SQLException ex) {
             throw new DefaultException("Unable to create subproject (Project ID unknown or invalid arguments)");
@@ -55,12 +71,12 @@ public class ProjectMapper {
         }
     }
 
+    // TODO Når objektet laves skal al information fra result set sættes ind
     public  ArrayList<Project> getProjects(int userId) throws DefaultException {
         try {
 
             String SQL = "SELECT * FROM project " +
-                    //  "LEFT JOIN subproject ON subproject.project_id = project.id " +
-                    //  "LEFT JOIN task ON task.subproject_id = subproject.id " +
+//                    "LEFT JOIN project_object_info ON project_object_info.project_id = project.id " +
                     "WHERE user_id= ?;";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, userId);
@@ -87,14 +103,45 @@ public class ProjectMapper {
         }
     }
 
+    public Project getProject(int projectId) throws DefaultException{
+        try {
 
+            String SQL = "SELECT * FROM project WHERE id= ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Project project = new Project(
+                        rs.getString("title"),
+                        LocalDate.parse(rs.getString("start_date"))
+                );
+                project.setId(rs.getInt("id"));
+
+                // Appends all subprojects to task
+                project.setSubprojects(getSubprojects(project.getId()));
+
+                return project;
+            } else {
+                return null;
+            }
+        } catch(SQLException e) {
+
+            throw new DefaultException(e.getMessage());
+
+        }
+    }
+
+
+    // TODO Når objektet laves skal al information fra result set sættes ind
     public ArrayList<Subproject> getSubprojects(int projectId) throws DefaultException {
 
         ArrayList<Subproject> subprojects = new ArrayList<>();
 
         try {
             String SQL = "SELECT * FROM subproject " +
-                    "WHERE project_id = ?";
+//                    "LEFT JOIN project_object_info ON project_object_info.subproject_id = subproject.id " +
+                    "WHERE subproject.project_id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, projectId);
             ResultSet rs = ps.executeQuery();
@@ -126,7 +173,8 @@ public class ProjectMapper {
 
         try {
             String SQL = "SELECT * FROM task " +
-                    "WHERE subproject_id = ?";
+//                    "LEFT JOIN project_object_info ON project_object_info.task_id = task.id " +
+                    "WHERE task.subproject_id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, subprojectId);
             ResultSet rs = ps.executeQuery();

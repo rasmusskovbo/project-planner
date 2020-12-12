@@ -1,0 +1,131 @@
+/*project title header*/
+.row-container {
+    height: 100%;
+    width: 100%;
+    padding: 1.5vw 0 0 3vw;
+}
+
+.row-container h1 {
+    padding-left: 1vw;
+    display: inline-block;
+}
+
+.project-table, .collapsible-nested-table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+    height: auto;
+    background-color: white;
+}
+
+/*Overall collapsible rows styling____________________________________________________________________________________*/
+.header-container {
+    border-bottom: 0.1vw solid black;
+    text-align: center;
+}
+
+.header-container h1 {
+    font-size: 1vw;
+    font-variant: small-caps;
+    font-weight: 900;
+}
+
+input[type="checkbox"] {
+    display: inline-block;
+    position:absolute;
+    opacity:0;
+    height: 2vw;
+    width:100%;
+    margin-top: 2vw;
+    cursor:pointer;
+}
+
+span {
+    display:inline-block;
+    transition:all .3s ease;
+    height:2vw;
+    width: 100%;
+}
+
+.row-container span+span, .collapsible-nested-table {
+    display:none;
+}
+.row-container input[type="checkbox"]:checked ~ span {
+    display:none;
+}
+.row-container input[type="checkbox"]:checked ~ span+span{
+    display:inline-block;
+}
+
+.row-container input[type="checkbox"]:checked ~ .collapsible-nested-table  {
+    display:table;
+}
+
+.span-row-wrapper {
+    display: inline-block;
+    height: 2vw;
+    width: 100%;
+    margin-top: 2vw;
+    font-size: 1vw;
+    font-variant: petite-caps;
+    font-weight: 900;
+}
+
+.span-row-wrapper i {
+    margin-left: 3vw;
+    font-size: 1vw;
+}
+
+.info-row-container h2 {
+    padding-top: 1vw;
+    word-break: break-word;
+    font-size: 1vw;
+    text-align: center;
+}
+
+.date-wrapper, .column-length-wrapper {
+    width: 9.5vw;
+}
+
+.column-length-wrapper2 {
+    width: 15.5vw;
+}
+
+.button-column-wrapper{
+    width: 2vw;
+}
+
+.date-wrapper {
+    width: 9.5vw;
+}
+
+.button {
+    border-style: none;
+    background-color: transparent;
+}
+
+.info-row-container input[type=date], .info-row-container input[type=number], .info-row-container input[type=text] {
+    font-size: 1vw;
+    border-style: none;
+    background-color: transparent;
+}
+
+.info-row-container input[type=date]:focus, .info-row-container input[type=number]:focus, .info-row-container input[type=text]:focus{
+    background-color: white;
+}
+
+.info-row-container input[type=date]:hover, .info-row-container input[type=number]:hover, .info-row-container input[type=text]:hover{
+    background-color: #7ac4c2;
+}
+
+.info-row-container input[type=date], .create-task-container input[type=text], .create-task-container input[type=date], .create-task-container input[type=number] {
+    font-size: 0.7vw;
+}
+
+.add-button {
+    text-align: center;
+}
+
+#task-table {
+    background-color: lightgray;
+}

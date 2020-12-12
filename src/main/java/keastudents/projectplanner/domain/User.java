@@ -7,7 +7,7 @@ public class User {
     private String email;
     private String password;
 
-    // Constructor for registering
+    // Constructor for registering (usermapper.createUser)
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -15,7 +15,7 @@ public class User {
         this.password = password;
     }
 
-    // Constructor for login
+    // Constructor for login (usermapper.login)
     public User(String email, String password) {
         this.email = email;
         this.password = password;

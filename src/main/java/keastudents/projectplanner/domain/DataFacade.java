@@ -14,11 +14,13 @@ public interface DataFacade {
 
     public User login(String email, String password) throws LoginException;
 
-    public void createProject(int userId, String projectTitle, LocalDate startDate) throws DefaultException;
+    public void createProject(int userId, String projectTitle, LocalDate startDate, LocalDate deadline, int baselineManHourCost, int baselineHoursPrWorkday) throws DefaultException;
 
     public void createSubproject(int projectId, String subprojectTitle, LocalDate startDateFormatted) throws DefaultException;
 
     public void createTask(int subprojectId, String taskTitle, LocalDate startDateFormatted) throws DefaultException;
 
     public ArrayList<Project> getProjects(int userId) throws DefaultException;
+
+    public Project getProject(int projectId) throws DefaultException;
 }

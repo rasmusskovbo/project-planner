@@ -4,7 +4,7 @@ package keastudents.projectplanner.domain;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Project {
+public class Project implements Comparable<Subproject> {
     // Variables for project creation/edit project
     private int id;
     private String title;                       // input
@@ -24,6 +24,10 @@ public class Project {
     // Variables related to business logic
     private ArrayList<Subproject> subprojects;
 
+    public Project() {
+        this.subprojects = new ArrayList<Subproject>();
+    }
+
     public Project(String title, int id, LocalDate startDate) {
         this.title = title;
         this.id = id;
@@ -31,31 +35,20 @@ public class Project {
         this.subprojects = new ArrayList<Subproject>();
     }
 
-    public Project() {
-
-    }
 
     public void addSubproject(Subproject subproject) {
         subprojects.add(subproject);
     }
 
     public void removeSubproject(Subproject subproject) {
-        subproject.removeSubproject(subproject);
-    }
-    //tests
-    public void addSubproject(int index) {
-    }
-    //tests
-    public void removeSubproject(int index) {
+        subprojects.remove(subproject);
     }
 
-    public void sortSubprojects() {
-        // subprojects.sort(); TODO Implementer sortering pr. dato
+
+    public void sortSubprojects(LocalDate startDate) {
+        subprojects.sort(Project::compareTo);// TODO Implementer sortering pr. dato
     }
 
-    public String subprojectsToString() {
-        return subprojects.toString();
-    }
 
     public Project(String title, LocalDate startDate) {
         this.title = title;
@@ -161,6 +154,9 @@ public class Project {
     }
 
 
-
+    @Override
+    public int compareTo(Subproject subproject) {
+        return  this.startDate.compareTo(subproject.getStartDate());
+    }
 }
 

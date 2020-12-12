@@ -1,11 +1,19 @@
 package keastudents.projectplanner.domain;
 
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.time.chrono.ChronoPeriod;
+import java.time.chrono.Chronology;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalField;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 
 public class Subproject extends Project {
 
-    private ArrayList<Task> tasks;
+
+   private ArrayList<Task> tasks;
+
 
     public Subproject(String title, LocalDate startDate) {
         super(title, startDate);
@@ -35,4 +43,6 @@ public class Subproject extends Project {
     public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
+
+
 }
