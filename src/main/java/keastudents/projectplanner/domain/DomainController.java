@@ -32,27 +32,12 @@ public class DomainController {
     }
 
     public void createProject(int userId, String projectTitle, LocalDate startDate, LocalDate deadline, String baselineManHourCost, String baselineHoursPrWorkday) throws DefaultException{
-        int baselineMHC;
-        int baselineHPW;
 
         if (deadline == null) {
             deadline = defaultDate;
         }
 
-        // TODO Skal forceres
-        if (baselineManHourCost != null) {
-            baselineMHC = Integer.parseInt(baselineManHourCost);
-        } else {
-            baselineMHC = defaultBaselineManHourCost;
-        }
-
-        if (baselineHoursPrWorkday != null) {
-            baselineHPW = Integer.parseInt(baselineHoursPrWorkday);
-        } else {
-            baselineHPW = defaultBaselineHoursPrWorkday;
-        }
-
-        facade.createProject(userId, projectTitle, startDate, deadline, baselineMHC, baselineHPW);
+        facade.createProject(userId, projectTitle, startDate, deadline, Integer.parseInt(baselineManHourCost), Integer.parseInt(baselineHoursPrWorkday));
     }
 
     public void createSubproject(int projectId, String subprojectTitle, LocalDate startDateFormatted) throws DefaultException{
@@ -61,6 +46,14 @@ public class DomainController {
 
     public void createTask(int subprojectId, String taskTitle, LocalDate startDateFormatted) throws DefaultException{
         facade.createTask(subprojectId, taskTitle, startDateFormatted);
+    }
+
+    public void editProject(int projectId, String title, LocalDate start_date, LocalDate deadline, int baseline_man_hour_cost, int baseline_hours_pr_workday) throws DefaultException {
+        facade.editProject(projectId, title, start_date, deadline, baseline_man_hour_cost, baseline_hours_pr_workday);
+    }
+
+    public void deleteProjectObject(int id, String choice) throws DefaultException {
+        facade.deleteProjectObject(id, choice);
     }
 
     public ArrayList<Project> getProjects(int userId) throws DefaultException {

@@ -44,6 +44,14 @@ public class DataFacadeImplemented implements DataFacade {
         projectMapper.createTask(subprojectId,taskTitle, startDateFormatted);
     }
 
+    public void editProject(int projectId, String title, LocalDate start_date, LocalDate deadline, int baseline_man_hour_cost, int baseline_hours_pr_workday) throws DefaultException {
+        projectMapper.editProject(projectId, title, start_date, deadline, baseline_man_hour_cost, baseline_hours_pr_workday);
+    }
+
+    public void deleteProjectObject(int id, String choice) throws DefaultException {
+        projectMapper.deleteProjectObject(id, choice);
+    }
+
     @Override
     public ArrayList<Project> getProjects(int userId) throws DefaultException {
         return projectMapper.getProjects(userId);

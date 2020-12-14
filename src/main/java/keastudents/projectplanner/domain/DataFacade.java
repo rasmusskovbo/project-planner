@@ -20,6 +20,10 @@ public interface DataFacade {
 
     public void createTask(int subprojectId, String taskTitle, LocalDate startDateFormatted) throws DefaultException;
 
+    public void editProject(int projectId, String title, LocalDate start_date, LocalDate deadline, int baseline_man_hour_cost, int baseline_hours_pr_workday) throws DefaultException;
+
+    public void deleteProjectObject(int id, String choice) throws DefaultException;
+
     public ArrayList<Project> getProjects(int userId) throws DefaultException;
 
     public Project getProject(int projectId) throws DefaultException;

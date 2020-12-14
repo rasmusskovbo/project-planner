@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class ProjectMapper {
     Connection con = DBManager.getConnection();
 
-    // TODO Deadline og baseline inputs skal sættes til en default værdi (e.g. 31122021 og 0, 0) hvis ikke bruger ønsker at taste det ind ved oprettelse. Alternativt skal vi force at de gør det)
     public void createProject(int userId, String projectTitle, LocalDate startDate, LocalDate deadline, int baselineManHourCost, int baselineHoursPrWorkday) throws DefaultException {
         try {
 
@@ -71,13 +70,71 @@ public class ProjectMapper {
         }
     }
 
+    // For project & subproject
+    public void editProject(int projectId, String title, LocalDate start_date, LocalDate deadline, int baseline_man_hour_cost, int baseline_hours_pr_workday) throws DefaultException {
+        String SQL = "";
+        PreparedStatement ps = null;
+
+        try {
+            SQL = "UPDATE project_object_info " +
+                    "SET title = ?, start_date = ?, deadline = ?, baseline_man_hour_cost = ?, baseline_hours_pr_workday = ? " +
+                    "WHERE project_id = ?";
+            ps = con.prepareStatement(SQL);
+            ps.setString(1, title);
+            ps.setDate(2, Date.valueOf(start_date));
+            ps.setDate(3, Date.valueOf(deadline));
+            ps.setInt(4, baseline_man_hour_cost);
+            ps.setInt(5, baseline_hours_pr_workday);
+            ps.setInt(6, projectId);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DefaultException("Unable to edit project in database");
+        }
+    }
+
+    // Choice = project, subproject or task
+    public void deleteProjectObject(int id, String choice) throws DefaultException {
+        String SQL = "";
+        PreparedStatement ps = null;
+
+        try {
+            switch (choice) {
+                case "project":
+                    SQL = "DELETE from project WHERE id = ?";
+                    ps = con.prepareStatement(SQL);
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
+                    break;
+
+                case "subproject":
+                    SQL = "DELETE from subproject WHERE id = ?";
+                    ps = con.prepareStatement(SQL);
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
+                    break;
+
+                case "task":
+                    SQL = "DELETE from task WHERE id = ?";
+                    ps = con.prepareStatement(SQL);
+                    ps.setInt(1, id);
+                    ps.executeUpdate();
+                    break;
+            }
+
+        } catch (SQLException e) {
+            throw new DefaultException("Unable to delete project_object in database: "+e.getMessage());
+        }
+    }
+
+
     // TODO Når objektet laves skal al information fra result set sættes ind
-    public  ArrayList<Project> getProjects(int userId) throws DefaultException {
+    public ArrayList<Project> getProjects(int userId) throws DefaultException {
         try {
 
             String SQL = "SELECT * FROM project " +
                     "LEFT JOIN project_object_info ON project_object_info.project_id = project.id " +
-                    "WHERE user_id= ?;";
+                    "WHERE user_id = ?;";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
@@ -108,7 +165,7 @@ public class ProjectMapper {
 
             String SQL = "SELECT * FROM project " +
                     "LEFT JOIN project_object_info ON project_object_info.project_id = project.id " +
-                    "WHERE user_id = ?";
+                    "WHERE project_id = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, projectId);
             ResultSet rs = ps.executeQuery();
