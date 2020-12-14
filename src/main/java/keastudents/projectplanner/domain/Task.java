@@ -12,6 +12,10 @@ public class Task extends Subproject {
         super(title, startDate);
     }
 
+    public Task() {
+
+    }
+
     public int getWorkHoursNeeded() {
         return workHoursNeeded;
     }
