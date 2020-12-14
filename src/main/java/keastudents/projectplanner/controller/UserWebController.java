@@ -14,8 +14,6 @@ import java.util.ArrayList;
 @Controller
 public class UserWebController {
     private DomainController domainController = new DomainController(new DataFacadeImplemented());
-   // private ValidationController validationController = new ValidationController();
-    private ValidationService validationService = new ValidationService();
 
     //show welcome-/frontpage
     @GetMapping("/")
@@ -61,7 +59,7 @@ public class UserWebController {
         String confirmedPassword = request.getParameter("password2");
 
         // Validates input. Returns custom error message if any errors, if not returns an empty string ""
-        String validationStatus = validationService.validateNewUser(firstName, lastName, email, password, confirmedPassword);
+        String validationStatus = domainController.validationService.validateNewUser(firstName, lastName, email, password, confirmedPassword);
 
         // Creates user if no validation error, if not reloads page and passes error message on
         if (validationStatus.equals("")) {

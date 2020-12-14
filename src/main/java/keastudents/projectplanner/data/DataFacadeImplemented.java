@@ -35,19 +35,29 @@ public class DataFacadeImplemented implements DataFacade {
     }
 
     @Override
-    public void createSubproject(int projectId, String subprojectTitle, LocalDate startDateFormatted) throws DefaultException {
-        projectMapper.createSubproject(projectId, subprojectTitle, startDateFormatted);
+    public void createSubproject(int projectId, String subprojectTitle, LocalDate startDateFormatted, LocalDate deadlineFormatted) throws DefaultException {
+        projectMapper.createSubproject(projectId, subprojectTitle, startDateFormatted, deadlineFormatted);
     }
 
     @Override
-    public void createTask(int subprojectId, String taskTitle, LocalDate startDateFormatted) throws DefaultException {
-        projectMapper.createTask(subprojectId,taskTitle, startDateFormatted);
+    public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
+        projectMapper.createTask(subprojectId,taskTitle, startDate, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
     }
 
+    @Override
     public void editProject(int projectId, String title, LocalDate start_date, LocalDate deadline, int baseline_man_hour_cost, int baseline_hours_pr_workday) throws DefaultException {
         projectMapper.editProject(projectId, title, start_date, deadline, baseline_man_hour_cost, baseline_hours_pr_workday);
     }
 
+    public void editSubproject(int subprojectId, String title, LocalDate start_date, LocalDate deadline) throws DefaultException {
+        projectMapper.editSubproject(subprojectId, title, start_date, deadline);
+    }
+
+    public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
+        projectMapper.editTask(taskId, title, start_date, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
+    }
+
+    @Override
     public void deleteProjectObject(int id, String choice) throws DefaultException {
         projectMapper.deleteProjectObject(id, choice);
     }

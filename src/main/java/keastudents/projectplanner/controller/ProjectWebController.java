@@ -100,6 +100,7 @@ public class ProjectWebController {
     @PostMapping("/createSubproject")
     public String createSubprojectAction(WebRequest request, Model model) throws DefaultException {
         //Takes info from WebRequest and creates/adds subproject to project through project id
+        String projectId = request.getParameter("projectId");
         String subprojectTitle = request.getParameter("subprojectTitle");
         String subprojectStartDate = request.getParameter("subprojectStartDate");
         String subprojectDeadline = request.getParameter("subprojectDeadline");
@@ -107,14 +108,15 @@ public class ProjectWebController {
         LocalDate startDateFormatted = localDateFormatter(subprojectStartDate);
         LocalDate deadlineFormatted = localDateFormatter(subprojectDeadline);
 
-//        domainController.createSubproject(Integer.parseInt(projectId), subprojectTitle, startDateFormatted, deadlineFormatted);
+        domainController.createSubproject(Integer.parseInt(projectId), subprojectTitle, startDateFormatted, deadlineFormatted);
 
+        getPageInfo(request, model, Integer.parseInt(projectId));
 
         return  "afterLogin/selectedProjectOverviewPage";
     }
 
     @PostMapping("/editSubproject")
-    public String editSubproject(WebRequest request, Model model) throws DefaultException {
+    public String editSubproject(WebRequest request) throws DefaultException {
         String subprojectId = request.getParameter("subprojectId");
         String subprojectTitle = request.getParameter("subprojectTitle");
         String subprojectStartDate = request.getParameter("subprojectStartDate");
@@ -123,11 +125,9 @@ public class ProjectWebController {
         LocalDate startDateFormatted = localDateFormatter(subprojectStartDate);
         LocalDate deadlineFormatted = localDateFormatter(subprojectDeadline);
 
-       // domainController.editProjectObject(Integer.parseInt(subprojectId), subprojectTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(projectBaselineManHourCost), Integer.parseInt(projectBaselineHoursPrWorkday), "project");
+       domainController.editSubproject(Integer.parseInt(subprojectId), subprojectTitle, startDateFormatted, deadlineFormatted);
 
-    //    getPageInfo(request, model, Integer.parseInt(projectId));
-
-        return "afterLogin/selectedProjectOverviewPage";
+        return "redirect:/overviewPage";
     }
 
     @PostMapping("/deleteSubproject")
@@ -155,8 +155,7 @@ public class ProjectWebController {
         LocalDate startDateFormatted = localDateFormatter(taskStartDate);
         LocalDate deadlineFormatted = localDateFormatter(taskDeadline);
 
-//        domainController.createTask(Integer.parseInt(projectId), Integer.parseInt(subprojectId), taskTitle, startDateFormatted,
-//                deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskManHourCost), Integer.parseInt(taskExtraCosts), Integer.parseInt(taskHoursPrWorkday));
+        domainController.createTask(Integer.parseInt(subprojectId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskManHourCost), Integer.parseInt(taskExtraCosts), Integer.parseInt(taskHoursPrWorkday));
 
         getPageInfo(request, model, Integer.parseInt(projectId));
 
@@ -166,7 +165,6 @@ public class ProjectWebController {
     @PostMapping("/editTask")
     public String editTask(WebRequest request, Model model) throws DefaultException {
         String projectId = request.getParameter("projectId");
-        String subprojectId = request.getParameter("subprojectId");
         String taskId = request.getParameter("taskId");
         String taskTitle = request.getParameter("taskTitle");
         String taskStartDate = request.getParameter("taskStartDate");
@@ -179,11 +177,9 @@ public class ProjectWebController {
         LocalDate startDateFormatted = localDateFormatter(taskStartDate);
         LocalDate deadlineFormatted = localDateFormatter(taskDeadline);
 
-//        domainController.editTask(Integer.parseInt(subprojectId), Integer.parseInt(taskId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded),
-//                Integer.parseInt(taskManHourCost), Integer.parseInt(taskExtraCost), Integer.parseInt(taskHoursPerWorkday));
+        domainController.editTask(Integer.parseInt(taskId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded),Integer.parseInt(taskManHourCost), Integer.parseInt(taskExtraCost), Integer.parseInt(taskHoursPerWorkday));
 
         getPageInfo(request, model, Integer.parseInt(projectId));
-
         return "afterLogin/selectedProjectOverviewPage";
     }
 
@@ -193,7 +189,7 @@ public class ProjectWebController {
 
         domainController.deleteProjectObject(Integer.parseInt(taskId), "task");
 
-        return "afterLogin/selectedProjectOverviewPage";
+        return "redirect:/overviewPage";
     }
 
 // GENERAL USE

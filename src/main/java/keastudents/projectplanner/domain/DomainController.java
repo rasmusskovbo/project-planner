@@ -11,6 +11,7 @@ public class DomainController {
     private LocalDate defaultDate = LocalDate.of(2099, 12, 31); // Arbitrary default date;
     private int defaultBaselineManHourCost = 0; // Ikke optional
     private int defaultBaselineHoursPrWorkday = 0; // Ikke optional
+    public ValidationService validationService = new ValidationService();
 
     public DomainController(DataFacade facade) {
         this.facade = facade;
@@ -40,16 +41,24 @@ public class DomainController {
         facade.createProject(userId, projectTitle, startDate, deadline, Integer.parseInt(baselineManHourCost), Integer.parseInt(baselineHoursPrWorkday));
     }
 
-    public void createSubproject(int projectId, String subprojectTitle, LocalDate startDateFormatted) throws DefaultException{
-        facade.createSubproject(projectId, subprojectTitle, startDateFormatted);
+    public void createSubproject(int projectId, String subprojectTitle, LocalDate startDateFormatted, LocalDate deadlineFormatted) throws DefaultException{
+        facade.createSubproject(projectId, subprojectTitle, startDateFormatted, deadlineFormatted);
     }
 
-    public void createTask(int subprojectId, String taskTitle, LocalDate startDateFormatted) throws DefaultException{
-        facade.createTask(subprojectId, taskTitle, startDateFormatted);
+    public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
+        facade.createTask(subprojectId, taskTitle, startDate, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
     }
 
     public void editProject(int projectId, String title, LocalDate start_date, LocalDate deadline, int baseline_man_hour_cost, int baseline_hours_pr_workday) throws DefaultException {
         facade.editProject(projectId, title, start_date, deadline, baseline_man_hour_cost, baseline_hours_pr_workday);
+    }
+
+    public void editSubproject(int subprojectId, String title, LocalDate start_date, LocalDate deadline) throws DefaultException {
+        facade.editSubproject(subprojectId, title, start_date, deadline);
+    }
+
+    public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
+        facade.editTask(taskId, title, start_date, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
     }
 
     public void deleteProjectObject(int id, String choice) throws DefaultException {
