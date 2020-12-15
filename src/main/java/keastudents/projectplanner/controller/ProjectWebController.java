@@ -22,6 +22,7 @@ public class ProjectWebController {
     @GetMapping("/selectedProjectOverview")
     public String selectedProjectOverviewPage(WebRequest request, Model model) throws DefaultException {
         String projectId = request.getParameter("projectId");
+        //setActiveProject(request, Integer.parseInt(projectId));
 
         int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
         model.addAttribute("user", domainController.getUser(userId));
@@ -82,7 +83,9 @@ public class ProjectWebController {
 
         domainController.editProject(Integer.parseInt(projectId), projectTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(projectBaselineManHourCost), Integer.parseInt(projectBaselineHoursPrWorkday));
 
-        return "redirect:/selectedProjectOverview";
+
+
+        return "redirect:/overviewPage";
     }
 
     @PostMapping("/deleteProject")
@@ -111,6 +114,7 @@ public class ProjectWebController {
         domainController.createSubproject(Integer.parseInt(projectId), subprojectTitle, startDateFormatted, deadlineFormatted);
 
         getPageInfo(request, model, Integer.parseInt(projectId));
+
 
         return  "afterLogin/selectedProjectOverviewPage";
     }
@@ -204,6 +208,10 @@ public class ProjectWebController {
         //Formats input String Date to LocalDate
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(date, formatter);
+    }
+
+    public void setActiveProject(WebRequest request, int projectId) {
+        request.setAttribute("activeProject", projectId, WebRequest.SCOPE_SESSION);
     }
 
 // EXCEPTION HANDLING

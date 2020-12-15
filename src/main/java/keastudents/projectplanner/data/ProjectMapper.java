@@ -4,7 +4,6 @@ import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.Project;
 import keastudents.projectplanner.domain.Subproject;
 import keastudents.projectplanner.domain.Task;
-import org.apache.tomcat.jni.Local;
 
 import java.sql.*;
 import java.time.LocalDate;

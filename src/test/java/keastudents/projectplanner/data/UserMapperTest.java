@@ -1,8 +1,10 @@
-package keastudents.projectplanner.domain;
+package keastudents.projectplanner.data;
 
 import keastudents.projectplanner.data.DBTableFixtures;
 import keastudents.projectplanner.data.LoginException;
 import keastudents.projectplanner.data.UserMapper;
+import keastudents.projectplanner.domain.DefaultException;
+import keastudents.projectplanner.domain.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
