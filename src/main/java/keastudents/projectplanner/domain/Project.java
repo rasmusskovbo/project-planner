@@ -74,13 +74,21 @@ public class Project {
         // Resetting variables to avoid addition with saved values in database
         totalWorkDays = 0;
 
-
         totalWorkDays = (int) Math.ceil((double) totalWorkHours / baselineHoursPrWorkday); // Rounds up
         estFinishedByDate = startDate.plusDays(totalWorkDays);
 
         deadlineDifference = (int) ChronoUnit.DAYS.between(deadline, estFinishedByDate);
-        int neededWorkHoursDaily = (totalWorkHours / deadlineDifference);
-        changeToWorkHoursNeeded = neededWorkHoursDaily - baselineHoursPrWorkday;
+
+        int neededWorkHoursDaily = 0;
+        int workDaysAvailable = 0;
+        if (deadlineDifference > 0) {
+            workDaysAvailable = (int) ChronoUnit.DAYS.between(startDate, deadline)+1;
+            neededWorkHoursDaily = (totalWorkHours / workDaysAvailable);
+            changeToWorkHoursNeeded = neededWorkHoursDaily - baselineHoursPrWorkday;
+
+        } else {
+            changeToWorkHoursNeeded = 0;
+        }
 
     }
 

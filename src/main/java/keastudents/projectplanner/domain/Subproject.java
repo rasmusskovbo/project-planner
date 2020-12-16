@@ -31,15 +31,24 @@ public class Subproject extends Project implements Comparable<Subproject> {
             subtotalCostOfLabor += tasks.get(i).getManHourCost() * tasks.get(i).getWorkHoursNeeded();
         }
 
+
         // Sets subtotals for table viewing (updated through project -> subproject)
         setTotalWorkHours(subtotalWorkHours);
         setEstTotalCost(subtotalExtraCosts);
         setTotalWorkDays((int) Math.ceil((double) getTotalWorkHours() / baselineHoursPrWorkday));
         setEstFinishedByDate(getStartDate().plusDays(getTotalWorkDays()));
-
         setDeadlineDifference ((int) (ChronoUnit.DAYS.between(getDeadline(), getEstFinishedByDate())));
-        int neededWorkHoursDaily = (getTotalWorkHours() / getDeadlineDifference());
-        setChangeToWorkHoursNeeded(neededWorkHoursDaily - baselineHoursPrWorkday);
+
+        int neededWorkHoursDaily = 0;
+        int workDaysAvailable = 0;
+
+        if (getDeadlineDifference() > 0) {
+            workDaysAvailable = (int) ChronoUnit.DAYS.between(getStartDate(), getDeadline())+1;
+            neededWorkHoursDaily = (getTotalWorkHours() / workDaysAvailable);
+            setChangeToWorkHoursNeeded(neededWorkHoursDaily - baselineHoursPrWorkday);
+        } else {
+            setChangeToWorkHoursNeeded(0);
+        }
 
         return new int[] {subtotalWorkHours, subtotalExtraCosts, subtotalCostOfLabor};
 
