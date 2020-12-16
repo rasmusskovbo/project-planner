@@ -62,10 +62,16 @@ public class UserWebController {
 // Initial landing page
     @GetMapping("/overviewPage")
     public String projectsOverview(WebRequest request, Model model) throws DefaultException, UserNotLoggedInException {
-        int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
-        model.addAttribute("user", domainController.getUser(userId));
+        int userId = 0;
+        try {
+            userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
+        } catch (Exception e) {
+            throw new UserNotLoggedInException("You have been logged out. Please login again.");
+        }
 
+        model.addAttribute("user", domainController.getUser(userId));
         ArrayList<Project> projects = domainController.getProjects(userId);
+
         // If user has active project(s), add to model.
         if (projects !=null) {
             model.addAttribute("projectList", projects);
@@ -93,8 +99,8 @@ public class UserWebController {
     }
 
     @PostMapping("/logoutAction")
-    public String logoutAction(WebRequest request) throws DefaultException {
-        setSessionInfo(request, new User(null, null));
+    public String logoutAction(WebRequest request) {
+
         return "beforeLogin/frontpage";
     }
 

@@ -43,7 +43,7 @@ public class TableWebController {
         int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
         domainController.createProject(userId, projectTitle, startDateFormatted, deadlineFormatted, baselineManHourCost, baselineHoursPrWorkday);
 
-        return "redirect:/projectOverview";
+        return "redirect:/overviewPage";
     }
 
 
@@ -119,7 +119,6 @@ public class TableWebController {
 // Task-related actions
     @PostMapping("/createTask")
     public String createTask(WebRequest request, Model model) throws DefaultException {
-        String projectId = request.getParameter("projectId");
         String subprojectId = request.getParameter("subprojectId");
         String taskTitle = request.getParameter("taskTitle");
         String taskStartDate = request.getParameter("taskStartDate");
@@ -132,7 +131,7 @@ public class TableWebController {
         LocalDate startDateFormatted = localDateFormatter(taskStartDate);
         LocalDate deadlineFormatted = localDateFormatter(taskDeadline);
 
-        domainController.createTask(Integer.parseInt(subprojectId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskManHourCost), Integer.parseInt(taskExtraCosts), Integer.parseInt(taskHoursPrWorkday));
+        domainController.createTask(Integer.parseInt(subprojectId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCosts), Integer.parseInt(taskManHourCost), Integer.parseInt(taskHoursPrWorkday));
 
         return "redirect:/projectOverview";
     }
