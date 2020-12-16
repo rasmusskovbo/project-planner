@@ -5,12 +5,10 @@ import keastudents.projectplanner.data.LoginException;
 import keastudents.projectplanner.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.ArrayList;
 
 @Controller
 public class UserWebController {
@@ -59,27 +57,6 @@ public class UserWebController {
         }
     }
 
-// Initial landing page
-    @GetMapping("/overviewPage")
-    public String projectsOverview(WebRequest request, Model model) throws DefaultException, UserNotLoggedInException {
-        int userId = 0;
-        try {
-            userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
-        } catch (Exception e) {
-            throw new UserNotLoggedInException("You have been logged out. Please login again.");
-        }
-
-        model.addAttribute("user", domainController.getUser(userId));
-        ArrayList<Project> projects = domainController.getProjects(userId);
-
-        // If user has active project(s), add to model.
-        if (projects !=null) {
-            model.addAttribute("projectList", projects);
-        }
-
-        return "afterLogin/overviewPage";
-    }
-
 // Log-in / Log-out actions
     @PostMapping("/loginAction")
     public String loginAction(WebRequest request, Model model) throws LoginException {
@@ -106,18 +83,11 @@ public class UserWebController {
         return "beforeLogin/frontpage";
     }
 
-// General use
+// User Session
     private void setSessionInfo(WebRequest request, User user) {
         // Place user info on session
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("id", user.getId(), WebRequest.SCOPE_SESSION);
-    }
-
-// Exception handling
-    @ExceptionHandler(UserNotLoggedInException.class)
-    public String error(Model model, UserNotLoggedInException e) {
-        model.addAttribute("message", e.getMessage());
-        return "exceptionPage";
     }
 
 }

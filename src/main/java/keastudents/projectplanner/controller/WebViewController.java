@@ -28,6 +28,28 @@ public class WebViewController {
         return "redirect:/projectOverview";
     }
 
+    // Initial landing page
+    @GetMapping("/overviewPage")
+    public String projectsOverview(WebRequest request, Model model) throws DefaultException, UserNotLoggedInException {
+        int userId = 0;
+        try {
+            userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
+        } catch (Exception e) {
+            throw new UserNotLoggedInException("You have been logged out. Please login again.");
+        }
+
+        model.addAttribute("user", domainController.getUser(userId));
+        ArrayList<Project> projects = domainController.getProjects(userId);
+
+        // If user has active project(s), add to model.
+        if (projects !=null) {
+            model.addAttribute("projectList", projects);
+        }
+
+        return "afterLogin/overviewPage";
+    }
+
+    // Project-view landing page
     @GetMapping("/projectOverview")
     public String projectOverview(WebRequest request, Model model) throws DefaultException, UserNotLoggedInException {
         int userId = 0;

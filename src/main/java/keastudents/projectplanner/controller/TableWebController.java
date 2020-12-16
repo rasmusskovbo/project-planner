@@ -1,18 +1,14 @@
 package keastudents.projectplanner.controller;
 
-
 import keastudents.projectplanner.data.DataFacadeImplemented;
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.DomainController;
-import keastudents.projectplanner.domain.Project;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 @Controller
 public class TableWebController {
