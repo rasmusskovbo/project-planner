@@ -22,7 +22,11 @@
                 <div class ="error-msg">
                     <h3>An error occured!</h3>
                     <p><span th:text="${message}"></span></p>
+                    <form name="logout" action="/" method="GET">
+                        <input type="submit" class="button" value="Home">
+                    </form>
                 </div>
+
 
             </div>
         </div>

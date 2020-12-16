@@ -100,7 +100,9 @@ public class UserWebController {
 
     @PostMapping("/logoutAction")
     public String logoutAction(WebRequest request) {
-
+        request.setAttribute("user", null, WebRequest.SCOPE_SESSION);
+        request.setAttribute("id", null, WebRequest.SCOPE_SESSION);
+        request.setAttribute("projectId", null, WebRequest.SCOPE_SESSION);
         return "beforeLogin/frontpage";
     }
 
@@ -112,13 +114,10 @@ public class UserWebController {
     }
 
 // Exception handling
-    /*
-    @ExceptionHandler(Exception.class)
-    public String anotherError(Model model, Exception exception) {
-        model.addAttribute("message",exception.getMessage());
+    @ExceptionHandler(UserNotLoggedInException.class)
+    public String error(Model model, UserNotLoggedInException e) {
+        model.addAttribute("message", e.getMessage());
         return "exceptionPage";
     }
-
-     */
 
 }
