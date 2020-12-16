@@ -5,6 +5,7 @@ import keastudents.projectplanner.data.LoginException;
 import keastudents.projectplanner.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class UserWebController {
     private DomainController domainController = new DomainController(new DataFacadeImplemented());
 
+// Log-in / Sign-up steps
     //show welcome-/frontpage
     @GetMapping("/")
     public String frontpage() {
@@ -31,22 +33,6 @@ public class UserWebController {
     @GetMapping("/signUpPage")
     public String signUpPage() {
         return "beforeLogin/signUpPage";
-    }
-
-    @GetMapping("/overviewPage")
-    public String projectsOverview(WebRequest request, Model model) throws DefaultException, UserNotLoggedInException {
-        // Retrieves project and user info, packs them and sends to html page.
-        int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
-
-        model.addAttribute("user", domainController.getUser(userId));
-
-        ArrayList<Project> projects = domainController.getProjects(userId);
-        // If user has active project(s), add to model.
-        if (projects !=null) {
-            model.addAttribute("projectList", projects);
-        }
-
-        return "afterLogin/overviewPage";
     }
 
     @PostMapping("/signUpAction")
@@ -73,6 +59,22 @@ public class UserWebController {
         }
     }
 
+// Initial landing page
+    @GetMapping("/overviewPage")
+    public String projectsOverview(WebRequest request, Model model) throws DefaultException, UserNotLoggedInException {
+        int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
+        model.addAttribute("user", domainController.getUser(userId));
+
+        ArrayList<Project> projects = domainController.getProjects(userId);
+        // If user has active project(s), add to model.
+        if (projects !=null) {
+            model.addAttribute("projectList", projects);
+        }
+
+        return "afterLogin/overviewPage";
+    }
+
+// Log-in / Log-out actions
     @PostMapping("/loginAction")
     public String loginAction(WebRequest request, Model model) throws LoginException {
         //Retrieve values from HTML form via WebRequest
@@ -96,27 +98,23 @@ public class UserWebController {
         return "beforeLogin/frontpage";
     }
 
-
-
+// General use
     private void setSessionInfo(WebRequest request, User user) {
         // Place user info on session
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         request.setAttribute("id", user.getId(), WebRequest.SCOPE_SESSION);
     }
 
+// Exception handling
     @GetMapping("/exceptionPage")
     public String exceptionPage() {
         return "exceptionPage";
     }
 
-
-    /*
     @ExceptionHandler(Exception.class)
-
     public String anotherError(Model model, Exception exception) {
         model.addAttribute("message",exception.getMessage());
         return "afterLogin/exceptionPage";
     }
-    */
 
 }

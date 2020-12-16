@@ -15,35 +15,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Controller
-public class ProjectWebController {
+public class TableWebController {
     DomainController domainController = new DomainController(new DataFacadeImplemented());
-
-// TABLE VIEW
-    @GetMapping("/selectProject")
-    public String selectProject(WebRequest request, Model model) throws DefaultException {
-        String projectId = request.getParameter("projectId");
-        setActiveProject(request, Integer.parseInt(projectId));
-
-        return "redirect:/projectOverview";
-    }
-
-    @GetMapping("/projectOverview")
-    public String projectOverview(WebRequest request, Model model) throws DefaultException {
-        int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
-        int projectId = (int) request.getAttribute("projectId", WebRequest.SCOPE_SESSION);
-
-        model.addAttribute("user", domainController.getUser(userId));
-        model.addAttribute("project", domainController.getProject(projectId));
-
-        ArrayList<Project> projectsList = domainController.getProjects(userId);
-        // If user has active project(s), add to model.
-        if (projectsList != null) {
-            model.addAttribute("projectList", projectsList);
-        }
-
-        return "afterLogin/selectedProjectOverviewPage";
-    }
-
 
 // PROJECT
     @PostMapping("/createProjectAction")
@@ -199,16 +172,11 @@ public class ProjectWebController {
         return LocalDate.parse(date, formatter);
     }
 
-    public void setActiveProject(WebRequest request, int projectId) {
-        request.setAttribute("projectId", projectId, WebRequest.SCOPE_SESSION);
-    }
-
 // EXCEPTION HANDLING
-/*
     @ExceptionHandler(Exception.class)
     public String anotherError(Model model, Exception exception) {
         model.addAttribute("message",exception.getMessage());
         return "afterLogin/exceptionPage";
     }
-*/
+
 }
