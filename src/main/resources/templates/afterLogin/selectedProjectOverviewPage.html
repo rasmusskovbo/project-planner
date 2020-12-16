@@ -68,7 +68,7 @@
                                     <td class="date-wrapper"><h1>deadline</h1></td>
                                     <td><h1>total work hours</h1>
                                     <td><h1>total work days</h1></td>
-                                    <td class="date-wrapper"><h1>est. deadline</h1></td>
+                                    <td class="date-wrapper"><h1>est. finish date</h1></td>
                                     <td><h1>deadline diff.</h1></td>
                                     <td><h1>change to work hours needed</h1></td>
                                     <td><h1>est. total cost</h1></td>
@@ -102,12 +102,12 @@
 
                                         <table class="collapsible-nested-table">
                                             <tr class="header-container">
-                                                <td><h1>project title</h1></td>
+                                                <td><h1>subproject title</h1></td>
                                                 <td class="date-wrapper"><h1>start date</h1></td>
                                                 <td class="date-wrapper"><h1>deadline</h1></td>
-                                                <td><h1>total work hours</h1>
-                                                <td><h1>total work days</h1></td>
-                                                <td class="date-wrapper"><h1>est. deadline</h1></td>
+                                                <td><h1>subtotal work hours</h1>
+                                                <td><h1>subtotal work days</h1></td>
+                                                <td class="date-wrapper"><h1>est. finish date</h1></td>
                                                 <td><h1>deadline diff.</h1></td>
                                                 <td><h1>change to work hours needed</h1></td>
                                                 <td><h1>est. total cost</h1></td>
@@ -322,12 +322,12 @@
 
                                     <div>
                                         <h2><label for="baseSalary2">base salary</label></h2>
-                                        <input type="number" id="baseSalary2" name="projectBaselineManHourCost" placeholder="DKK" th:value="${baselineManHourCost}"> <!-- change later-->
+                                        <input type="number" id="baseSalary2" name="projectBaselineManHourCost" placeholder="DKK" th:value="${project.baselineManHourCost}"> <!-- change later-->
                                     </div>
 
                                     <div>
                                         <h2><label for="workHoursPerDay2">work hours per day</label></h2>
-                                        <input type="number" id="workHoursPerDay2" name="projectBaselineHoursPrWorkday" placeholder="0" th:value="${baselineHoursPrWorkday}"> <!-- change later-->
+                                        <input type="number" id="workHoursPerDay2" name="projectBaselineHoursPrWorkday" placeholder="0" th:value="${project.baselineHoursPrWorkday}"> <!-- change later-->
                                     </div>
 
                                     <input type="submit" class="button" onclick="return confirm('Edit Project?')" value="Edit Project">
@@ -441,12 +441,12 @@
 
                 <div>
                     <h2><label for="baseSalary">base salary</label></h2>
-                    <input type="number" id="baseSalary" name="projectBaseSalary" placeholder="DKK" th:value="${baselineManHourCost}">
+                    <input type="number" id="baseSalary" name="projectBaseSalary" placeholder="DKK" th:value="${baselineManHourCost}" required>
                 </div>
 
                 <div>
                     <h2><label for="workHoursPerDay">work hours per day</label></h2>
-                    <input type="number" id="workHoursPerDay" name="projectWorkHoursPerDay" placeholder="0" th:value="${baselineHoursPrWorkday}">
+                    <input type="number" id="workHoursPerDay" name="projectWorkHoursPerDay" placeholder="0" th:value="${baselineHoursPrWorkday}" required>
                 </div>
 
                 <input type="submit" class="button"

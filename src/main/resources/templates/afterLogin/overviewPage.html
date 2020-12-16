@@ -101,12 +101,12 @@
 
                 <div>
                     <h2><label for="baseSalary">base salary</label></h2>
-                    <input type="number" id="baseSalary" name="projectBaseSalary" placeholder="DKK" th:value="${baselineManHourCost}">
+                    <input type="number" id="baseSalary" name="projectBaseSalary" placeholder="DKK" th:value="${baselineManHourCost}" required>
                 </div>
 
                 <div>
                     <h2><label for="workHoursPerDay">work hours per day</label></h2>
-                    <input type="number" id="workHoursPerDay" name="projectWorkHoursPerDay" placeholder="0" th:value="${baselineHoursPrWorkday}">
+                    <input type="number" id="workHoursPerDay" name="projectWorkHoursPerDay" placeholder="0" th:value="${baselineHoursPrWorkday}" required>
                 </div>
 
                 <input type="submit" class="button"

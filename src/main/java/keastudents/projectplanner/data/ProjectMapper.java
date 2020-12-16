@@ -45,7 +45,35 @@ public class ProjectMapper {
     }
 
 // EDIT
-    public void updateProject() {
+    public void updateProject(Project project) throws DefaultException {
+        String SQL = "";
+        PreparedStatement ps = null;
+
+        try {
+            SQL = "UPDATE project_object_info " +
+                    "SET " +
+                    "total_work_hours = ?, " +
+                    "total_work_days = ?, " +
+                    "est_finished_by_date = ?, " +
+                    "deadline_difference = ?, " +
+                    "change_to_workhours_needed = ?, " +
+                    "est_total_cost = ? " +
+                    "WHERE project_id = ?;";
+            ps = con.prepareStatement(SQL);
+            ps.setInt(1, project.getTotalWorkHours());
+            ps.setInt(2, project.getTotalWorkDays());
+            ps.setDate(3, Date.valueOf(project.getEstFinishedByDate()));
+            ps.setInt(4, project.getDeadlineDifference());
+            ps.setInt(5, project.getChangeToWorkHoursNeeded());
+            ps.setInt(6, project.getEstTotalCost());
+            ps.setInt(7, project.getId());
+            ps.executeUpdate();
+
+            subprojectMapper.updateSubprojects(project.getSubprojects());
+
+        } catch (SQLException e) {
+            throw new DefaultException("Could not update project: " + e.getMessage());
+        }
 
     }
 
@@ -70,10 +98,6 @@ public class ProjectMapper {
             throw new DefaultException("Unable to edit project in database");
         }
     }
-
-
-
-
 
 // DELETE
     // Choice = project, subproject or task
@@ -166,7 +190,6 @@ public class ProjectMapper {
         }
     }
 
-
     public Project setProject(ResultSet rs) throws SQLException {
         Project project = new Project();
         project.setId(rs.getInt("id"));
@@ -181,11 +204,8 @@ public class ProjectMapper {
         project.setDeadlineDifference(rs.getInt("deadline_difference"));
         project.setChangeToWorkHoursNeeded(rs.getInt("change_to_workhours_needed"));
         project.setEstTotalCost(rs.getInt("est_total_cost"));
+
         return project;
     }
-
-
-
-
 
 }

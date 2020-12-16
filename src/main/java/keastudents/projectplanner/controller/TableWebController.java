@@ -25,6 +25,7 @@ public class TableWebController {
         String projectTitle = request.getParameter("projectTitle");
         String startDate = request.getParameter("projectStartDate");
         String projectDeadline = null;
+        LocalDate deadlineFormatted = null;
         String baselineManHourCost = request.getParameter("projectBaseSalary");
         String baselineHoursPrWorkday = request.getParameter("projectWorkHoursPerDay");
 
@@ -32,8 +33,8 @@ public class TableWebController {
         LocalDate startDateFormatted = localDateFormatter(startDate);
 
         // Checks if deadline has been inputted.
-        LocalDate deadlineFormatted = null;
-        if (request.getParameter("projectDeadline") != null) {
+        projectDeadline = request.getParameter("projectDeadline");
+        if (!projectDeadline.equals("")) {
             projectDeadline = request.getParameter("projectDeadline");
             deadlineFormatted = localDateFormatter(projectDeadline);
         }
@@ -138,7 +139,6 @@ public class TableWebController {
 
     @PostMapping("/editTask")
     public String editTask(WebRequest request, Model model) throws DefaultException {
-        String projectId = request.getParameter("projectId");
         String taskId = request.getParameter("taskId");
         String taskTitle = request.getParameter("taskTitle");
         String taskStartDate = request.getParameter("taskStartDate");
@@ -151,7 +151,7 @@ public class TableWebController {
         LocalDate startDateFormatted = localDateFormatter(taskStartDate);
         LocalDate deadlineFormatted = localDateFormatter(taskDeadline);
 
-        domainController.editTask(Integer.parseInt(taskId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded),Integer.parseInt(taskManHourCost), Integer.parseInt(taskExtraCost), Integer.parseInt(taskHoursPerWorkday));
+        domainController.editTask(Integer.parseInt(taskId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCost), Integer.parseInt(taskManHourCost), Integer.parseInt(taskHoursPerWorkday));
 
         return "redirect:/projectOverview";
     }

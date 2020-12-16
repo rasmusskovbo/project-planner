@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class DomainController {
     private DataFacade facade = null;
-    private LocalDate defaultDate = LocalDate.of(2099, 12, 31); // Arbitrary default date;
+    private LocalDate defaultDate = LocalDate.of(2099, 01,01); // Arbitrary default date;
     private int defaultBaselineManHourCost = 0; // Ikke optional
     private int defaultBaselineHoursPrWorkday = 0; // Ikke optional
     public ValidationService validationService = new ValidationService();
@@ -47,6 +47,12 @@ public class DomainController {
 
     public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
         facade.createTask(subprojectId, taskTitle, startDate, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
+    }
+
+    public void updateProject(int projectId) throws DefaultException {
+        Project project = facade.getProject(projectId);
+        project.calculateProjectData();
+        facade.updateProject(project);
     }
 
     public void editProject(int projectId, String title, LocalDate start_date, LocalDate deadline, int baseline_man_hour_cost, int baseline_hours_pr_workday) throws DefaultException {

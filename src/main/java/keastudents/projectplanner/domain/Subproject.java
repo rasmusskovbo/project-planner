@@ -1,6 +1,7 @@
 package keastudents.projectplanner.domain;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -19,7 +20,7 @@ public class Subproject extends Project implements Comparable<Subproject> {
         Collections.sort(tasks);
     }
 
-    public int[] calculateTasks() {
+    public int[] calculateSubproject(int baselineHoursPrWorkday) {
         int subtotalWorkHours = 0;
         int subtotalExtraCosts = 0;
         int subtotalCostOfLabor = 0;
@@ -30,9 +31,15 @@ public class Subproject extends Project implements Comparable<Subproject> {
             subtotalCostOfLabor += tasks.get(i).getManHourCost() * tasks.get(i).getWorkHoursNeeded();
         }
 
+        // Sets subtotals for table viewing (updated through project -> subproject)
         setTotalWorkHours(subtotalWorkHours);
         setEstTotalCost(subtotalExtraCosts);
-        // est deadline, deadline diff, change to work hours mangler. impl efter project level er ok
+        setTotalWorkDays((int) Math.ceil((double) getTotalWorkHours() / baselineHoursPrWorkday));
+        setEstFinishedByDate(getStartDate().plusDays(getTotalWorkDays()));
+
+        setDeadlineDifference ((int) (ChronoUnit.DAYS.between(getDeadline(), getEstFinishedByDate())));
+        int neededWorkHoursDaily = (getTotalWorkHours() / getDeadlineDifference());
+        setChangeToWorkHoursNeeded(neededWorkHoursDaily - baselineHoursPrWorkday);
 
         return new int[] {subtotalWorkHours, subtotalExtraCosts, subtotalCostOfLabor};
 

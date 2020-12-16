@@ -86,11 +86,14 @@ public class TaskMapper {
 
             // Loops through subprojects if found
             while (rs.next()) {
-                Task task = new Task(
-                        rs.getString("title"),
-                        LocalDate.parse(rs.getString("start_date"))
-                );
+                Task task = new Task();
                 task.setId(rs.getInt("id"));
+                task.setTitle(rs.getString("title"));
+                task.setStartDate(rs.getString("start_date"));
+                task.setDeadline(rs.getString("deadline"));
+                task.setWorkHoursNeeded(rs.getInt("workhours_needed"));
+                task.setExtraCosts(rs.getInt("extra_costs"));
+                task.setManHourCost(rs.getInt("man_hour_cost"));
 
                 tasks.add(task);
             }

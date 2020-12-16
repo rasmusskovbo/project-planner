@@ -1,6 +1,7 @@
 package keastudents.projectplanner.data;
 
 import keastudents.projectplanner.domain.DefaultException;
+import keastudents.projectplanner.domain.Project;
 import keastudents.projectplanner.domain.Subproject;
 
 import java.sql.*;
@@ -37,6 +38,40 @@ public class SubprojectMapper {
         }
     }
 
+    public void updateSubprojects(ArrayList<Subproject> subprojects) throws DefaultException {
+        String SQL = "";
+        PreparedStatement ps = null;
+
+        try {
+            for (int i = 0; i<subprojects.size(); i++) {
+                Subproject subproject = subprojects.get(i);
+
+                SQL = "UPDATE project_object_info " +
+                        "SET " +
+                        "total_work_hours = ?, " +
+                        "total_work_days = ?, " +
+                        "est_finished_by_date = ?, " +
+                        "deadline_difference = ?, " +
+                        "change_to_workhours_needed = ?, " +
+                        "est_total_cost = ? " +
+                        "WHERE subproject_id = ?;";
+                ps = con.prepareStatement(SQL);
+                ps.setInt(1, subproject.getTotalWorkHours());
+                ps.setInt(2, subproject.getTotalWorkDays());
+                ps.setDate(3, Date.valueOf(subproject.getEstFinishedByDate()));
+                ps.setInt(4, subproject.getDeadlineDifference());
+                ps.setInt(5, subproject.getChangeToWorkHoursNeeded());
+                ps.setInt(6, subproject.getEstTotalCost());
+                ps.setInt(7, subproject.getId());
+                ps.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            throw new DefaultException("Could not update subproject: " + e.getMessage());
+        }
+
+    }
+
     public void editSubproject(int subprojectId, String title, LocalDate start_date, LocalDate deadline) throws DefaultException {
         String SQL = "";
         PreparedStatement ps = null;
@@ -57,8 +92,6 @@ public class SubprojectMapper {
         }
     }
 
-
-    // TODO Når objektet laves skal al information fra result set sættes ind
     public ArrayList<Subproject> getSubprojects(int projectId) throws DefaultException {
 
         ArrayList<Subproject> subprojects = new ArrayList<>();
@@ -73,11 +106,7 @@ public class SubprojectMapper {
 
             // Loops through subprojects if found
             while (rs.next()) {
-                Subproject subproject = new Subproject(
-                        rs.getString("title"),
-                        LocalDate.parse(rs.getString("start_date"))
-                );
-                subproject.setId(rs.getInt("id"));
+                Subproject subproject = setSubproject(rs);
 
                 // Appends all tasks to subproject
                 subproject.setTasks(taskMapper.getTasks(subproject.getId()));
@@ -90,5 +119,22 @@ public class SubprojectMapper {
         } catch (SQLException e) {
             throw new DefaultException(e.getMessage());
         }
+    }
+
+    public Subproject setSubproject(ResultSet rs) throws SQLException {
+        Subproject subproject = new Subproject();
+        subproject.setId(rs.getInt("id"));
+        subproject.setTitle(rs.getString("title"));
+        subproject.setStartDate((rs.getString("start_date")));
+        subproject.setDeadline((rs.getString("deadline")));
+        subproject.setBaselineManHourCost(rs.getInt("baseline_man_hour_cost"));
+        subproject.setBaselineHoursPrWorkday(rs.getInt("baseline_hours_pr_workday"));
+        subproject.setTotalWorkHours(rs.getInt("total_work_hours"));
+        subproject.setTotalWorkDays(rs.getInt("total_work_days"));
+        subproject.setEstFinishedByDate((rs.getString("est_finished_by_date")));
+        subproject.setDeadlineDifference(rs.getInt("deadline_difference"));
+        subproject.setChangeToWorkHoursNeeded(rs.getInt("change_to_workhours_needed"));
+        subproject.setEstTotalCost(rs.getInt("est_total_cost"));
+        return subproject;
     }
 }

@@ -44,14 +44,21 @@ public class DataFacadeImplemented implements DataFacade {
     }
 
     @Override
+    public void updateProject(Project project) throws DefaultException {
+        projectMapper.updateProject(project);
+    }
+
+    @Override
     public void editProject(int projectId, String title, LocalDate start_date, LocalDate deadline, int baseline_man_hour_cost, int baseline_hours_pr_workday) throws DefaultException {
         projectMapper.editProject(projectId, title, start_date, deadline, baseline_man_hour_cost, baseline_hours_pr_workday);
     }
 
+    @Override
     public void editSubproject(int subprojectId, String title, LocalDate start_date, LocalDate deadline) throws DefaultException {
         subprojectMapper.editSubproject(subprojectId, title, start_date, deadline);
     }
 
+    @Override
     public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
         taskMapper.editTask(taskId, title, start_date, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
     }

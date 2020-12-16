@@ -31,6 +31,8 @@ public class WebViewController {
         int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
         int projectId = (int) request.getAttribute("projectId", WebRequest.SCOPE_SESSION);
 
+        domainController.updateProject(projectId);
+
         model.addAttribute("user", domainController.getUser(userId));
         model.addAttribute("project", domainController.getProject(projectId));
 
@@ -39,8 +41,6 @@ public class WebViewController {
         if (projectsList != null) {
             model.addAttribute("projectList", projectsList);
         }
-
-        //projectsList.get(0).getSubprojects().get(0).calculateTasks();
 
         return "afterLogin/selectedProjectOverviewPage";
     }

@@ -57,8 +57,12 @@ public class Project {
     }
 
     public void calculateSubprojects() {
+        // Resetting variables to avoid addition with saved values in database
+        totalWorkHours = 0;
+        estTotalCost = 0;
+
         for (int i = 0; i < subprojects.size(); i++) {
-            int[] taskData = subprojects.get(i).calculateTasks();
+            int[] taskData = subprojects.get(i).calculateSubproject(baselineHoursPrWorkday);
             totalWorkHours += taskData[0];
             estTotalCost += taskData[1];
             estTotalCost += taskData[2];
@@ -67,15 +71,19 @@ public class Project {
 
     public void calculateProjectData() {
         calculateSubprojects();
+        // Resetting variables to avoid addition with saved values in database
+        totalWorkDays = 0;
 
-        totalWorkDays = totalWorkHours * baselineHoursPrWorkday;
+
+        totalWorkDays = (int) Math.ceil((double) totalWorkHours / baselineHoursPrWorkday); // Rounds up
         estFinishedByDate = startDate.plusDays(totalWorkDays);
 
         deadlineDifference = (int) ChronoUnit.DAYS.between(deadline, estFinishedByDate);
-        changeToWorkHoursNeeded = deadlineDifference / baselineHoursPrWorkday;
-
+        int neededWorkHoursDaily = (totalWorkHours / deadlineDifference);
+        changeToWorkHoursNeeded = neededWorkHoursDaily - baselineHoursPrWorkday;
 
     }
+
 
     public void setStartDate(String startDate) {
         if (startDate != null) {
@@ -99,6 +107,10 @@ public class Project {
         } else {
             this.estFinishedByDate = defaultDate;
         }
+    }
+
+    public void setEstFinishedByDate(LocalDate estFinishedByDate) {
+        this.estFinishedByDate = estFinishedByDate;
     }
 
     public ArrayList<Subproject> getSubprojects() {
