@@ -19,12 +19,19 @@ public class Subproject extends Project implements Comparable<Subproject> {
         Collections.sort(tasks);
     }
 
-    public void calculateTasks() {
+    public int[] calculateTasks() {
         int subtotalWorkHours = 0;
+        int subtotalExtraCosts = 0;
+        int subtotalCostOfLabor = 0;
+
         for (int i = 0; i<tasks.size(); i++) {
             subtotalWorkHours += tasks.get(i).getWorkHoursNeeded();
+            subtotalExtraCosts += tasks.get(i).getExtraCosts();
+            subtotalCostOfLabor += tasks.get(i).getManHourCost() * tasks.get(i).getWorkHoursNeeded();
         }
-        System.out.println(subtotalWorkHours);
+
+        return new int[] {subtotalWorkHours, subtotalExtraCosts, subtotalCostOfLabor};
+
     }
 
     public void addTask(Task task) {

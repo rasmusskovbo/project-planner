@@ -1,8 +1,11 @@
 package keastudents.projectplanner.domain;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.time.temporal.ChronoUnit;
+
 
 public class Project {
     // Variables for project creation/edit project
@@ -17,7 +20,7 @@ public class Project {
     private int totalWorkHours;                 // calculated
     private int totalWorkDays;                  // calculated
     private LocalDate estFinishedByDate;        // calculated
-    private String deadlineDifference;          // deadline - estFinishedByDate displayed in days and hours using remainder op -> %
+    private int deadlineDifference;          // deadline - estFinishedByDate displayed in days and hours using remainder op -> %
     private int changeToWorkHoursNeeded;        // calculated
     private int estTotalCost;                   // calculated
 
@@ -26,6 +29,11 @@ public class Project {
 
     public Project() {
         this.subprojects = new ArrayList<Subproject>();
+    }
+
+    public Project(String title, LocalDate startDate) {
+        this.title = title;
+        this.startDate = startDate;
     }
 
     public Project(String title, int id, LocalDate startDate) {
@@ -43,14 +51,29 @@ public class Project {
         subprojects.remove(subproject);
     }
 
-
     public void sortSubprojects() {
         Collections.sort(subprojects);
     }
 
-    public Project(String title, LocalDate startDate) {
-        this.title = title;
-        this.startDate = startDate;
+    public void calculateSubprojects() {
+        for (int i = 0; i < subprojects.size(); i++) {
+            int[] taskData = subprojects.get(i).calculateTasks();
+            totalWorkHours += taskData[0];
+            estTotalCost += taskData[1];
+            estTotalCost += taskData[2];
+        }
+    }
+
+    public void calculateProjectData() {
+        calculateSubprojects();
+
+        totalWorkDays = totalWorkHours * baselineHoursPrWorkday;
+        estFinishedByDate = startDate.plusDays(totalWorkDays);
+
+        deadlineDifference = (int) ChronoUnit.DAYS.between(deadline, estFinishedByDate);
+        changeToWorkHoursNeeded = deadlineDifference / baselineHoursPrWorkday;
+
+
     }
 
     public String getTitle() {
@@ -105,6 +128,22 @@ public class Project {
         this.totalWorkDays = totalWorkDays;
     }
 
+    public int getBaselineManHourCost() {
+        return baselineManHourCost;
+    }
+
+    public void setBaselineManHourCost(int baselineManHourCost) {
+        this.baselineManHourCost = baselineManHourCost;
+    }
+
+    public int getBaselineHoursPrWorkday() {
+        return baselineHoursPrWorkday;
+    }
+
+    public void setBaselineHoursPrWorkday(int baselineHoursPrWorkday) {
+        this.baselineHoursPrWorkday = baselineHoursPrWorkday;
+    }
+
     public LocalDate getEstFinishedByDate() {
         return estFinishedByDate;
     }
@@ -113,11 +152,11 @@ public class Project {
         this.estFinishedByDate = estFinishedByDate;
     }
 
-    public String getDeadlineDifference() {
+    public int getDeadlineDifference() {
         return deadlineDifference;
     }
 
-    public void setDeadlineDifference(String deadlineDifference) {
+    public void setDeadlineDifference(int deadlineDifference) {
         this.deadlineDifference = deadlineDifference;
     }
 
