@@ -19,21 +19,26 @@ public class ProjectWebController {
     DomainController domainController = new DomainController(new DataFacadeImplemented());
 
 // TABLE VIEW
-    @GetMapping("/selectedProjectOverview")
-    public String selectedProjectOverviewPage(WebRequest request, Model model) throws DefaultException {
+    @GetMapping("/selectProject")
+    public String selectProject(WebRequest request, Model model) throws DefaultException {
         String projectId = request.getParameter("projectId");
-        //setActiveProject(request, Integer.parseInt(projectId));
+        setActiveProject(request, Integer.parseInt(projectId));
 
+        return "redirect:/projectOverview";
+    }
+
+    @GetMapping("/projectOverview")
+    public String projectOverview(WebRequest request, Model model) throws DefaultException {
         int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
+        int projectId = (int) request.getAttribute("projectId", WebRequest.SCOPE_SESSION);
+
         model.addAttribute("user", domainController.getUser(userId));
+        model.addAttribute("project", domainController.getProject(projectId));
 
-        Project project = domainController.getProject(Integer.parseInt(projectId));
-        model.addAttribute("project", project);
-
-        ArrayList<Project> projects = domainController.getProjects(userId);
+        ArrayList<Project> projectsList = domainController.getProjects(userId);
         // If user has active project(s), add to model.
-        if (projects != null) {
-            model.addAttribute("projectList", projects);
+        if (projectsList != null) {
+            model.addAttribute("projectList", projectsList);
         }
 
         return "afterLogin/selectedProjectOverviewPage";
@@ -64,7 +69,7 @@ public class ProjectWebController {
         int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
         domainController.createProject(userId, projectTitle, startDateFormatted, deadlineFormatted, baselineManHourCost, baselineHoursPrWorkday);
 
-        return "redirect:/overviewPage";
+        return "redirect:/projectOverview";
     }
 
 
@@ -83,9 +88,7 @@ public class ProjectWebController {
 
         domainController.editProject(Integer.parseInt(projectId), projectTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(projectBaselineManHourCost), Integer.parseInt(projectBaselineHoursPrWorkday));
 
-
-
-        return "redirect:/overviewPage";
+        return "redirect:/projectOverview";
     }
 
     @PostMapping("/deleteProject")
@@ -94,8 +97,7 @@ public class ProjectWebController {
 
         domainController.deleteProjectObject(Integer.parseInt(projectId), "project");
 
-
-        return "redirect:/overviewPage";
+        return "redirect:/projectOverview";
     }
 
 
@@ -113,10 +115,7 @@ public class ProjectWebController {
 
         domainController.createSubproject(Integer.parseInt(projectId), subprojectTitle, startDateFormatted, deadlineFormatted);
 
-        getPageInfo(request, model, Integer.parseInt(projectId));
-
-
-        return  "afterLogin/selectedProjectOverviewPage";
+        return  "redirect:/projectOverview";
     }
 
     @PostMapping("/editSubproject")
@@ -131,7 +130,7 @@ public class ProjectWebController {
 
        domainController.editSubproject(Integer.parseInt(subprojectId), subprojectTitle, startDateFormatted, deadlineFormatted);
 
-        return "redirect:/overviewPage";
+        return "redirect:/projectOverview";
     }
 
     @PostMapping("/deleteSubproject")
@@ -140,7 +139,7 @@ public class ProjectWebController {
 
         domainController.deleteProjectObject(Integer.parseInt(subprojectId), "subproject");
 
-        return "afterLogin/selectedProjectOverviewPage";
+        return "redirect:/projectOverview";
     }
 
 // TASK
@@ -161,9 +160,7 @@ public class ProjectWebController {
 
         domainController.createTask(Integer.parseInt(subprojectId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskManHourCost), Integer.parseInt(taskExtraCosts), Integer.parseInt(taskHoursPrWorkday));
 
-        getPageInfo(request, model, Integer.parseInt(projectId));
-
-        return "afterLogin/selectedProjectOverviewPage";
+        return "redirect:/projectOverview";
     }
 
     @PostMapping("/editTask")
@@ -183,8 +180,7 @@ public class ProjectWebController {
 
         domainController.editTask(Integer.parseInt(taskId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded),Integer.parseInt(taskManHourCost), Integer.parseInt(taskExtraCost), Integer.parseInt(taskHoursPerWorkday));
 
-        getPageInfo(request, model, Integer.parseInt(projectId));
-        return "afterLogin/selectedProjectOverviewPage";
+        return "redirect:/projectOverview";
     }
 
     @PostMapping("/deleteTask")
@@ -193,17 +189,10 @@ public class ProjectWebController {
 
         domainController.deleteProjectObject(Integer.parseInt(taskId), "task");
 
-        return "redirect:/overviewPage";
+        return "redirect:/projectOverview";
     }
 
 // GENERAL USE
-    private void getPageInfo(WebRequest request, Model model, int projectId) throws DefaultException{
-        int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
-        model.addAttribute("user", domainController.getUser(userId));
-        Project project = domainController.getProject(projectId);
-        model.addAttribute("project", project);
-    }
-
     private LocalDate localDateFormatter(String date) {
         //Formats input String Date to LocalDate
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -211,7 +200,7 @@ public class ProjectWebController {
     }
 
     public void setActiveProject(WebRequest request, int projectId) {
-        request.setAttribute("activeProject", projectId, WebRequest.SCOPE_SESSION);
+        request.setAttribute("projectId", projectId, WebRequest.SCOPE_SESSION);
     }
 
 // EXCEPTION HANDLING

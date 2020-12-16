@@ -330,7 +330,7 @@
                                         <input type="number" id="workHoursPerDay2" name="projectBaselineHoursPrWorkday" placeholder="0" th:value="${baselineHoursPrWorkday}"> <!-- change later-->
                                     </div>
 
-                                    <input type="submit" class="button" onclick="return confirm('Create Project?')" value="Create Project">
+                                    <input type="submit" class="button" onclick="return confirm('Edit Project?')" value="Edit Project">
                                 </form>
                             </div>
                         </div>
@@ -391,7 +391,7 @@
                 <!-- select Project to view-->
                 <tr class="select-project-container">
                     <td colspan="11">
-                        <form name="selectedProjectOverview" action="/selectedProjectOverview" method="GET">
+                        <form name="selectedProjectOverview" action="/selectProject" method="GET">
                             <label for="project">Select Project To View:</label>
                             <select name="projectId" id="project">
                                 <th:block th:each="project: ${projectList}">
@@ -410,7 +410,7 @@
 
     <!--page footer-->
     <div class="footer">
-        <h1> WWW.BLABLA.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@BLABLA.COM • TLF: +45 46 46 07 00 </h1>
+        <h1> WWW.PROJECTPLANNER.COM • LYGTEN 37, 2400 KØBENHAVN NV• E-MAIL: INFO@PROJECTPLANNER.COM • TLF: +45 46 46 07 00 </h1>
     </div>
 </div>
 
