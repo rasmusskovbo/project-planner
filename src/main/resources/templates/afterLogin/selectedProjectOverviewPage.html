@@ -391,7 +391,7 @@
                 <!-- select Project to view-->
                 <tr class="select-project-container">
                     <td colspan="11">
-                        <form name="selectedProjectOverview" action="/selectProject" method="GET">
+                        <form name="selectedProjectOverview" action="/selectProject" method="POST">
                             <label for="project">Select Project To View:</label>
                             <select name="projectId" id="project">
                                 <th:block th:each="project: ${projectList}">

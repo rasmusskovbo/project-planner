@@ -1,8 +1,8 @@
 package keastudents.projectplanner.domain;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Project {
     // Variables for project creation/edit project
@@ -35,7 +35,6 @@ public class Project {
         this.subprojects = new ArrayList<Subproject>();
     }
 
-
     public void addSubproject(Subproject subproject) {
         subprojects.add(subproject);
     }
@@ -45,10 +44,9 @@ public class Project {
     }
 
 
-    public void sortSubprojects(LocalDate startDate) {
-        // TODO Implementer sortering pr. dato
+    public void sortSubprojects() {
+        Collections.sort(subprojects);
     }
-
 
     public Project(String title, LocalDate startDate) {
         this.title = title;
@@ -141,16 +139,6 @@ public class Project {
 
     public void setSubprojects(ArrayList<Subproject> subprojects) {
         this.subprojects = subprojects;
-    }
-
-    @Override
-    public String toString() {
-        return "Project{" +
-                "title='" + title + '\'' +
-                ", id=" + id +
-                ", startDate=" + startDate +
-                ", subprojects=" + subprojects +
-                '}';
     }
 
 }

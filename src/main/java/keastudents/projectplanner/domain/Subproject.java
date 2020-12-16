@@ -1,31 +1,30 @@
 package keastudents.projectplanner.domain;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
-import java.time.chrono.ChronoPeriod;
-import java.time.chrono.Chronology;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalField;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class Subproject extends Project {
+public class Subproject extends Project implements Comparable<Subproject> {
+    private ArrayList<Task> tasks;
 
-
-   private ArrayList<Task> tasks;
-
+    public Subproject() {
+    }
 
     public Subproject(String title, LocalDate startDate) {
         super(title, startDate);
         this.tasks = new ArrayList<Task>();
     }
 
-    public Subproject() {
-
+    public void sortTasks() {
+        Collections.sort(tasks);
     }
 
-    public void sortTasks() {
-        // tasks.sort(); TODO Implementer sortering pr. dato
+    public void calculateTasks() {
+        int subtotalWorkHours = 0;
+        for (int i = 0; i<tasks.size(); i++) {
+            subtotalWorkHours += tasks.get(i).getWorkHoursNeeded();
+        }
+        System.out.println(subtotalWorkHours);
     }
 
     public void addTask(Task task) {
@@ -44,5 +43,8 @@ public class Subproject extends Project {
         this.tasks = tasks;
     }
 
-
+    @Override
+    public int compareTo(Subproject subproject) {
+        return this.getStartDate().compareTo(subproject.getStartDate());
+    }
 }

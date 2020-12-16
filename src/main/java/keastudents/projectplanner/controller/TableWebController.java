@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class TableWebController {
     DomainController domainController = new DomainController(new DataFacadeImplemented());
 
-// PROJECT
+// Project-related actions
     @PostMapping("/createProjectAction")
     public String createProjectAction(WebRequest request) throws DefaultException {
         // Takes info from WebRequest and creates project in database, afterwards redirecting to overview
@@ -74,7 +74,7 @@ public class TableWebController {
     }
 
 
-// SUBPROJECT
+// Subproject-related actions
     @PostMapping("/createSubproject")
     public String createSubprojectAction(WebRequest request, Model model) throws DefaultException {
         //Takes info from WebRequest and creates/adds subproject to project through project id
@@ -115,7 +115,7 @@ public class TableWebController {
         return "redirect:/projectOverview";
     }
 
-// TASK
+// Task-related actions
     @PostMapping("/createTask")
     public String createTask(WebRequest request, Model model) throws DefaultException {
         String projectId = request.getParameter("projectId");
@@ -173,10 +173,13 @@ public class TableWebController {
     }
 
 // EXCEPTION HANDLING
+    /*
     @ExceptionHandler(Exception.class)
     public String anotherError(Model model, Exception exception) {
         model.addAttribute("message",exception.getMessage());
         return "afterLogin/exceptionPage";
     }
+
+     */
 
 }
