@@ -1,15 +1,14 @@
 package keastudents.projectplanner.data;
 
-import keastudents.projectplanner.domain.DataFacade;
-import keastudents.projectplanner.domain.DefaultException;
-import keastudents.projectplanner.domain.Project;
-import keastudents.projectplanner.domain.User;
+import keastudents.projectplanner.domain.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DataFacadeImplemented implements DataFacade {
     private ProjectMapper projectMapper = new ProjectMapper();
+    private SubprojectMapper subprojectMapper = new SubprojectMapper();
+    private TaskMapper taskMapper = new TaskMapper();
     private UserMapper userMapper = new UserMapper();
 
 
@@ -36,12 +35,12 @@ public class DataFacadeImplemented implements DataFacade {
 
     @Override
     public void createSubproject(int projectId, String subprojectTitle, LocalDate startDateFormatted, LocalDate deadlineFormatted) throws DefaultException {
-        projectMapper.createSubproject(projectId, subprojectTitle, startDateFormatted, deadlineFormatted);
+        subprojectMapper.createSubproject(projectId, subprojectTitle, startDateFormatted, deadlineFormatted);
     }
 
     @Override
     public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
-        projectMapper.createTask(subprojectId,taskTitle, startDate, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
+        taskMapper.createTask(subprojectId,taskTitle, startDate, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
     }
 
     @Override
@@ -50,11 +49,11 @@ public class DataFacadeImplemented implements DataFacade {
     }
 
     public void editSubproject(int subprojectId, String title, LocalDate start_date, LocalDate deadline) throws DefaultException {
-        projectMapper.editSubproject(subprojectId, title, start_date, deadline);
+        subprojectMapper.editSubproject(subprojectId, title, start_date, deadline);
     }
 
     public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
-        projectMapper.editTask(taskId, title, start_date, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
+        taskMapper.editTask(taskId, title, start_date, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
     }
 
     @Override

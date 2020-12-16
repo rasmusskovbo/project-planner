@@ -40,7 +40,7 @@ public class WebViewController {
             model.addAttribute("projectList", projectsList);
         }
 
-        projectsList.get(0).getSubprojects().get(0).calculateTasks();
+        //projectsList.get(0).getSubprojects().get(0).calculateTasks();
 
         return "afterLogin/selectedProjectOverviewPage";
     }

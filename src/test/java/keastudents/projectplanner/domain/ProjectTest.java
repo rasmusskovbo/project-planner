@@ -96,8 +96,8 @@ class ProjectTest {
         LocalDate a = LocalDate.of(2020, 11, 11);
         LocalDate b = LocalDate.of(2020, 9, 9);
 
-        project.setStartDate(a);
-        subproject.setStartDate(b);
+        //project.setStartDate(a);
+        //subproject.setStartDate(b);
         //Linjen neden under fejler. ved ikke om det er min opsætning der er noget galt med. eller,
         // om det er fordi sort-metoden ikke er lavet korret under projekts.
        // subproject.sortSubprojects(b.compareTo(project.getStartDate()));

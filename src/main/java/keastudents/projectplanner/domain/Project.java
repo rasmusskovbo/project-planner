@@ -8,24 +8,25 @@ import java.time.temporal.ChronoUnit;
 
 
 public class Project {
+    // Variables related to business logic
+    private ArrayList<Subproject> subprojects;
+    private LocalDate defaultDate = LocalDate.of(2099,01,01);
+
     // Variables for project creation/edit project
     private int id;
     private String title;                       // input
     private LocalDate startDate;                // input
-    private LocalDate deadline;                 // input
-    private int baselineManHourCost;            // input
-    private int baselineHoursPrWorkday;         // input
+    private LocalDate deadline = defaultDate;   // input
+    private int baselineManHourCost = 0;            // input
+    private int baselineHoursPrWorkday = 0;         // input
 
     // Variables for calculating and showing info to user
-    private int totalWorkHours;                 // calculated
-    private int totalWorkDays;                  // calculated
-    private LocalDate estFinishedByDate;        // calculated
+    private int totalWorkHours = 0;                 // calculated
+    private int totalWorkDays = 0;                  // calculated
+    private LocalDate estFinishedByDate = defaultDate;
     private int deadlineDifference;          // deadline - estFinishedByDate displayed in days and hours using remainder op -> %
     private int changeToWorkHoursNeeded;        // calculated
     private int estTotalCost;                   // calculated
-
-    // Variables related to business logic
-    private ArrayList<Subproject> subprojects;
 
     public Project() {
         this.subprojects = new ArrayList<Subproject>();
@@ -76,12 +77,44 @@ public class Project {
 
     }
 
-    public String getTitle() {
-        return title;
+    public void setStartDate(String startDate) {
+        if (startDate != null) {
+            this.startDate = LocalDate.parse(startDate);
+        } else {
+            this.startDate = defaultDate;
+        }
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setDeadline(String deadline) {
+        if (deadline != null) {
+            this.deadline = LocalDate.parse(deadline);
+        } else {
+            this.deadline = defaultDate;
+        }
+    }
+
+    public void setEstFinishedByDate(String estFinishedByDate) {
+        if (estFinishedByDate != null) {
+            this.estFinishedByDate = LocalDate.parse(estFinishedByDate);
+        } else {
+            this.estFinishedByDate = defaultDate;
+        }
+    }
+
+    public ArrayList<Subproject> getSubprojects() {
+        return subprojects;
+    }
+
+    public void setSubprojects(ArrayList<Subproject> subprojects) {
+        this.subprojects = subprojects;
+    }
+
+    public LocalDate getDefaultDate() {
+        return defaultDate;
+    }
+
+    public void setDefaultDate(LocalDate defaultDate) {
+        this.defaultDate = defaultDate;
     }
 
     public int getId() {
@@ -92,40 +125,20 @@ public class Project {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public ArrayList<Subproject> getSubprojects() {
-        return subprojects;
-    }
-
     public LocalDate getDeadline() {
         return deadline;
-    }
-
-    public void setDeadline(LocalDate deadline) {
-        this.deadline = deadline;
-    }
-
-    public int getTotalWorkHours() {
-        return totalWorkHours;
-    }
-
-    public void setTotalWorkHours(int totalWorkHours) {
-        this.totalWorkHours = totalWorkHours;
-    }
-
-    public int getTotalWorkDays() {
-        return totalWorkDays;
-    }
-
-    public void setTotalWorkDays(int totalWorkDays) {
-        this.totalWorkDays = totalWorkDays;
     }
 
     public int getBaselineManHourCost() {
@@ -144,12 +157,24 @@ public class Project {
         this.baselineHoursPrWorkday = baselineHoursPrWorkday;
     }
 
-    public LocalDate getEstFinishedByDate() {
-        return estFinishedByDate;
+    public int getTotalWorkHours() {
+        return totalWorkHours;
     }
 
-    public void setEstFinishedByDate(LocalDate estFinishedByDate) {
-        this.estFinishedByDate = estFinishedByDate;
+    public void setTotalWorkHours(int totalWorkHours) {
+        this.totalWorkHours = totalWorkHours;
+    }
+
+    public int getTotalWorkDays() {
+        return totalWorkDays;
+    }
+
+    public void setTotalWorkDays(int totalWorkDays) {
+        this.totalWorkDays = totalWorkDays;
+    }
+
+    public LocalDate getEstFinishedByDate() {
+        return estFinishedByDate;
     }
 
     public int getDeadlineDifference() {
@@ -175,10 +200,5 @@ public class Project {
     public void setEstTotalCost(int estTotalCost) {
         this.estTotalCost = estTotalCost;
     }
-
-    public void setSubprojects(ArrayList<Subproject> subprojects) {
-        this.subprojects = subprojects;
-    }
-
 }
 
