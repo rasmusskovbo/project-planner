@@ -136,6 +136,7 @@ public class ProjectMapper {
 
 // GET
     public ArrayList<Project> getProjects(int userId) throws DefaultException {
+        //only used to get a list of all user's project titles (no need to append subprojects/task)
         try {
 
             String SQL = "SELECT * FROM project " +
@@ -148,9 +149,6 @@ public class ProjectMapper {
             ArrayList<Project> projects = new ArrayList<>();
             while (rs.next()) {
                 Project project = setProject(rs);
-
-                // Appends all subprojects to task
-                project.setSubprojects(subprojectMapper.getSubprojects(project.getId()));
 
                 projects.add(project);
             }

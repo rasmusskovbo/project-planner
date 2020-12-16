@@ -98,10 +98,6 @@ th {
     color: #913737;
 }
 
-.sidenav-item-bottom {
-    margin-top: 17vw;
-}
-
 :root {
     --mainColor: white;
 }
@@ -210,7 +206,6 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    border: 0.1vw solid black;
     box-shadow: none;
     background-color: #7ac4c2;
 }

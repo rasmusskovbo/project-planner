@@ -20,7 +20,7 @@ public class TableWebController {
         // Takes info from WebRequest and creates project in database, afterwards redirecting to overview
         String projectTitle = request.getParameter("projectTitle");
         String startDate = request.getParameter("projectStartDate");
-        String projectDeadline = null;
+        String deadline = null;
         LocalDate deadlineFormatted = null;
         String baselineManHourCost = request.getParameter("projectBaseSalary");
         String baselineHoursPrWorkday = request.getParameter("projectWorkHoursPerDay");
@@ -29,21 +29,21 @@ public class TableWebController {
         LocalDate startDateFormatted = localDateFormatter(startDate);
 
         // Checks if deadline has been inputted.
-        projectDeadline = request.getParameter("projectDeadline");
-        if (!projectDeadline.equals("")) {
-            projectDeadline = request.getParameter("projectDeadline");
-            deadlineFormatted = localDateFormatter(projectDeadline);
+        deadline = request.getParameter("projectDeadline");
+        if (!deadline.equals("")) {
+            deadline = request.getParameter("projectDeadline");
+            deadlineFormatted = localDateFormatter(deadline);
         }
 
         //To get projects from current user
         int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
         domainController.createProject(userId, projectTitle, startDateFormatted, deadlineFormatted, baselineManHourCost, baselineHoursPrWorkday);
 
-        return "redirect:/overviewPage";
+        return "redirect:/overview";
     }
 
 
-    @PostMapping("/editProject")
+    @PostMapping("/editProjectAction")
     public String editProject(WebRequest request, Model model) throws DefaultException {
         String projectId = request.getParameter("projectId");
         String projectTitle = request.getParameter("projectTitle");
@@ -58,21 +58,21 @@ public class TableWebController {
 
         domainController.editProject(Integer.parseInt(projectId), projectTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(projectBaselineManHourCost), Integer.parseInt(projectBaselineHoursPrWorkday));
 
-        return "redirect:/projectOverview";
+        return "redirect:/selectedProjectOverview";
     }
 
-    @PostMapping("/deleteProject")
+    @PostMapping("/deleteProjectAction")
     public String deleteProject(WebRequest request, Model model) throws DefaultException {
         String projectId = request.getParameter("projectId");
 
         domainController.deleteProjectObject(Integer.parseInt(projectId), "project");
 
-        return "redirect:/projectOverview";
+        return "redirect:/selectedProjectOverview";
     }
 
 
 // Subproject-related actions
-    @PostMapping("/createSubproject")
+    @PostMapping("/createSubprojectAction")
     public String createSubprojectAction(WebRequest request, Model model) throws DefaultException {
         //Takes info from WebRequest and creates/adds subproject to project through project id
         String projectId = request.getParameter("projectId");
@@ -85,10 +85,10 @@ public class TableWebController {
 
         domainController.createSubproject(Integer.parseInt(projectId), subprojectTitle, startDateFormatted, deadlineFormatted);
 
-        return  "redirect:/projectOverview";
+        return  "redirect:/selectedProjectOverview";
     }
 
-    @PostMapping("/editSubproject")
+    @PostMapping("/editSubprojectAction")
     public String editSubproject(WebRequest request) throws DefaultException {
         String subprojectId = request.getParameter("subprojectId");
         String subprojectTitle = request.getParameter("subprojectTitle");
@@ -100,20 +100,20 @@ public class TableWebController {
 
        domainController.editSubproject(Integer.parseInt(subprojectId), subprojectTitle, startDateFormatted, deadlineFormatted);
 
-        return "redirect:/projectOverview";
+        return "redirect:/selectedProjectOverview";
     }
 
-    @PostMapping("/deleteSubproject")
+    @PostMapping("/deleteSubprojectAction")
     public String deleteSubproject(WebRequest request, Model model) throws DefaultException {
         String subprojectId = request.getParameter("subprojectId");
 
         domainController.deleteProjectObject(Integer.parseInt(subprojectId), "subproject");
 
-        return "redirect:/projectOverview";
+        return "redirect:/selectedProjectOverview";
     }
 
 // Task-related actions
-    @PostMapping("/createTask")
+    @PostMapping("/createTaskAction")
     public String createTask(WebRequest request, Model model) throws DefaultException {
         String subprojectId = request.getParameter("subprojectId");
         String taskTitle = request.getParameter("taskTitle");
@@ -129,10 +129,10 @@ public class TableWebController {
 
         domainController.createTask(Integer.parseInt(subprojectId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCosts), Integer.parseInt(taskManHourCost), Integer.parseInt(taskHoursPrWorkday));
 
-        return "redirect:/projectOverview";
+        return "redirect:/selectedProjectOverview";
     }
 
-    @PostMapping("/editTask")
+    @PostMapping("/editTaskAction")
     public String editTask(WebRequest request, Model model) throws DefaultException {
         String taskId = request.getParameter("taskId");
         String taskTitle = request.getParameter("taskTitle");
@@ -148,16 +148,16 @@ public class TableWebController {
 
         domainController.editTask(Integer.parseInt(taskId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCost), Integer.parseInt(taskManHourCost), Integer.parseInt(taskHoursPerWorkday));
 
-        return "redirect:/projectOverview";
+        return "redirect:/selectedProjectOverview";
     }
 
-    @PostMapping("/deleteTask")
+    @PostMapping("/deleteTaskAction")
     public String deleteTask(WebRequest request, Model model) throws DefaultException {
         String taskId = request.getParameter("taskId");
 
         domainController.deleteProjectObject(Integer.parseInt(taskId), "task");
 
-        return "redirect:/projectOverview";
+        return "redirect:/selectedProjectOverview";
     }
 
 // GENERAL USE

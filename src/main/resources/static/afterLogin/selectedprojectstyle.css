@@ -18,6 +18,10 @@
     background-color: white;
 }
 
+.project-table {
+    background-color: #a6a6a6;
+}
+
 /*Overall collapsible rows styling____________________________________________________________________________________*/
 .header-container {
     border-bottom: 0.1vw solid black;
@@ -61,7 +65,7 @@ span {
     display:table;
 }
 
-.span-row-wrapper {
+.span-subproject-row-wrapper, .span-task-row-wrapper {
     display: inline-block;
     height: 2vw;
     width: 100%;
@@ -71,9 +75,17 @@ span {
     font-weight: 900;
 }
 
-.span-row-wrapper i {
+.span-subproject-row-wrapper i, .span-task-row-wrapper i {
     margin-left: 3vw;
     font-size: 1vw;
+}
+
+.span-subproject-row-wrapper, #subproject-table {
+    background-color: #bfbfbf;
+}
+
+.span-task-row-wrapper, #task-table {
+    background-color: lightgray;
 }
 
 .info-row-container h2 {
@@ -99,11 +111,6 @@ span {
     width: 9.5vw;
 }
 
-.button {
-    border-style: none;
-    background-color: transparent;
-}
-
 .info-row-container input[type=date], .info-row-container input[type=number], .info-row-container input[type=text] {
     font-size: 1vw;
     border-style: none;
@@ -114,7 +121,7 @@ span {
     background-color: white;
 }
 
-.info-row-container input[type=date]:hover, .info-row-container input[type=number]:hover, .info-row-container input[type=text]:hover{
+.info-row-container input[type=date]:hover, .info-row-container input[type=number]:hover, .info-row-container input[type=text]:hover, .edit-button:hover, .delete-button:hover{
     background-color: #7ac4c2;
 }
 
@@ -126,6 +133,8 @@ span {
     text-align: center;
 }
 
-#task-table {
-    background-color: lightgray;
+.edit-button, .delete-button {
+    padding: 0.2vw 0 0.2vw 0.2vw;
+    border-style: none;
+    background-color: transparent;
 }

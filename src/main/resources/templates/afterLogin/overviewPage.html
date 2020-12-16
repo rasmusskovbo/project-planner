@@ -14,11 +14,11 @@
     <!-- left side content/ nav menu-->
     <div class="sidenav-container">
         <div class="sidenav-wrapper">
-            <a href="/overviewPage"><h1><i class="fas fa-tasks"></i>Project overview</h1></a>
+            <a href="/overview"><h1><i class="fas fa-tasks"></i>Project overview</h1></a>
 
             <a href="#popupCreateProject"><h1><i class="fas fa-plus"></i>Create New Project</h1></a>
 
-            <a href="/" class="sidenav-item-bottom">
+            <a href="/" style="margin-top: 26vw">
                 <!-- thymeleaf: user logged in-->
                 <h2>Currently logged in as: <br>
                     <th th:text="${user.firstName}"></th>
@@ -27,9 +27,9 @@
 
                 <!-- TODO form skal implementeres sammen med billede og tekst -->
                 <form name="logout" action="/logoutAction" method="POST">
-                    <input type="submit" class="button">
-                    <h1><i class="fas fa-sign-out-alt"></i>Log out</h1>
+                    <h1><i class="fas fa-sign-out-alt"></i><input type="submit" class="button" value="Log Out"></h1>
                 </form>
+            </a>
             </a>
         </div>
     </div>
@@ -50,7 +50,7 @@
                 <!-- select Project to view-->
                 <tr class="select-project-container">
                     <td colspan="9">
-                        <form name="selectedProjectOverview" action="/selectProject" method="POST">
+                        <form name="selectProject" action="/selectProject" method="POST">
                             <label for="project">Select Project To View:</label>
                             <select name="projectId" id="project">
                                 <th:block th:each="project: ${projectList}">
@@ -86,27 +86,27 @@
 
                 <div>
                     <h2><label for="title">project title</label></h2>
-                    <input type="text" id="title" name="projectTitle" placeholder="Write project title..." th:value="${title}" required>
+                    <input type="text" id="title" name="projectTitle" placeholder="Write project title..." required>
                 </div>
 
                 <div>
                     <h2><label for="startDate">start date</label></h2>
-                    <input type="date" id="startDate" name="projectStartDate" th:value="${startDate}" required>
+                    <input type="date" id="startDate" name="projectStartDate" min="2000-01-01" max="2099-01-01"required>
                 </div>
 
                 <div>
                     <h2><label for="deadline">deadline (optional)</label></h2>
-                    <input type="date" id="deadline" name="projectDeadline" th:value="${deadline}">
+                    <input type="date" id="deadline" name="projectDeadline" min="2000-01-01" max="2099-01-01">
                 </div>
 
                 <div>
                     <h2><label for="baseSalary">base salary</label></h2>
-                    <input type="number" id="baseSalary" name="projectBaseSalary" placeholder="DKK" th:value="${baselineManHourCost}" required>
+                    <input type="number" id="baseSalary" name="projectBaseSalary"  value="0" required>
                 </div>
 
                 <div>
                     <h2><label for="workHoursPerDay">work hours per day</label></h2>
-                    <input type="number" id="workHoursPerDay" name="projectWorkHoursPerDay" placeholder="0" th:value="${baselineHoursPrWorkday}" required>
+                    <input type="number" id="workHoursPerDay" name="projectWorkHoursPerDay" max="24" value="0" required>
                 </div>
 
                 <input type="submit" class="button"

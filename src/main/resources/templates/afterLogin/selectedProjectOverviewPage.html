@@ -12,11 +12,10 @@
 
 <div class="page-container">
 
-
     <!-- left side content/ nav menu-->
     <div class="sidenav-container">
         <div class="sidenav-wrapper">
-            <a href="/overviewPage"><h1><i class="fas fa-tasks"></i>Project overview</h1></a>
+            <a href="/overview"><h1><i class="fas fa-tasks"></i>Project overview</h1></a>
 
             <a href="#popupCreateProject"><h1><i class="fas fa-plus"></i>Create New Project</h1></a>
 
@@ -24,7 +23,7 @@
 
             <a href="#deleteProject"><h1 class="delete-item-wrapper"><i class="fas fa-trash-alt"></i>Delete Project</h1></a>
 
-            <a href="/" class="sidenav-item-bottom">
+            <a href="/" style="margin-top: 15vw;">
                 <!-- thymeleaf: user logged in-->
                 <h2>Currently logged in as: <br>
                     <th th:text="${user.firstName}"></th>
@@ -33,8 +32,7 @@
 
                 <!-- TODO form skal implementeres sammen med billede og tekst -->
                 <form name="logout" action="/logoutAction" method="POST">
-                    <!--                    <input type="submit" class="button">-->
-                    <h1><i class="fas fa-sign-out-alt"></i>Log out</h1>
+                    <h1><i class="fas fa-sign-out-alt"></i><input type="submit" class="button" value="Log Out"></h1>
                 </form>
             </a>
         </div>
@@ -93,14 +91,14 @@
                                 <tr>
                                     <td colspan="11">
                                         <input type="checkbox"/>
-                                        <span class="span-row-wrapper">
+                                        <span class="span-subproject-row-wrapper">
                                             <i class="fas fa-plus"></i>show: subprojects
                                         </span>
-                                        <span class="span-row-wrapper">
+                                        <span class="span-subproject-row-wrapper">
                                             <i class="fas fa-minus"></i>hide: subprojects
                                         </span>
 
-                                        <table class="collapsible-nested-table">
+                                        <table class="collapsible-nested-table" id="subproject-table">
                                             <tr class="header-container">
                                                 <td><h1>subproject title</h1></td>
                                                 <td class="date-wrapper"><h1>start date</h1></td>
@@ -120,7 +118,7 @@
                                                 <tr class="info-row-container">
 
                                                     <!--edit subproject -->
-                                                    <form name="editSubproject" action="/editSubproject" method="POST">
+                                                    <form name="editSubprojectAction" action="/editSubprojectAction" method="POST">
                                                         <input type="hidden" name="projectId" th:value="${project.id}">
                                                         <input type="hidden" name="subprojectId" th:value="${subproject.id}">
 
@@ -129,11 +127,11 @@
                                                         </td>
 
                                                         <td class="date-wrapper">
-                                                            <h2><input type="date" name="subprojectStartDate" th:value="${subproject.startDate}"></h2>
+                                                            <h2><input type="date" name="subprojectStartDate"  min="2000-01-01" max="2099-01-01" th:value="${subproject.startDate}"></h2>
                                                         </td>
 
                                                         <td class="date-wrapper">
-                                                            <h2><input type="date" name="subprojectDeadline" th:value="${subproject.deadline}"></h2>
+                                                            <h2><input type="date" name="subprojectDeadline"  min="2000-01-01" max="2099-01-01" th:value="${subproject.deadline}"></h2>
                                                         </td>
 
                                                         <td><h2 th:text="${subproject.totalWorkHours}"></h2></td>
@@ -149,18 +147,18 @@
                                                         <td><h2 th:text="${subproject.estTotalCost}"></h2></td>
 
                                                         <td class="button-column-wrapper">
-                                                            <button type="submit" class="button" onclick="return confirm('Save Changes?')"><i class="far fa-save"></i></button>
+                                                            <button type="submit" class="edit-button" onclick="return confirm('Save Changes?')"><i class="far fa-save"></i></button>
                                                         </td>
                                                     </form>
 
                                                     <!-- delete subproject -->
-                                                    <form name="deleteSubproject" action="/deleteSubproject"
+                                                    <form name="deleteSubprojectAction" action="/deleteSubprojectAction"
                                                           method="POST">
                                                         <td class="button-column-wrapper">
                                                             <input type="hidden" name="projectId" th:value="${project.id}">
                                                             <input type="hidden" name="subprojectId" th:value="${subproject.id}">
 
-                                                            <button type="submit" class="button" onclick="return confirm('Delete Subproject?')"><i class="fas fa-trash-alt"></i></button>
+                                                            <button type="submit" class="delete-button" onclick="return confirm('Delete Subproject?')"><i class="fas fa-trash-alt"></i></button>
                                                         </td>
                                                     </form>
                                                 </tr>
@@ -169,8 +167,8 @@
                                                 <tr>
                                                     <td colspan="11">
                                                         <input type="checkbox"/>
-                                                        <span class="span-row-wrapper"><i class="fas fa-plus"></i>show: tasks</span>
-                                                        <span class="span-row-wrapper"><i class="fas fa-minus"></i>hide: tasks</span>
+                                                        <span class="span-task-row-wrapper"><i class="fas fa-plus"></i>show: tasks</span>
+                                                        <span class="span-task-row-wrapper"><i class="fas fa-minus"></i>hide: tasks</span>
 
                                                         <table class="collapsible-nested-table" id="task-table">
                                                             <tr class="header-container">
@@ -186,7 +184,7 @@
                                                                 <td class="button-column-wrapper"></td>
                                                             </tr>
 
-                                                            <form name="createTask" action="/createTask" method="POST">
+                                                            <form name="createTaskAction" action="/createTaskAction" method="POST">
                                                                 <tr class="create-task-container">
                                                                     <input type="hidden" name="projectId" th:value="${project.id}">
                                                                     <input type="hidden" name="subprojectId" th:value="${subproject.id}">
@@ -196,40 +194,39 @@
                                                                     </td>
 
                                                                     <td class="date-wrapper">
-                                                                        <input type="date" name="taskStartDate" max="2050-12-31" required>
+                                                                        <input type="date" name="taskStartDate"  min="2000-01-01" max="2099-01-01" required>
                                                                     </td>
 
                                                                     <td class="date-wrapper">
-                                                                        <input type="date" name="taskDeadline" max="2050-12-31">
+                                                                        <input type="date" name="taskDeadline" min="2000-01-01" max="2099-01-01">
                                                                     </td>
 
                                                                     <td>
-                                                                        <input type="number" name="taskWorkHoursNeeded">
+                                                                        <input type="number" name="taskWorkHoursNeeded" value="0">
                                                                     </td>
 
                                                                     <td>
-                                                                        <input type="number" name="taskManHourCost" placeholder="DKK">
+                                                                        <input type="number" name="taskManHourCost" th:value="${project.baselineManHourCost}">
                                                                     </td>
 
                                                                     <td class="column-length-wrapper">
-                                                                        <input type="number" name="taskExtraCosts" placeholder="DKK">
+                                                                        <input type="number" name="taskExtraCosts" value="0">
                                                                     </td>
 
                                                                     <td>
-                                                                        <input type="number" name="taskHoursPrWorkday">
+                                                                        <input type="number" name="taskHoursPrWorkday" max="24" th:value="${project.baselineHoursPrWorkday}">
                                                                     </td>
 
                                                                     <td colspan="4" class="add-button">
-                                                                        <input type="submit" onclick="return confirm('Add Task?')" value="+ Add Task">
+                                                                        <input type="submit" class="button" onclick="return confirm('Add Task?')" value="+ Add Task">
                                                                     </td>
                                                                 </tr>
                                                             </form>
 
                                                             <th:block th:each="task: ${subproject.tasks}">
                                                                 <tr class="info-row-container">
-
                                                                     <!--edit task form -->
-                                                                    <form name="editTask" action="/editTask" method="POST">
+                                                                    <form name="editTaskAction" action="/editTaskAction" method="POST">
                                                                         <input type="hidden" name="projectId" th:value="${project.id}">
                                                                         <input type="hidden" name="subprojectId" th:value="${subproject.id}">
                                                                         <input type="hidden" name="taskId" th:value="${task.id}">
@@ -238,10 +235,10 @@
                                                                             <h2><input type="text" name="taskTitle" th:value="${task.title}"></h2>
                                                                         </td>
                                                                         <td class="date-wrapper">
-                                                                            <h2><input type="date" name="taskStartDate" th:value="${task.startDate}"></h2>
+                                                                            <h2><input type="date" name="taskStartDate" min="2000-01-01" max="2099-01-01" th:value="${task.startDate}"></h2>
                                                                         </td>
                                                                         <td class="date-wrapper">
-                                                                            <h2><input type="date" name="taskDeadline" th:value="${task.deadline}"></h2>
+                                                                            <h2><input type="date" name="taskDeadline" min="2000-01-01" max="2099-01-01" th:value="${task.deadline}"></h2>
                                                                         </td>
                                                                         <td>
                                                                             <h2><input type="number" name="taskWorkHoursNeeded" th:value="${task.workHoursNeeded}"></h2>
@@ -253,38 +250,36 @@
                                                                             <h2><input type="number" name="taskExtraCost" th:value="${task.extraCosts}"></h2>
                                                                         </td>
                                                                         <td>
-                                                                            <h2><input type="number"  name="taskHoursPerWorkday" th:value="${task.hoursPrWorkday}"></h2>
+                                                                            <h2><input type="number"  name="taskHoursPerWorkday" max="24" th:value="${task.hoursPrWorkday}"></h2>
                                                                         </td>
 
                                                                         <td colspan="2" class="column-length-wrapper2"></td>
 
                                                                         <td class="button-column-wrapper">
-                                                                            <button type="submit" class="button" onclick="return confirm('Save Changes?')"><i class="far fa-save"></i></button>
+                                                                            <button type="submit" class="edit-button" onclick="return confirm('Save Changes?')"><i class="far fa-save"></i></button>
                                                                         </td>
                                                                     </form>
 
                                                                     <!--delete task form-->
-                                                                    <form name="deleteTask" action="/deleteTask" method="POST">
+                                                                    <form name="deleteTaskAction" action="/deleteTaskAction" method="POST">
                                                                     <td class="button-column-wrapper">
                                                                         <input type="hidden" name="projectId" th:value="${project.id}">
                                                                         <input type="hidden" name="subprojectId" th:value="${subproject.id}">
                                                                         <input type="hidden" name="taskId" th:value="${task.id}">
-                                                                        <button type="submit" class="button" onclick="return confirm('Delete Task?')"><i class="fas fa-trash-alt"></i></button>
+                                                                        <button type="submit" class="delete-button" onclick="return confirm('Delete Task?')"><i class="fas fa-trash-alt"></i></button>
                                                                     </td>
                                                                     </form>
                                                                 </tr>
                                                             </th:block>
-
                                                         </table>
-
                                                     </td>
                                                 </tr>
-
                                             </th:block>
 
                                             <tr class="add-button">
                                                 <td colspan="11">
-                                                    <a href="#addSubproject"><input type="submit" value="+ Add Subproject"></a></td>
+                                                    <a href="#addSubproject"><input type="submit" class="button" value="+ Add Subproject"></a>
+                                                </td>
                                             </tr>
 
                                         </table>
@@ -299,38 +294,38 @@
                     <!-- popup for editing a project -->
                     <div id="editProject" class="overlay">
                         <div class="popup">
-                            <h1>Edit project</h1>
+                            <h1>edit project</h1>
                             <a class="close" href="#">&times;</a>
                             <div class="popup-content">
-                                <form name="editProject" action="/editProject" method="POST">
+                                <form name="editProjectAction" action="/editProjectAction" method="POST">
                                     <input type="hidden" name="projectId" th:value="${project.id}">
 
                                     <div>
-                                        <h2><label for="title2">project title</label></h2>
-                                        <input type="text" id="title2" name="projectTitle" placeholder="Write project title..." th:value="${project.title}">
+                                        <h2><label for="projectTitle">project title</label></h2>
+                                        <input type="text" id="projectTitle" name="projectTitle" th:value="${project.title}">
                                     </div>
 
                                     <div>
-                                        <h2><label for="startDate2">start date</label></h2>
-                                        <input type="date" id="startDate2" name="projectStartDate" th:value="${project.startDate}">
+                                        <h2><label for="projectStartDate">start date</label></h2>
+                                        <input type="date" id="projectStartDate" name="projectStartDate" min="2000-01-01" max="2099-01-01" th:value="${project.startDate}">
                                     </div>
 
                                     <div>
-                                        <h2><label for="deadline2">deadline (optional)</label></h2>
-                                        <input type="date" id="deadline2" name="projectDeadline" th:value="${project.deadline}">
+                                        <h2><label for="projectDeadline">deadline</label></h2>
+                                        <input type="date" id="projectDeadline" name="projectDeadline" min="2000-01-01" max="2099-01-01" th:value="${project.deadline}" required>
                                     </div>
 
                                     <div>
-                                        <h2><label for="baseSalary2">base salary</label></h2>
-                                        <input type="number" id="baseSalary2" name="projectBaselineManHourCost" placeholder="DKK" th:value="${project.baselineManHourCost}"> <!-- change later-->
+                                        <h2><label for="projectBaselineManHourCost">cost per hour</label></h2>
+                                        <input type="number" id="projectBaselineManHourCost" name="projectBaselineManHourCost" th:value="${project.baselineManHourCost}">
                                     </div>
 
                                     <div>
-                                        <h2><label for="workHoursPerDay2">work hours per day</label></h2>
-                                        <input type="number" id="workHoursPerDay2" name="projectBaselineHoursPrWorkday" placeholder="0" th:value="${project.baselineHoursPrWorkday}"> <!-- change later-->
+                                        <h2><label for="projectBaselineHoursPrWorkday">work hours per day</label></h2>
+                                        <input type="number" id="projectBaselineHoursPrWorkday" name="projectBaselineHoursPrWorkday" max="24" th:value="${project.baselineHoursPrWorkday}">
                                     </div>
 
-                                    <input type="submit" class="button" onclick="return confirm('Edit Project?')" value="Edit Project">
+                                    <input type="submit" class="button" onclick="return confirm('Save Changes?')" value="Edit Project">
                                 </form>
                             </div>
                         </div>
@@ -342,7 +337,7 @@
                             <h1>delete project</h1>
                             <a class="close" href="#">&times;</a>
                             <div class="popup-content">
-                                <form name="deleteProject" action="/deleteProject" method="POST">
+                                <form name="deleteProjectAction" action="/deleteProjectAction" method="POST">
                                     <input type="hidden" name="projectId" th:value="${project.id}">
 
                                     <div>
@@ -355,28 +350,28 @@
                         </div>
                     </div>
 
-                    <!-- popup for adding a subproject -->
+                    <!-- popup for creating a subproject -->
                     <div id="addSubproject" class="overlay">
                         <div class="popup">
-                            <h1>Add subproject</h1>
+                            <h1>add subproject</h1>
                             <a class="close" href="#">&times;</a>
                             <div class="popup-content">
-                                <form name="createSubproject" action="/createSubproject" method="POST">
+                                <form name="createSubprojectAction" action="/createSubprojectAction" method="POST">
                                     <input type="hidden" name="projectId" th:value="${project.id}">
 
                                     <div>
                                         <h2><label for="subprojectTitle">subproject title</label></h2>
-                                        <input type="text" id="subprojectTitle" name="subprojectTitle" th:value="${title}" required>
+                                        <input type="text" id="subprojectTitle" name="subprojectTitle" required>
                                     </div>
 
                                     <div>
                                         <h2><label for="subprojectStartDate">start date</label></h2>
-                                        <input type="date" id="subprojectStartDate" name="subprojectStartDate" th:value="${startDate}" required>
+                                        <input type="date" id="subprojectStartDate" name="subprojectStartDate" min="2000-01-01" max="2099-01-01" required>
                                     </div>
 
                                     <div>
-                                        <h2><label for="deadline">deadline (optional)</label></h2>
-                                        <input type="date" id="subprojectDeadline" name="subprojectDeadline" th:value="${deadline}">
+                                        <h2><label for="deadline">deadline</label></h2>
+                                        <input type="date" id="subprojectDeadline" name="subprojectDeadline" min="2000-01-01" max="2099-01-01" required>
                                     </div>
 
                                     <input type="submit" class="button" onclick="return confirm('Create Subproject?')" value="Create Subproject">
@@ -426,31 +421,30 @@
 
                 <div>
                     <h2><label for="title">project title</label></h2>
-                    <input type="text" id="title" name="projectTitle" placeholder="Write project title..." th:value="${title}" required>
+                    <input type="text" id="title" name="projectTitle" placeholder="Write project title..." required>
                 </div>
 
                 <div>
                     <h2><label for="startDate">start date</label></h2>
-                    <input type="date" id="startDate" name="projectStartDate" th:value="${startDate}" required>
+                    <input type="date" id="startDate" name="projectStartDate" min="2000-01-01" max="2099-01-01" required>
                 </div>
 
                 <div>
                     <h2><label for="deadline">deadline (optional)</label></h2>
-                    <input type="date" id="deadline" name="projectDeadline" th:value="${deadline}">
+                    <input type="date" id="deadline" name="projectDeadline" min="2000-01-01" max="2099-01-01">
                 </div>
 
                 <div>
                     <h2><label for="baseSalary">base salary</label></h2>
-                    <input type="number" id="baseSalary" name="projectBaseSalary" placeholder="DKK" th:value="${baselineManHourCost}" required>
+                    <input type="number" id="baseSalary" name="projectBaseSalary"  value="0" required>
                 </div>
 
                 <div>
                     <h2><label for="workHoursPerDay">work hours per day</label></h2>
-                    <input type="number" id="workHoursPerDay" name="projectWorkHoursPerDay" placeholder="0" th:value="${baselineHoursPrWorkday}" required>
+                    <input type="number" id="workHoursPerDay" name="projectWorkHoursPerDay" max="24" value="0" required>
                 </div>
 
-                <input type="submit" class="button"
-                       onclick="return confirm('Create Project?')" value="Create Project">
+                <input type="submit" class="button" onclick="return confirm('Create Project?')" value="Create Project">
             </form>
         </div>
     </div>

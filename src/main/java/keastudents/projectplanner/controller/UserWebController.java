@@ -22,14 +22,14 @@ public class UserWebController {
     }
 
     //show log in page
-    @GetMapping("/logInPage")
-    public String logInPage() {
+    @GetMapping("/logIn")
+    public String logIn() {
         return "beforeLogin/logInPage";
     }
 
     //show sign up page
-    @GetMapping("/signUpPage")
-    public String signUpPage() {
+    @GetMapping("/signUp")
+    public String signUp() {
         return "beforeLogin/signUpPage";
     }
 
@@ -50,7 +50,7 @@ public class UserWebController {
             domainController.createUser(firstName, lastName, email, password);
             User user = domainController.login(email, password);
             setSessionInfo(request, user);
-            return "redirect:/overviewPage";
+            return "redirect:/overview";
         } else {
             model.addAttribute("errorMsg", validationStatus);
             return "beforeLogin/signUpPage";
@@ -71,7 +71,7 @@ public class UserWebController {
             model.addAttribute("errorMsg", "Could not validate the user. Please check your e-mail and password and try again.");
             return "beforeLogin/logInPage";
         }
-        return "redirect:/overviewPage";
+        return "redirect:/overview";
 
     }
 

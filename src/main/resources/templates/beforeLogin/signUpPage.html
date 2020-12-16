@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" href="generalbasestyle.css">
+    <link rel="stylesheet" href="errorstyle.css">
     <link rel="stylesheet" href="beforeLogin/beforeloginbasestyle.css">
     <link rel="stylesheet" href="beforeLogin/loginstyle.css">
     <script src="https://kit.fontawesome.com/00d69adb96.js" crossorigin="anonymous"></script>
@@ -15,17 +16,18 @@
     <!-- header navigation menu-->
     <ul class="header-nav-container">
         <li class="menu-item-wrapper1">
-            <a class="frontpage-logo" href="/">
-                <h1><i class="fas fa-chart-bar"></i>Website Name</h1>
+            <a href="/">
+                <img src="images/projectplannerlogo.png"
+                     alt="ProjectPlanner Logo" height="100%"/>
             </a>
         </li>
         <li class="menu-item-wrapper2">
-            <a href="/logInPage">
+            <a href="/logIn" class="menu-button">
                 <h1 class="active">Log In</h1>
             </a>
         </li>
         <li>
-            <a href="/signUpPage">
+            <a href="/signUp" class="menu-button">
                 <h1>Sign Up</h1>
             </a>
         </li>
@@ -34,11 +36,10 @@
     <!-- left side content-->
     <div class="left-side-container">
         <div class="left-box-wrapper">
-            <h1>heading</h1>
-            <p>About us, about us, about us, about us, about us, about us, about us, about us, about us,
-                about us, about us, about us, about us, about us, about us, about us
-                About us, about us, about us, about us, about us, about us, about us, about us, about us,
-                about us, about us, about us, about us, about us, about us, about us</p>
+            <h1>get started!</h1>
+            <p>Whether you're an internationally accomplished consulting business or a fresh out-of-the-gate start-up, planning and planning ahead is important.
+                With ProjectPlanner you can start planning today. With a simple yet effective interface, you will be able to plan and test the budget of your project
+                all the way down to the emptying of a litter bin.</p>
         </div>
     </div>
 
@@ -86,7 +87,7 @@
 
                     <!-- Text field for error msg -->
                     <div class="inputfield-fullwidth-wrapper">
-                        <p style="color: darkred; font-size: 12px" th:text="${errorMsg}"></p>
+                        <p class="error-msg-wrapper" th:text="${errorMsg}"></p>
                     </div>
 
 
@@ -97,7 +98,7 @@
 
                     <!-- redirect to log in page -->
                     <div class="inputfield-fullwidth-wrapper">
-                        <a href="/logInPage">Already a member? Log in here!</a>
+                        <a href="/logIn">Already a member? Log in here!</a>
                     </div>
 
                     <div class="non-content-wrapper"></div>

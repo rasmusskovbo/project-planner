@@ -18,18 +18,8 @@ import java.util.ArrayList;
 public class WebViewController {
     DomainController domainController = new DomainController(new DataFacadeImplemented());
 
-// TABLE VIEW
-    // Adds/changes active user project to session object
-    @PostMapping("/selectProject")
-    public String selectProject(WebRequest request) {
-        String projectId = request.getParameter("projectId");
-        setActiveProject(request, Integer.parseInt(projectId));
-
-        return "redirect:/projectOverview";
-    }
-
     // Initial landing page
-    @GetMapping("/overviewPage")
+    @GetMapping("/overview")
     public String projectsOverview(WebRequest request, Model model) throws DefaultException, UserNotLoggedInException {
         int userId = 0;
         try {
@@ -49,8 +39,7 @@ public class WebViewController {
         return "afterLogin/overviewPage";
     }
 
-    // Project-view landing page
-    @GetMapping("/projectOverview")
+    @GetMapping("/selectedProjectOverview")
     public String projectOverview(WebRequest request, Model model) throws DefaultException, UserNotLoggedInException {
         int userId = 0;
 
@@ -68,7 +57,7 @@ public class WebViewController {
         // If user has active project(s), add to model.
         if (projectsList != null) {
             model.addAttribute("projectList", projectsList);
-             // Only updates and calculates active project, if user has active projects.
+            // Only updates and calculates active project, if user has active projects.
         }
 
         domainController.updateProject(projectId);
@@ -76,6 +65,22 @@ public class WebViewController {
 
 
         return "afterLogin/selectedProjectOverviewPage";
+    }
+
+    // TABLE VIEW
+    // Adds/changes active user project to session object
+    @PostMapping("/selectProject")
+    public String selectProject(WebRequest request) {
+        //choose project to view
+        //try-catch if theres no projects to view but user tries to send request anyway by clicking on the button
+        try {
+            String projectId = request.getParameter("projectId");
+            setActiveProject(request, Integer.parseInt(projectId));
+
+            return "redirect:/selectedProjectOverview";
+        } catch (NumberFormatException e) {
+            return "redirect:/overview";
+        }
     }
 
     public void setActiveProject(WebRequest request, int projectId) {

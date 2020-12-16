@@ -18,17 +18,18 @@
         <!-- header navigation menu-->
         <ul class="header-nav-container">
             <li class="menu-item-wrapper1">
-                <a class="frontpage-logo" href="/">
-                    <h1><i class="fas fa-chart-bar"></i>Website Name</h1>
+                <a href="/">
+                <img src="images/projectplannerlogo.png"
+                     alt="ProjectPlanner Logo" height="100%"/>
                 </a>
             </li>
             <li class="menu-item-wrapper2">
-                <a href="/logInPage">
+                <a href="/logIn" class="menu-button">
                     <h1 class="active">Log In</h1>
                 </a>
             </li>
             <li>
-                <a href="/signUpPage">
+                <a href="/signUp" class="menu-button">
                     <h1>Sign Up</h1>
                 </a>
             </li>
@@ -44,7 +45,7 @@
         <div class="right-side-container">
             <div class="right-box-wrapper">
 
-                <h1>Plan Ahead!</h1>
+                <h1>plan ahead!</h1>
                 <p>Whether you're an internationally accomplished consulting business or a fresh out-of-the-gate start-up, planning and planning ahead is important.
                     With ProjectPlanner you can start planning today. With a simple yet effective interface, you will be able to plan and test the budget of your project
                     all the way down to the emptying of a litter bin.
@@ -52,12 +53,12 @@
                 <p>Start planning now!</p>
 
                 <!-- redirect to log in page -->
-                <form name="signUp" action="/signUpPage" method="get">
+                <form name="signUp" action="/signUp" method="get">
                     <input type="submit" class="button" value="Sign up">
                 </form>
 
                 <!-- redirect to sign up page -->
-                <form name="logIn" action="/logInPage" method="get">
+                <form name="logIn" action="/logIn" method="get">
                     <input type="submit" class="button" value="Log in">
                 </form>
 
