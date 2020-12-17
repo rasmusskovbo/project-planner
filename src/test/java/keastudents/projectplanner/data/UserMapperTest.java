@@ -42,6 +42,13 @@ class UserMapperTest {
     }
 
     @Test
+    public void getUser_getsCorrectUserFromUserID() throws DefaultException, SQLException {
+
+    }
+
+
+
+    @Test
     public void login_throwsWhenWrongEmail() {
         Assertions.assertThrows(LoginException.class, () -> {
             userMapper.login("notvalid@email.dk", "1234");

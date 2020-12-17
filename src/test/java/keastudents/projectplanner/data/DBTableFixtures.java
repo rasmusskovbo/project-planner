@@ -18,14 +18,13 @@ public class DBTableFixtures {
 
             con.setAutoCommit(false);
 
-
             // Temporarily removes foreign key checks to drop tables
             st.addBatch("SET foreign_key_checks = 0;");
 
             // Sets up DB
             st.addBatch("DROP TABLE IF EXISTS user;");
             st.addBatch("CREATE TABLE user (" +
-                    "  id smallint NOT NULL AUTO_INCREMENT," +
+                    "  id int NOT NULL AUTO_INCREMENT," +
                     "  email varchar(100) NOT NULL," +
                     "  PRIMARY KEY (id)," +
                     "  UNIQUE KEY id_UNIQUE (id)," +
@@ -34,78 +33,77 @@ public class DBTableFixtures {
             
             st.addBatch("DROP TABLE IF EXISTS user_info;");
             st.addBatch("CREATE TABLE user_info (" +
-                    "  id smallint NOT NULL AUTO_INCREMENT," +
+                    "  id int NOT NULL AUTO_INCREMENT," +
                     "  first_name varchar(45) NOT NULL," +
                     "  last_name varchar(45) NOT NULL," +
-                    "  user_id smallint NOT NULL," +
+                    "  user_id int NOT NULL," +
                     "  PRIMARY KEY (id)," +
                     "  UNIQUE KEY id_UNIQUE (id)," +
-                    "  KEY user_id_idx (user_id)," +
-                    "  CONSTRAINT user_id_info FOREIGN KEY (user_id) REFERENCES user (id)" +
+                    "  KEY user_info_to_user (user_id)," +
+                    "  CONSTRAINT user_id_info FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE ON UPDATE CASCADE" +
                     ");");
 
             st.addBatch("DROP TABLE IF EXISTS login_info;");
             st.addBatch("CREATE TABLE login_info (" +
-                    "  id smallint NOT NULL AUTO_INCREMENT," +
+                    "  id int NOT NULL AUTO_INCREMENT," +
                     "  pword varchar(100) NOT NULL," +
-                    "  user_id smallint NOT NULL," +
+                    "  user_id int NOT NULL," +
                     "  PRIMARY KEY (id)," +
                     "  UNIQUE KEY id_UNIQUE (id)," +
-                    "  KEY user_id_idx (user_id)," +
-                    "  CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES user (id)" +
-                    ")");
+                    "  KEY login_info_to_user (user_id)," +
+                    "  CONSTRAINT user_id_login FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE ON UPDATE CASCADE" +
+                    ");");
 
             st.addBatch("DROP TABLE IF EXISTS project;");
             st.addBatch("CREATE TABLE project (" +
-                    "  id smallint NOT NULL AUTO_INCREMENT," +
-                    "  user_id smallint NOT NULL," +
+                    "  id int NOT NULL AUTO_INCREMENT," +
+                    "  user_id int NOT NULL," +
                     "  PRIMARY KEY (id)," +
                     "  UNIQUE KEY id_UNIQUE (id)," +
                     "  KEY user_id_project_idx (user_id)," +
-                    "  CONSTRAINT user_id_project FOREIGN KEY (user_id) REFERENCES user (id)" +
-                    ") ");
+                    "  CONSTRAINT user_id_project FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE ON UPDATE CASCADE" +
+                    ");");
 
             st.addBatch("DROP TABLE IF EXISTS subproject;");
             st.addBatch("CREATE TABLE subproject (" +
-                    "  id smallint NOT NULL AUTO_INCREMENT," +
-                    "  project_id smallint NOT NULL," +
+                    "  id int NOT NULL AUTO_INCREMENT," +
+                    "  project_id int NOT NULL," +
                     "  PRIMARY KEY (id)," +
                     "  UNIQUE KEY id_UNIQUE (id)," +
                     "  KEY project_id_idx (project_id)," +
-                    "  CONSTRAINT project_id FOREIGN KEY (project_id) REFERENCES project (id) ON DELETE CASCADE" +
-                    ") ");
+                    "  CONSTRAINT project_id FOREIGN KEY (project_id) REFERENCES project (id) ON DELETE CASCADE ON UPDATE CASCADE" +
+                    ");");
 
             st.addBatch("DROP TABLE IF EXISTS task;");
             st.addBatch("CREATE TABLE task (" +
-                    "  id smallint NOT NULL AUTO_INCREMENT," +
-                    "  subproject_id smallint NOT NULL," +
-                    "  workhours_needed smallint DEFAULT NULL," +
-                    "  extra_costs smallint DEFAULT NULL," +
-                    "  man_hour_cost smallint DEFAULT NULL," +
-                    "  hours_pr_workday smallint DEFAULT NULL," +
+                    "  id int NOT NULL AUTO_INCREMENT," +
+                    "  subproject_id int NOT NULL," +
+                    "  workhours_needed int DEFAULT NULL," +
+                    "  extra_costs int DEFAULT NULL," +
+                    "  man_hour_cost int DEFAULT NULL," +
                     "  PRIMARY KEY (id)," +
                     "  UNIQUE KEY id_UNIQUE (id)," +
                     "  KEY subproject_id_idx (subproject_id)," +
-                    "  CONSTRAINT subproject_id FOREIGN KEY (subproject_id) REFERENCES subproject (id) ON DELETE CASCADE" +
-                    ")");
+                    "  CONSTRAINT subproject_id FOREIGN KEY (subproject_id) REFERENCES subproject (id) ON DELETE CASCADE ON UPDATE CASCADE" +
+                    ");");
 
             st.addBatch("DROP TABLE IF EXISTS project_object_info;");
             st.addBatch("CREATE TABLE project_object_info (" +
-                    "  id smallint NOT NULL AUTO_INCREMENT," +
+                    "  id int NOT NULL AUTO_INCREMENT," +
                     "  title varchar(100) NOT NULL," +
                     "  start_date date NOT NULL," +
                     "  deadline date DEFAULT NULL," +
-                    "  baseline_man_hour_cost smallint DEFAULT NULL," +
-                    "  baseline_hours_pr_workday smallint DEFAULT NULL," +
-                    "  total_work_hours smallint DEFAULT NULL," +
-                    "  total_work_days smallint DEFAULT NULL," +
+                    "  baseline_man_hour_cost int DEFAULT NULL," +
+                    "  baseline_hours_pr_workday int DEFAULT NULL," +
+                    "  total_work_hours int DEFAULT NULL," +
+                    "  total_work_days int DEFAULT NULL," +
                     "  est_finished_by_date date DEFAULT NULL," +
                     "  deadline_difference varchar(45) DEFAULT NULL," +
-                    "  change_to_workhours_needed smallint DEFAULT NULL," +
-                    "  est_total_cost smallint DEFAULT NULL," +
-                    "  project_id smallint DEFAULT NULL," +
-                    "  subproject_id smallint DEFAULT NULL," +
-                    "  task_id smallint DEFAULT NULL," +
+                    "  change_to_workhours_needed int DEFAULT NULL," +
+                    "  est_total_cost int DEFAULT NULL," +
+                    "  project_id int DEFAULT NULL," +
+                    "  subproject_id int DEFAULT NULL," +
+                    "  task_id int DEFAULT NULL," +
                     "  PRIMARY KEY (id)," +
                     "  UNIQUE KEY id_UNIQUE (id)," +
                     "  KEY project_id_idx (project_id)," +
@@ -113,8 +111,8 @@ public class DBTableFixtures {
                     "  KEY task_id_idx (task_id)," +
                     "  CONSTRAINT project_id_objectinfo FOREIGN KEY (project_id) REFERENCES project (id)," +
                     "  CONSTRAINT subproject_id_objectinfo FOREIGN KEY (subproject_id) REFERENCES subproject (id)," +
-                    "  CONSTRAINT task_id_objectinfo FOREIGN KEY (task_id) REFERENCES task (id) ON DELETE CASCADE" +
-                    ")");
+                    "  CONSTRAINT task_id_objectinfo FOREIGN KEY (task_id) REFERENCES task (id) ON DELETE CASCADE ON UPDATE CASCADE" +
+                    ");");
             st.addBatch("SET foreign_key_checks = 1;");
 
             // Injects data (USER)
