@@ -81,18 +81,18 @@ th {
     overflow-y: scroll;
 }
 
-.sidenav-wrapper a {
+.sidenav-wrapper a, .log-out {
     display: block;
     padding: 2vw 1vw 2vw 2vw;
     text-decoration: none;
 }
 
-.sidenav-wrapper h1 {
+.sidenav-wrapper h1  {
     font-size: 1.5vw;
     color: black;
 }
 
-.sidenav-wrapper h2 {
+.log-out h2 {
     font-size: 1vw;
     margin-bottom: 2vw;
     color: #913737;

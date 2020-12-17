@@ -41,8 +41,8 @@ public class DomainController {
         facade.createSubproject(projectId, subprojectTitle, startDateFormatted, deadlineFormatted);
     }
 
-    public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
-        facade.createTask(subprojectId, taskTitle, startDate, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
+    public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost) throws DefaultException {
+        facade.createTask(subprojectId, taskTitle, startDate, deadline, workHoursNeeded, extraCosts, manHourCost);
     }
 
     public void updateProject(int projectId) throws DefaultException {
@@ -59,8 +59,8 @@ public class DomainController {
         facade.editSubproject(subprojectId, title, start_date, deadline);
     }
 
-    public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
-        facade.editTask(taskId, title, start_date, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
+    public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost) throws DefaultException {
+        facade.editTask(taskId, title, start_date, deadline, workHoursNeeded, extraCosts, manHourCost);
     }
 
     public void deleteProjectObject(int id, String choice) throws DefaultException {

@@ -107,11 +107,13 @@ span {
     width: 6vw;
 }
 
+.task-number-column-wrapper {
+    width: 12.5vw;
+}
+
 .button-column-wrapper{
     width: 2vw;
 }
-
-
 
 .info-row-container input[type=date], .info-row-container input[type=number], .info-row-container input[type=text] {
     font-size: 1vw;
@@ -129,10 +131,6 @@ span {
 
 .info-row-container input[type=date], .create-task-container input[type=text], .create-task-container input[type=date], .create-task-container input[type=number] {
     font-size: 0.7vw;
-}
-
-.add-button {
-    text-align: center;
 }
 
 .edit-button, .delete-button {

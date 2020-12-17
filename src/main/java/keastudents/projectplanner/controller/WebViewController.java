@@ -48,7 +48,7 @@ public class WebViewController {
             model.addAttribute("projectList", projectsList);
         }
 
-        domainController.updateProject(projectId);
+//        domainController.updateProject(projectId);
         model.addAttribute("project", domainController.getProject(projectId));
 
         return "afterLogin/selectedProjectOverviewPage";

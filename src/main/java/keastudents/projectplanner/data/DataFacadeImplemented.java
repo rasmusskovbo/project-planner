@@ -39,8 +39,8 @@ public class DataFacadeImplemented implements DataFacade {
     }
 
     @Override
-    public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
-        taskMapper.createTask(subprojectId,taskTitle, startDate, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
+    public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost) throws DefaultException {
+        taskMapper.createTask(subprojectId,taskTitle, startDate, deadline, workHoursNeeded, extraCosts, manHourCost);
     }
 
     @Override
@@ -59,8 +59,8 @@ public class DataFacadeImplemented implements DataFacade {
     }
 
     @Override
-    public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
-        taskMapper.editTask(taskId, title, start_date, deadline, workHoursNeeded, extraCosts, manHourCost, hoursPrWorkday);
+    public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost) throws DefaultException {
+        taskMapper.editTask(taskId, title, start_date, deadline, workHoursNeeded, extraCosts, manHourCost);
     }
 
     @Override

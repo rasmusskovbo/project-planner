@@ -18,7 +18,7 @@ public interface DataFacade {
 
     public void createSubproject(int projectId, String subprojectTitle, LocalDate startDateFormatted, LocalDate deadlineFormatted) throws DefaultException;
 
-    public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException;
+    public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost) throws DefaultException;
 
     public void updateProject(Project project) throws DefaultException;
 
@@ -26,7 +26,7 @@ public interface DataFacade {
 
     public void editSubproject(int subprojectId, String title, LocalDate start_date, LocalDate deadline) throws DefaultException;
 
-    public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException;
+    public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost) throws DefaultException;
 
     public void deleteProjectObject(int id, String choice) throws DefaultException;
 

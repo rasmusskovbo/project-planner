@@ -10,15 +10,14 @@ import java.util.ArrayList;
 public class TaskMapper {
     Connection con = DBManager.getConnection();
 
-    public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
+    public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost) throws DefaultException {
         try {
-            String SQL = "INSERT INTO task (subproject_id, workhours_needed, extra_costs, man_hour_cost, hours_pr_workday) VALUES (?, ?, ?, ?, ?)";
+            String SQL = "INSERT INTO task (subproject_id, workhours_needed, extra_costs, man_hour_cost) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, subprojectId);
             ps.setInt(2, workHoursNeeded);
             ps.setInt(3, extraCosts);
             ps.setInt(4, manHourCost);
-            ps.setInt(5, hoursPrWorkday);
             ps.executeUpdate();
 
             ResultSet id = ps.getGeneratedKeys();
@@ -41,19 +40,18 @@ public class TaskMapper {
         }
     }
 
-    public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost, int hoursPrWorkday) throws DefaultException {
+    public void editTask(int taskId, String title, LocalDate start_date, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost) throws DefaultException {
         String SQL = "";
         PreparedStatement ps = null;
 
         try {
             SQL = "UPDATE task "+
-                    "SET workhours_needed = ?, extra_costs = ?, man_hour_cost = ?, hours_pr_workday = ? " +
+                    "SET workhours_needed = ?, extra_costs = ?, man_hour_cost = ?" +
                     "WHERE id = ?";
             ps = con.prepareStatement(SQL);
             ps.setInt(1, workHoursNeeded);
             ps.setInt(2, extraCosts);
             ps.setInt(3, manHourCost);
-            ps.setInt(4, hoursPrWorkday);
             ps.setInt(5, taskId);
             ps.executeUpdate();
 

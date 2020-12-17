@@ -114,12 +114,12 @@ public class TableWebController {
         String taskWorkHoursNeeded = request.getParameter("taskWorkHoursNeeded");
         String taskManHourCost = request.getParameter("taskManHourCost");
         String taskExtraCosts = request.getParameter("taskExtraCosts");
-        String taskHoursPrWorkday = request.getParameter("taskHoursPrWorkday");
+
 
         LocalDate startDateFormatted = domainController.validationService.localDateFormatter(taskStartDate);
         LocalDate deadlineFormatted = domainController.validationService.validateDeadline(taskDeadline);
 
-        domainController.createTask(Integer.parseInt(subprojectId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCosts), Integer.parseInt(taskManHourCost), Integer.parseInt(taskHoursPrWorkday));
+        domainController.createTask(Integer.parseInt(subprojectId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCosts), Integer.parseInt(taskManHourCost));
 
         return "redirect:/selectedProjectOverview";
     }
@@ -133,12 +133,12 @@ public class TableWebController {
         String taskWorkHoursNeeded = request.getParameter("taskWorkHoursNeeded");
         String taskManHourCost = request.getParameter("taskManHourCost");
         String taskExtraCost = request.getParameter("taskExtraCost");
-        String taskHoursPerWorkday = request.getParameter("taskHoursPerWorkday");
+
 
         LocalDate startDateFormatted = domainController.validationService.localDateFormatter(taskStartDate);
         LocalDate deadlineFormatted = domainController.validationService.validateDeadline(taskDeadline);
 
-        domainController.editTask(Integer.parseInt(taskId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCost), Integer.parseInt(taskManHourCost), Integer.parseInt(taskHoursPerWorkday));
+        domainController.editTask(Integer.parseInt(taskId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCost), Integer.parseInt(taskManHourCost));
 
         return "redirect:/selectedProjectOverview";
     }

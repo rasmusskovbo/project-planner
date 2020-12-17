@@ -23,18 +23,18 @@
 
             <a href="#deleteProject"><h1 class="delete-item-wrapper"><i class="fas fa-trash-alt"></i>Delete Project</h1></a>
 
-            <a href="/" style="margin-top: 15vw;">
-                <!-- thymeleaf: user logged in-->
+            <div class="log-out" style="margin-top: 13.5vw">
                 <h2>Currently logged in as: <br>
                     <th th:text="${user.firstName}"></th>
                     <th th:text="${user.lastName}"></th>
                 </h2>
-
-                <!-- TODO form skal implementeres sammen med billede og tekst -->
                 <form name="logout" action="/logoutAction" method="POST">
-                    <h1><i class="fas fa-sign-out-alt"></i><input type="submit" class="button" value="Log Out"></h1>
+                    <!-- thymeleaf: user logged in-->
+
+                    <!-- TODO form skal implementeres sammen med billede og tekst -->
+                    <h1><i class="fas fa-sign-out-alt"></i><input type="submit" value="Log Out"></h1>
                 </form>
-            </a>
+            </div>
         </div>
     </div>
 
@@ -175,10 +175,10 @@
                                                                 <td class="title-column-wrapper"><h1>task title</h1></td>
                                                                 <td class="date-column-wrapper"><h1>start date</h1></td>
                                                                 <td class="date-column-wrapper"><h1>deadline</h1></td>
-                                                                <td class="number-column-wrapper"><h1>total work hours</h1>
-                                                                <td class="number-column-wrapper"><h1>cost per hour</h1></td>
-                                                                <td class="number-column-wrapper"><h1>external cost</h1></td>
-                                                                <td colspan="3"></td>
+                                                                <td colspan="2" class="task-number-column-wrapper"><h1>total work hours</h1>
+                                                                <td colspan="2" class="task-number-column-wrapper"><h1>cost per hour</h1></td>
+                                                                <td class="task-number-column-wrapper"><h1>external cost</h1></td>
+                                                                <td></td>
                                                                 <td class="button-column-wrapper"></td>
                                                                 <td class="button-column-wrapper"></td>
                                                             </tr>
@@ -192,27 +192,27 @@
                                                                         <input type="text" name="taskTitle" placeholder="Write task title..." required>
                                                                     </td>
 
-                                                                    <td class="date-wrapper">
+                                                                    <td class="date-column-wrapper">
                                                                         <input type="date" name="taskStartDate"  min="2000-01-01" max="2099-01-01" th:value="${subproject.startDate}" required>
                                                                     </td>
 
-                                                                    <td class="date-wrapper">
+                                                                    <td class="date-column-wrapper">
                                                                         <input type="date" name="taskDeadline" min="2000-01-01" max="2099-01-01" th:value="${subproject.deadline}">
                                                                     </td>
 
-                                                                    <td class="number-column-wrapper">
+                                                                    <td colspan="2" class="task-number-column-wrapper">
                                                                         <input type="number" name="taskWorkHoursNeeded" value="0">
                                                                     </td>
 
-                                                                    <td class="number-column-wrapper">
+                                                                    <td colspan="2" class="task-number-column-wrapper">
                                                                         <input type="number" name="taskManHourCost" th:value="${project.baselineManHourCost}">
                                                                     </td>
 
-                                                                    <td class="number-column-wrapper">
+                                                                    <td class="task-number-column-wrapper">
                                                                         <input type="number" name="taskExtraCosts" value="0">
                                                                     </td>
 
-                                                                    <td colspan="5" class="add-button">
+                                                                    <td colspan="3">
                                                                         <input type="submit" class="button" onclick="return confirm('Add Task?')" value="+ Add Task">
                                                                     </td>
                                                                 </tr>
@@ -235,17 +235,17 @@
                                                                         <td class="date-column-wrapper">
                                                                             <h2><input type="date" name="taskDeadline" min="2000-01-01" max="2099-01-01" th:value="${task.deadline}"></h2>
                                                                         </td>
-                                                                        <td>
+                                                                        <td colspan="2" class="task-number-column-wrapper">
                                                                             <h2><input type="number" name="taskWorkHoursNeeded" th:value="${task.workHoursNeeded}"></h2>
                                                                         </td>
-                                                                        <td>
+                                                                        <td colspan="2" class="task-number-column-wrapper">
                                                                             <h2><input type="number" name="taskManHourCost" th:value="${task.manHourCost}"></h2>
                                                                         </td>
-                                                                        <td>
+                                                                        <td class="task-number-column-wrapper">
                                                                             <h2><input type="number" name="taskExtraCost" th:value="${task.extraCosts}"></h2>
                                                                         </td>
 
-                                                                        <td colspan="3"></td>
+                                                                        <td></td>
 
                                                                         <td class="button-column-wrapper">
                                                                             <button type="submit" class="edit-button" onclick="return confirm('Save Changes?')"><i class="far fa-save"></i></button>
