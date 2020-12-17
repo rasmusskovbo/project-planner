@@ -7,6 +7,9 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProjectTest {
@@ -32,8 +35,6 @@ class ProjectTest {
         project.addSubproject(subproject3);
 
         assertEquals(3, project.getSubprojects().size());
-
-
     }
 
     @Test
@@ -47,26 +48,26 @@ class ProjectTest {
 
         project.removeSubproject(subproject1);
         assertEquals(1, project.getSubprojects().size());
-
     }
 
     @Test
-    void sort_successfully() {
-        Project project = new Project();
-        Subproject subproject = new Subproject();
+    void sortSubprojects_successfully() {
+        ArrayList<Subproject> subprojects = new ArrayList<Subproject>();
+        Subproject subproject1 = new Subproject("Garden", LocalDate.of(2020,9,1));
+        Subproject subproject2 = new Subproject("House", LocalDate.of(2020,10,15));
+        Subproject subproject3 = new Subproject("Carport", LocalDate.of(2020,1,3));
 
-        LocalDate a = LocalDate.of(2020, 11, 11);
-        LocalDate b = LocalDate.of(2020, 9, 9);
+        subprojects.add(subproject1);
+        subprojects.add(subproject2);
+        subprojects.add(subproject3);
+        //Sorts from lowest-highest date
+        Collections.sort(subprojects);
 
-        //project.setStartDate(a);
-        //subproject.setStartDate(b);
-        //Linjen neden under fejler. ved ikke om det er min opsætning der er noget galt med. eller,
-        // om det er fordi sort-metoden ikke er lavet korret under projekts.
-       // subproject.sortSubprojects(b.compareTo(project.getStartDate()));
+        ArrayList<Subproject> expectedSortedSubprojects = new ArrayList<Subproject>();
+        expectedSortedSubprojects.add(subproject3);
+        expectedSortedSubprojects.add(subproject1);
+        expectedSortedSubprojects.add(subproject2);
 
+        assertEquals(subprojects, expectedSortedSubprojects);
     }
-
-
-
-
 }
