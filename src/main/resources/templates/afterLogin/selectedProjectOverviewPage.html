@@ -23,15 +23,12 @@
 
             <a href="#deleteProject"><h1 class="delete-item-wrapper"><i class="fas fa-trash-alt"></i>Delete Project</h1></a>
 
-            <div class="log-out" style="margin-top: 13.5vw">
+            <div class="log-out" style="margin-top: 13.5vw; margin-left: 2vw">
                 <h2>Currently logged in as: <br>
                     <th th:text="${user.firstName}"></th>
                     <th th:text="${user.lastName}"></th>
                 </h2>
                 <form name="logout" action="/logoutAction" method="POST">
-                    <!-- thymeleaf: user logged in-->
-
-                    <!-- TODO form skal implementeres sammen med billede og tekst -->
                     <h1><i class="fas fa-sign-out-alt"></i><input type="submit" value="Log Out"></h1>
                 </form>
             </div>

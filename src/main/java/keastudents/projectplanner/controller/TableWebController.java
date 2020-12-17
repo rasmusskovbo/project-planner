@@ -115,7 +115,6 @@ public class TableWebController {
         String taskManHourCost = request.getParameter("taskManHourCost");
         String taskExtraCosts = request.getParameter("taskExtraCosts");
 
-
         LocalDate startDateFormatted = domainController.validationService.localDateFormatter(taskStartDate);
         LocalDate deadlineFormatted = domainController.validationService.validateDeadline(taskDeadline);
 
@@ -133,7 +132,6 @@ public class TableWebController {
         String taskWorkHoursNeeded = request.getParameter("taskWorkHoursNeeded");
         String taskManHourCost = request.getParameter("taskManHourCost");
         String taskExtraCost = request.getParameter("taskExtraCost");
-
 
         LocalDate startDateFormatted = domainController.validationService.localDateFormatter(taskStartDate);
         LocalDate deadlineFormatted = domainController.validationService.validateDeadline(taskDeadline);
