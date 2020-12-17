@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProjectTest {
 
     @Test
-    void creatProject_successfully() {
+    void createProject_successfully() {
         LocalDate d = LocalDate.of(2020, 11, 11);
         Project project = new Project("Byggeprojekt", 1, d);
         String expected = "Byggeprojekt";
@@ -36,9 +36,8 @@ class ProjectTest {
 
     }
 
-
     @Test
-    void removeSubproject_Successfully() {
+    void removeSubproject_successfully() {
         Project project = new Project();
         Subproject subproject1 = new Subproject();
         Subproject subproject2 = new Subproject();
@@ -50,46 +49,9 @@ class ProjectTest {
         assertEquals(1, project.getSubprojects().size());
 
     }
-    
-    @Test
-    void addTask_successfully() {
-        Project project = new Project();
-        Subproject subproject = new Subproject();
-        project.addSubproject(subproject);
-
-        Task task1 = new Task();
-        Task task2 = new Task();
-        Task task3 = new Task();
-
-        subproject.addTask(task1);
-        subproject.addTask(task2);
-        subproject.addTask(task3);
-
-        assertEquals(3, subproject.getTasks().size());
-
-
-    }
-
 
     @Test
-    void removeTask_Successfully() {
-        Project project = new Project();
-        Subproject subproject = new Subproject();
-        project.addSubproject(subproject);
-
-        Task task1 = new Task();
-        Task task2 = new Task();
-
-        subproject.addTask(task1);
-        subproject.addTask(task2);
-
-        subproject.removeTask(task1);
-        assertEquals(1, project.getSubprojects().size());
-
-    }
-
-    @Test
-    void sort_Successfully() {
+    void sort_successfully() {
         Project project = new Project();
         Subproject subproject = new Subproject();
 
@@ -103,6 +65,8 @@ class ProjectTest {
        // subproject.sortSubprojects(b.compareTo(project.getStartDate()));
 
     }
+
+
 
 
 }

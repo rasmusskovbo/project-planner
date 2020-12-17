@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 public class Project {
     // Variables related to business logic
-    private ArrayList<Subproject> subprojects;
+    private ArrayList<Subproject> subprojects = new ArrayList<Subproject>();
     private LocalDate defaultDate = LocalDate.of(2099,01,01);
 
     // Variables for project creation/edit project
