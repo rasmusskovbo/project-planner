@@ -22,6 +22,7 @@ public class WebViewController {
     @GetMapping("/overview")
     public String projectsOverview(WebRequest request, Model model) throws DefaultException, UserNotLoggedInException {
         int userId = 0;
+
         try {
             userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
         } catch (Exception e) {

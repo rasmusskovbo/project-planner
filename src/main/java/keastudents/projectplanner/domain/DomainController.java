@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public class DomainController {
     private DataFacade facade = null;
     private LocalDate defaultDate = LocalDate.of(2099, 01,01); // Arbitrary default date;
-    private int defaultBaselineManHourCost = 0; // Ikke optional
-    private int defaultBaselineHoursPrWorkday = 0; // Ikke optional
     public ValidationService validationService = new ValidationService();
 
     public DomainController(DataFacade facade) {

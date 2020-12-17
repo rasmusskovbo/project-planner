@@ -194,11 +194,11 @@
                                                                     </td>
 
                                                                     <td class="date-wrapper">
-                                                                        <input type="date" name="taskStartDate"  min="2000-01-01" max="2099-01-01" required>
+                                                                        <input type="date" name="taskStartDate"  min="2000-01-01" max="2099-01-01" th:value="${subproject.startDate}" required>
                                                                     </td>
 
                                                                     <td class="date-wrapper">
-                                                                        <input type="date" name="taskDeadline" min="2000-01-01" max="2099-01-01">
+                                                                        <input type="date" name="taskDeadline" min="2000-01-01" max="2099-01-01" th:value="${subproject.deadline}">
                                                                     </td>
 
                                                                     <td>
@@ -366,7 +366,7 @@
 
                                     <div>
                                         <h2><label for="subprojectStartDate">start date</label></h2>
-                                        <input type="date" id="subprojectStartDate" name="subprojectStartDate" min="2000-01-01" max="2099-01-01" required>
+                                        <input type="date" id="subprojectStartDate" name="subprojectStartDate" min="2000-01-01" max="2099-01-01" th:value="${project.startDate}" required>
                                     </div>
 
                                     <div>

@@ -85,7 +85,6 @@ public class Project {
             workDaysAvailable = (int) ChronoUnit.DAYS.between(startDate, deadline)+1;
             neededWorkHoursDaily = (totalWorkHours / workDaysAvailable);
             changeToWorkHoursNeeded = neededWorkHoursDaily - baselineHoursPrWorkday;
-
         } else {
             changeToWorkHoursNeeded = 0;
         }

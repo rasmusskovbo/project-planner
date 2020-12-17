@@ -19,7 +19,7 @@
 }
 
 .project-table {
-    background-color: #a6a6a6;
+    background-color: lightgray;
 }
 
 /*Overall collapsible rows styling____________________________________________________________________________________*/
@@ -85,7 +85,7 @@ span {
 }
 
 .span-task-row-wrapper, #task-table {
-    background-color: lightgray;
+    background-color: #a6a6a6;
 }
 
 .info-row-container h2 {
