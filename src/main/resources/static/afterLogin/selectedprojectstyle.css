@@ -95,21 +95,23 @@ span {
     text-align: center;
 }
 
-.date-wrapper, .column-length-wrapper {
+.title-column-wrapper {
+    width: 15vw;
+}
+
+.date-column-wrapper{
     width: 9.5vw;
 }
 
-.column-length-wrapper2 {
-    width: 15.5vw;
+.number-column-wrapper {
+    width: 6vw;
 }
 
 .button-column-wrapper{
     width: 2vw;
 }
 
-.date-wrapper {
-    width: 9.5vw;
-}
+
 
 .info-row-container input[type=date], .info-row-container input[type=number], .info-row-container input[type=text] {
     font-size: 1vw;

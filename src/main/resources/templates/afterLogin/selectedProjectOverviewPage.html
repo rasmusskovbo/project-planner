@@ -61,28 +61,28 @@
                             <table class="project-table">
                                 <!-- project info header row-->
                                 <tr class="header-container">
-                                    <td><h1>project title</h1></td>
-                                    <td class="date-wrapper"><h1>start date</h1></td>
-                                    <td class="date-wrapper"><h1>deadline</h1></td>
-                                    <td><h1>total work hours</h1>
-                                    <td><h1>total work days</h1></td>
-                                    <td class="date-wrapper"><h1>est. finish date</h1></td>
-                                    <td><h1>deadline diff.</h1></td>
-                                    <td><h1>change to work hours needed</h1></td>
+                                    <td class="title-column-wrapper"><h1>project title</h1></td>
+                                    <td class="date-column-wrapper"><h1>start date</h1></td>
+                                    <td class="date-column-wrapper"><h1>deadline</h1></td>
+                                    <td class="number-column-wrapper"><h1>total work hours</h1>
+                                    <td class="number-column-wrapper"><h1>total work days</h1></td>
+                                    <td class="date-column-wrapper"><h1>est. finish date</h1></td>
+                                    <td class="number-column-wrapper"><h1>deadline diff.</h1></td>
+                                    <td class="number-column-wrapper"><h1>change to work hours needed</h1></td>
                                     <td><h1>est. total cost</h1></td>
                                     <td class="button-column-wrapper"></td>
                                     <td class="button-column-wrapper"></td>
                                 </tr>
 
                                 <tr class="info-row-container">
-                                    <td><h2 th:text="${project.title}"></h2></td>
-                                    <td class="date-wrapper"><h2 th:text="${project.startDate}"></h2></td>
-                                    <td class="date-wrapper"><h2 th:text="${project.deadline}"></h2></td>
-                                    <td><h2 th:text="${project.totalWorkHours}"></h2></td>
-                                    <td><h2 th:text="${project.totalWorkDays}"></h2></td>
-                                    <td class="date-wrapper"><h2 th:text="${project.estFinishedByDate}"></h2></td>
-                                    <td><h2 th:text="${project.deadlineDifference}"></h2></td>
-                                    <td><h2 th:text="${project.changeToWorkHoursNeeded}"></h2></td>
+                                    <td class="title-column-wrapper"><h2 th:text="${project.title}"></h2></td>
+                                    <td class="date-column-wrapper"><h2 th:text="${project.startDate}"></h2></td>
+                                    <td class="date-column-wrapper"><h2 th:text="${project.deadline}"></h2></td>
+                                    <td class="number-column-wrapper"><h2 th:text="${project.totalWorkHours}"></h2></td>
+                                    <td class="number-column-wrapper"><h2 th:text="${project.totalWorkDays}"></h2></td>
+                                    <td class="date-column-wrapper"><h2 th:text="${project.estFinishedByDate}"></h2></td>
+                                    <td class="number-column-wrapper"><h2 th:text="${project.deadlineDifference}"></h2></td>
+                                    <td class="number-column-wrapper"><h2 th:text="${project.changeToWorkHoursNeeded}"></h2></td>
                                     <td><h2 th:text="${project.estTotalCost}"></h2></td>
                                     <td class="button-column-wrapper"></td>
                                     <td class="button-column-wrapper"></td>
@@ -100,14 +100,14 @@
 
                                         <table class="collapsible-nested-table" id="subproject-table">
                                             <tr class="header-container">
-                                                <td><h1>subproject title</h1></td>
-                                                <td class="date-wrapper"><h1>start date</h1></td>
-                                                <td class="date-wrapper"><h1>deadline</h1></td>
-                                                <td><h1>subtotal work hours</h1>
-                                                <td><h1>subtotal work days</h1></td>
-                                                <td class="date-wrapper"><h1>est. finish date</h1></td>
-                                                <td><h1>deadline diff.</h1></td>
-                                                <td><h1>change to work hours needed</h1></td>
+                                                <td class="title-column-wrapper"><h1>subproject title</h1></td>
+                                                <td class="date-column-wrapper"><h1>start date</h1></td>
+                                                <td class="date-column-wrapper"><h1>deadline</h1></td>
+                                                <td class="number-column-wrapper"><h1>subtotal work hours</h1>
+                                                <td class="number-column-wrapper"><h1>subtotal work days</h1></td>
+                                                <td class="date-column-wrapper"><h1>est. finish date</h1></td>
+                                                <td class="number-column-wrapper"><h1>deadline diff.</h1></td>
+                                                <td class="number-column-wrapper"><h1>change to work hours needed</h1></td>
                                                 <td><h1>est. total cost</h1></td>
                                                 <td class="button-column-wrapper"></td>
                                                 <td class="button-column-wrapper"></td>
@@ -122,27 +122,27 @@
                                                         <input type="hidden" name="projectId" th:value="${project.id}">
                                                         <input type="hidden" name="subprojectId" th:value="${subproject.id}">
 
-                                                        <td>
+                                                        <td class="title-column-wrapper">
                                                             <h2><input type="text" name="subprojectTitle" th:value="${subproject.title}"></h2>
                                                         </td>
 
-                                                        <td class="date-wrapper">
+                                                        <td class="date-column-wrapper">
                                                             <h2><input type="date" name="subprojectStartDate"  min="2000-01-01" max="2099-01-01" th:value="${subproject.startDate}"></h2>
                                                         </td>
 
-                                                        <td class="date-wrapper">
+                                                        <td class="date-column-wrapper">
                                                             <h2><input type="date" name="subprojectDeadline"  min="2000-01-01" max="2099-01-01" th:value="${subproject.deadline}"></h2>
                                                         </td>
 
-                                                        <td><h2 th:text="${subproject.totalWorkHours}"></h2></td>
+                                                        <td class="number-column-wrapper"><h2 th:text="${subproject.totalWorkHours}"></h2></td>
 
-                                                        <td><h2 th:text="${subproject.totalWorkDays}"></h2></td>
+                                                        <td class="number-column-wrapper"><h2 th:text="${subproject.totalWorkDays}"></h2></td>
 
-                                                        <td class="date-wrapper"><h2 th:text="${subproject.estFinishedByDate}"></h2></td>
+                                                        <td class="date-column-wrapper"><h2 th:text="${subproject.estFinishedByDate}"></h2></td>
 
-                                                        <td><h2 th:text="${subproject.deadlineDifference}"></h2></td>
+                                                        <td class="number-column-wrapper"><h2 th:text="${subproject.deadlineDifference}"></h2></td>
 
-                                                        <td><h2 th:text="${subproject.changeToWorkHoursNeeded}"></h2></td>
+                                                        <td class="number-column-wrapper"><h2 th:text="${subproject.changeToWorkHoursNeeded}"></h2></td>
 
                                                         <td><h2 th:text="${subproject.estTotalCost}"></h2></td>
 
@@ -172,14 +172,13 @@
 
                                                         <table class="collapsible-nested-table" id="task-table">
                                                             <tr class="header-container">
-                                                                <td><h1>task title</h1></td>
-                                                                <td class="date-wrapper"><h1>start date</h1></td>
-                                                                <td class="date-wrapper"><h1>deadline</h1></td>
-                                                                <td><h1>total work hours</h1>
-                                                                <td><h1>cost per hour</h1></td>
-                                                                <td class="column-length-wrapper"><h1>external cost</h1></td>
-                                                                <td><h1>work hours per day</h1></td>
-                                                                <td colspan="2" class="column-length-wrapper2"></td>
+                                                                <td class="title-column-wrapper"><h1>task title</h1></td>
+                                                                <td class="date-column-wrapper"><h1>start date</h1></td>
+                                                                <td class="date-column-wrapper"><h1>deadline</h1></td>
+                                                                <td class="number-column-wrapper"><h1>total work hours</h1>
+                                                                <td class="number-column-wrapper"><h1>cost per hour</h1></td>
+                                                                <td class="number-column-wrapper"><h1>external cost</h1></td>
+                                                                <td colspan="3"></td>
                                                                 <td class="button-column-wrapper"></td>
                                                                 <td class="button-column-wrapper"></td>
                                                             </tr>
@@ -189,7 +188,7 @@
                                                                     <input type="hidden" name="projectId" th:value="${project.id}">
                                                                     <input type="hidden" name="subprojectId" th:value="${subproject.id}">
 
-                                                                    <td>
+                                                                    <td class="title-column-wrapper">
                                                                         <input type="text" name="taskTitle" placeholder="Write task title..." required>
                                                                     </td>
 
@@ -201,23 +200,19 @@
                                                                         <input type="date" name="taskDeadline" min="2000-01-01" max="2099-01-01" th:value="${subproject.deadline}">
                                                                     </td>
 
-                                                                    <td>
+                                                                    <td class="number-column-wrapper">
                                                                         <input type="number" name="taskWorkHoursNeeded" value="0">
                                                                     </td>
 
-                                                                    <td>
+                                                                    <td class="number-column-wrapper">
                                                                         <input type="number" name="taskManHourCost" th:value="${project.baselineManHourCost}">
                                                                     </td>
 
-                                                                    <td class="column-length-wrapper">
+                                                                    <td class="number-column-wrapper">
                                                                         <input type="number" name="taskExtraCosts" value="0">
                                                                     </td>
 
-                                                                    <td>
-                                                                        <input type="number" name="taskHoursPrWorkday" max="24" th:value="${project.baselineHoursPrWorkday}">
-                                                                    </td>
-
-                                                                    <td colspan="4" class="add-button">
+                                                                    <td colspan="5" class="add-button">
                                                                         <input type="submit" class="button" onclick="return confirm('Add Task?')" value="+ Add Task">
                                                                     </td>
                                                                 </tr>
@@ -231,13 +226,13 @@
                                                                         <input type="hidden" name="subprojectId" th:value="${subproject.id}">
                                                                         <input type="hidden" name="taskId" th:value="${task.id}">
 
-                                                                        <td>
+                                                                        <td class="title-column-wrapper">
                                                                             <h2><input type="text" name="taskTitle" th:value="${task.title}"></h2>
                                                                         </td>
-                                                                        <td class="date-wrapper">
+                                                                        <td class="date-column-wrapper">
                                                                             <h2><input type="date" name="taskStartDate" min="2000-01-01" max="2099-01-01" th:value="${task.startDate}"></h2>
                                                                         </td>
-                                                                        <td class="date-wrapper">
+                                                                        <td class="date-column-wrapper">
                                                                             <h2><input type="date" name="taskDeadline" min="2000-01-01" max="2099-01-01" th:value="${task.deadline}"></h2>
                                                                         </td>
                                                                         <td>
@@ -249,11 +244,8 @@
                                                                         <td>
                                                                             <h2><input type="number" name="taskExtraCost" th:value="${task.extraCosts}"></h2>
                                                                         </td>
-                                                                        <td>
-                                                                            <h2><input type="number"  name="taskHoursPerWorkday" max="24" th:value="${task.hoursPrWorkday}"></h2>
-                                                                        </td>
 
-                                                                        <td colspan="2" class="column-length-wrapper2"></td>
+                                                                        <td colspan="3"></td>
 
                                                                         <td class="button-column-wrapper">
                                                                             <button type="submit" class="edit-button" onclick="return confirm('Save Changes?')"><i class="far fa-save"></i></button>
@@ -398,7 +390,6 @@
                     </td>
                 </tr>
                 </tfoot>
-
             </table>
         </div>
     </div>
