@@ -60,7 +60,7 @@ public class WebViewController {
             // Only updates and calculates active project, if user has active projects.
         }
 
-        domainController.updateProject(projectId);
+//        domainController.updateProject(projectId);
         model.addAttribute("project", domainController.getProject(projectId));
 
 
