@@ -67,7 +67,7 @@ public class TableWebController {
 
         domainController.deleteProjectObject(Integer.parseInt(projectId), "project");
 
-        return "redirect:/selectedProjectOverview";
+        return "redirect:/overview";
     }
 
 
