@@ -24,7 +24,7 @@ public class Project {
     private int totalWorkHours = 0;                 // calculated
     private int totalWorkDays = 0;                  // calculated
     private LocalDate estFinishedByDate = defaultDate;
-    private int deadlineDifference;          // deadline - estFinishedByDate displayed in days and hours using remainder op -> %
+    private int deadlineDifference;             // deadline - estFinishedByDate displayed in days and hours using remainder op -> %
     private int changeToWorkHoursNeeded;        // calculated
     private int estTotalCost;                   // calculated
 
@@ -90,7 +90,6 @@ public class Project {
         }
 
     }
-
 
     public void setStartDate(String startDate) {
         if (startDate != null) {

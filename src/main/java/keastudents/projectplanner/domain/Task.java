@@ -6,14 +6,12 @@ public class Task extends Subproject  {
     private int workHoursNeeded;    // input
     private int extraCosts;         // input
     private int manHourCost;        // input, but baselined on project level
-    private int hoursPrWorkday;    // input, but baselined on project level
+
+    public Task() {
+    }
 
     public Task(String title, LocalDate startDate) {
         super(title, startDate);
-    }
-
-    public Task() {
-
     }
 
     public int getWorkHoursNeeded() {
@@ -38,14 +36,6 @@ public class Task extends Subproject  {
 
     public void setManHourCost(int manHourCost) {
         this.manHourCost = manHourCost;
-    }
-
-    public int getHoursPrWorkday() {
-        return hoursPrWorkday;
-    }
-
-    public void setHoursPrWorkday(int hoursPrWorkday) {
-        this.hoursPrWorkday = hoursPrWorkday;
     }
 
 }

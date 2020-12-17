@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Controller
 public class TableWebController {
@@ -20,22 +19,15 @@ public class TableWebController {
         // Takes info from WebRequest and creates project in database, afterwards redirecting to overview
         String projectTitle = request.getParameter("projectTitle");
         String startDate = request.getParameter("projectStartDate");
-        String deadline = null;
-        LocalDate deadlineFormatted = null;
+        String deadline = request.getParameter("projectDeadline");
         String baselineManHourCost = request.getParameter("projectBaseSalary");
         String baselineHoursPrWorkday = request.getParameter("projectWorkHoursPerDay");
 
-        // Formats date
-        LocalDate startDateFormatted = localDateFormatter(startDate);
+        // Formats date & defaults deadline if it has not been inputted by user.
+        LocalDate startDateFormatted = domainController.validationService.localDateFormatter(startDate);
+        LocalDate deadlineFormatted = domainController.validationService.validateDeadline(deadline);
 
-        // Checks if deadline has been inputted.
-        deadline = request.getParameter("projectDeadline");
-        if (!deadline.equals("")) {
-            deadline = request.getParameter("projectDeadline");
-            deadlineFormatted = localDateFormatter(deadline);
-        }
-
-        //To get projects from current user
+        // Gets user ID from session to create project
         int userId = (int) request.getAttribute("id", WebRequest.SCOPE_SESSION);
         domainController.createProject(userId, projectTitle, startDateFormatted, deadlineFormatted, baselineManHourCost, baselineHoursPrWorkday);
 
@@ -53,8 +45,8 @@ public class TableWebController {
         String projectBaselineManHourCost = request.getParameter("projectBaselineManHourCost");
         String projectBaselineHoursPrWorkday = request.getParameter("projectBaselineHoursPrWorkday");
 
-        LocalDate startDateFormatted = localDateFormatter(projectStartDate);
-        LocalDate deadlineFormatted = localDateFormatter(projectDeadline);
+        LocalDate startDateFormatted = domainController.validationService.localDateFormatter(projectStartDate);
+        LocalDate deadlineFormatted = domainController.validationService.validateDeadline(projectDeadline);
 
         domainController.editProject(Integer.parseInt(projectId), projectTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(projectBaselineManHourCost), Integer.parseInt(projectBaselineHoursPrWorkday));
 
@@ -80,8 +72,8 @@ public class TableWebController {
         String subprojectStartDate = request.getParameter("subprojectStartDate");
         String subprojectDeadline = request.getParameter("subprojectDeadline");
 
-        LocalDate startDateFormatted = localDateFormatter(subprojectStartDate);
-        LocalDate deadlineFormatted = localDateFormatter(subprojectDeadline);
+        LocalDate startDateFormatted = domainController.validationService.localDateFormatter(subprojectStartDate);
+        LocalDate deadlineFormatted = domainController.validationService.validateDeadline(subprojectDeadline);
 
         domainController.createSubproject(Integer.parseInt(projectId), subprojectTitle, startDateFormatted, deadlineFormatted);
 
@@ -95,8 +87,8 @@ public class TableWebController {
         String subprojectStartDate = request.getParameter("subprojectStartDate");
         String subprojectDeadline = request.getParameter("subprojectDeadline");
 
-        LocalDate startDateFormatted = localDateFormatter(subprojectStartDate);
-        LocalDate deadlineFormatted = localDateFormatter(subprojectDeadline);
+        LocalDate startDateFormatted = domainController.validationService.localDateFormatter(subprojectStartDate);
+        LocalDate deadlineFormatted = domainController.validationService.validateDeadline(subprojectDeadline);
 
        domainController.editSubproject(Integer.parseInt(subprojectId), subprojectTitle, startDateFormatted, deadlineFormatted);
 
@@ -124,8 +116,8 @@ public class TableWebController {
         String taskExtraCosts = request.getParameter("taskExtraCosts");
         String taskHoursPrWorkday = request.getParameter("taskHoursPrWorkday");
 
-        LocalDate startDateFormatted = localDateFormatter(taskStartDate);
-        LocalDate deadlineFormatted = localDateFormatter(taskDeadline);
+        LocalDate startDateFormatted = domainController.validationService.localDateFormatter(taskStartDate);
+        LocalDate deadlineFormatted = domainController.validationService.validateDeadline(taskDeadline);
 
         domainController.createTask(Integer.parseInt(subprojectId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCosts), Integer.parseInt(taskManHourCost), Integer.parseInt(taskHoursPrWorkday));
 
@@ -143,8 +135,8 @@ public class TableWebController {
         String taskExtraCost = request.getParameter("taskExtraCost");
         String taskHoursPerWorkday = request.getParameter("taskHoursPerWorkday");
 
-        LocalDate startDateFormatted = localDateFormatter(taskStartDate);
-        LocalDate deadlineFormatted = localDateFormatter(taskDeadline);
+        LocalDate startDateFormatted = domainController.validationService.localDateFormatter(taskStartDate);
+        LocalDate deadlineFormatted = domainController.validationService.validateDeadline(taskDeadline);
 
         domainController.editTask(Integer.parseInt(taskId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCost), Integer.parseInt(taskManHourCost), Integer.parseInt(taskHoursPerWorkday));
 
@@ -160,21 +152,11 @@ public class TableWebController {
         return "redirect:/selectedProjectOverview";
     }
 
-// GENERAL USE
-    private LocalDate localDateFormatter(String date) {
-        //Formats input String Date to LocalDate
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDate.parse(date, formatter);
-    }
-
 // EXCEPTION HANDLING
-    /*
     @ExceptionHandler(Exception.class)
     public String anotherError(Model model, Exception exception) {
         model.addAttribute("message",exception.getMessage());
         return "afterLogin/exceptionPage";
     }
-
-     */
 
 }

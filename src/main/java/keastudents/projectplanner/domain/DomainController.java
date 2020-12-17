@@ -1,20 +1,19 @@
 package keastudents.projectplanner.domain;
 
 import keastudents.projectplanner.data.LoginException;
-import org.apache.tomcat.jni.Local;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class DomainController {
     private DataFacade facade = null;
-    private LocalDate defaultDate = LocalDate.of(2099, 01,01); // Arbitrary default date;
-    public ValidationService validationService = new ValidationService();
+    private LocalDate defaultDate = LocalDate.of(2099, 01,01); // Default date if user does not want to input upon creation;
+    public ValidationService validationService = new ValidationService(defaultDate);
 
     public DomainController(DataFacade facade) {
         this.facade = facade;
     }
-
 
     public User createUser(String firstName, String lastName, String email, String password) throws DefaultException{
         User userCreate = new User(firstName, lastName, email, password);

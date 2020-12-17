@@ -31,7 +31,6 @@ public class Subproject extends Project implements Comparable<Subproject> {
             subtotalCostOfLabor += tasks.get(i).getManHourCost() * tasks.get(i).getWorkHoursNeeded();
         }
 
-
         // Sets subtotals for table viewing (updated through project -> subproject)
         setTotalWorkHours(subtotalWorkHours);
         setEstTotalCost(subtotalExtraCosts);
