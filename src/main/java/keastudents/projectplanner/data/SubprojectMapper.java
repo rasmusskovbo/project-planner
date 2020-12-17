@@ -1,7 +1,6 @@
 package keastudents.projectplanner.data;
 
 import keastudents.projectplanner.domain.DefaultException;
-import keastudents.projectplanner.domain.Project;
 import keastudents.projectplanner.domain.Subproject;
 
 import java.sql.*;

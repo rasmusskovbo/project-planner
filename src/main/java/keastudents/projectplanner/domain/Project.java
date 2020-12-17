@@ -1,6 +1,5 @@
 package keastudents.projectplanner.domain;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;

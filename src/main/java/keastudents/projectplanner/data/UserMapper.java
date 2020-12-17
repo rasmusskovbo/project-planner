@@ -2,7 +2,6 @@ package keastudents.projectplanner.data;
 
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.User;
-import org.apache.juli.logging.Log;
 
 import java.sql.*;
 

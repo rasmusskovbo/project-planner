@@ -3,7 +3,6 @@ package keastudents.projectplanner.domain;
 import keastudents.projectplanner.data.LoginException;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class DomainController {
