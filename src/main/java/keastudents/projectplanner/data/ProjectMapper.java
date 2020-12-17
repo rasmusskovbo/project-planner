@@ -11,7 +11,14 @@ public class ProjectMapper {
     Connection con = DBManager.getConnection();
     SubprojectMapper subprojectMapper = new SubprojectMapper();
 
-// CREATE
+    public ProjectMapper() {
+    }
+
+    public ProjectMapper(Connection connection) {
+        con = connection;
+    }
+
+    // CREATE
     public void createProject(int userId, String projectTitle, LocalDate startDate, LocalDate deadline, int baselineManHourCost, int baselineHoursPrWorkday) throws DefaultException {
         try {
 

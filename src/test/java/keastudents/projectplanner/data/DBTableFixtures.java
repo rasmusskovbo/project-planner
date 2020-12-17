@@ -109,16 +109,22 @@ public class DBTableFixtures {
                     "  KEY project_id_idx (project_id)," +
                     "  KEY subproject_id_idx (subproject_id)," +
                     "  KEY task_id_idx (task_id)," +
-                    "  CONSTRAINT project_id_objectinfo FOREIGN KEY (project_id) REFERENCES project (id)," +
-                    "  CONSTRAINT subproject_id_objectinfo FOREIGN KEY (subproject_id) REFERENCES subproject (id)," +
+                    "  CONSTRAINT project_id_objectinfo FOREIGN KEY (project_id) REFERENCES project (id) ON DELETE CASCADE ON UPDATE CASCADE," +
+                    "  CONSTRAINT subproject_id_objectinfo FOREIGN KEY (subproject_id) REFERENCES subproject (id) ON DELETE CASCADE ON UPDATE CASCADE," +
                     "  CONSTRAINT task_id_objectinfo FOREIGN KEY (task_id) REFERENCES task (id) ON DELETE CASCADE ON UPDATE CASCADE" +
                     ");");
             st.addBatch("SET foreign_key_checks = 1;");
 
-            // Injects data (USER)
+            // Injects data
+            // (USER)
             st.addBatch("INSERT INTO user (email) VALUE ('test@test.dk')");
             st.addBatch("INSERT INTO user_info (user_id, first_name, last_name) VALUES (1, 'test', 'testersen')");
             st.addBatch("INSERT INTO login_info (user_id, pword) VALUES (1, '1234')");
+
+            // (PROJECT)
+            st.addBatch("INSERT INTO project (user_id) VALUE (1)");
+            st.addBatch("INSERT INTO project_object_info (title, start_date, deadline, baseline_man_hour_cost, baseline_hours_pr_workday, project_id) " +
+                    "VALUES ('Test projekt', 20210101, 20210131, 120, 8, 1);");
 
             int[] updateCounts = st.executeBatch();
             

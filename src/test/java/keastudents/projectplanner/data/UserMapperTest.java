@@ -1,8 +1,5 @@
 package keastudents.projectplanner.data;
 
-import keastudents.projectplanner.data.DBTableFixtures;
-import keastudents.projectplanner.data.LoginException;
-import keastudents.projectplanner.data.UserMapper;
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.User;
 import org.junit.jupiter.api.Assertions;
@@ -43,10 +40,18 @@ class UserMapperTest {
 
     @Test
     public void getUser_getsCorrectUserFromUserID() throws DefaultException, SQLException {
+        con = fixture.getTestConnection();
+        User user = userMapper.getUser(1);
 
+        assertEquals("test", user.getFirstName());
     }
 
-
+    @Test
+    public void getUser_throwsWhenIDNotFound() {
+        Assertions.assertThrows(DefaultException.class, () -> {
+            userMapper.getUser(11);
+        });
+    }
 
     @Test
     public void login_throwsWhenWrongEmail() {
