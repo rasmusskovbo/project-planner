@@ -28,8 +28,7 @@ public class DBManager {
         }
         try {
             connection = DriverManager.getConnection(url,user,password);
-            //ændret til test database fordi uanset hvor man ændre database navn så defaulter den altid til det der bliver sat her (mange timer brændt af på fejlfinding pga. dette)
-            String setDB = "USE projectplannertestdatabase;";
+            String setDB = "USE projectplanner;";
             PreparedStatement ps = connection.prepareStatement(setDB);
             ps.executeUpdate();
 

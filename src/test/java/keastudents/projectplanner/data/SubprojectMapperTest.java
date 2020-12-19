@@ -15,20 +15,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class SubprojectMapperTest {
     DBTableFixtures fixture;
     Connection con;
-    ProjectMapper projectMapper;
+    SubprojectMapper subprojectMapper;
 
     @BeforeEach
     public void setup() throws SQLException {
         fixture = new DBTableFixtures();
         fixture.setUp();
-        projectMapper = new ProjectMapper(fixture.getTestConnection());
+        subprojectMapper = new SubprojectMapper(fixture.getTestConnection());
     }
 
 
    @Test
     void createSubproject_newSubprojectSuccessfullyAddedToDB() throws SQLException, DefaultException {
               con = fixture.getTestConnection();
-        projectMapper.subprojectMapper.createSubproject(1, "Test subprojects 1", LocalDate.of(2021,01,01), LocalDate.of(2021,01,30));
+        subprojectMapper.createSubproject(1, "Test subprojects 1", LocalDate.of(2021,01,01), LocalDate.of(2021,01,30));
         String SQL = "SELECT COUNT(*) FROM subproject;";
         PreparedStatement ps = con.prepareStatement(SQL);
         ResultSet rs = ps.executeQuery();
@@ -43,8 +43,8 @@ class SubprojectMapperTest {
     @Test
     void getSubprojects_Successfully() throws SQLException, DefaultException{
         con = fixture.getTestConnection();
-        projectMapper.subprojectMapper.createSubproject(1, "Test subprojects 1", LocalDate.of(2021,01,01), LocalDate.of(2021,01,30));
-        projectMapper.subprojectMapper.getSubprojects(1);
+        subprojectMapper.createSubproject(1, "Test subprojects 1", LocalDate.of(2021,01,01), LocalDate.of(2021,01,30));
+        subprojectMapper.getSubprojects(1);
 
         String SQL = "SELECT COUNT(*) FROM subproject";
         PreparedStatement ps = con.prepareStatement(SQL);
@@ -60,8 +60,8 @@ class SubprojectMapperTest {
     void editSubproject_SubprojectSuccessfullyEditedToDB() throws SQLException, DefaultException{
 
         con = fixture.getTestConnection();
-        projectMapper.subprojectMapper.createSubproject(1, "Test subprojects 1", LocalDate.of(2021,01,01), LocalDate.of(2021,01,30));
-        projectMapper.subprojectMapper.editSubproject(1, "Edited Test subprojects #1", LocalDate.of(2021,01,01), LocalDate.of(2021,01,30));
+        subprojectMapper.createSubproject(1, "Test subprojects 1", LocalDate.of(2021,01,01), LocalDate.of(2021,01,30));
+        subprojectMapper.editSubproject(1, "Edited Test subprojects #1", LocalDate.of(2021,01,01), LocalDate.of(2021,01,30));
 
         String SQL = "SELECT COUNT(*) FROM project_object_info where title = \"Edited Test subprojects #1\";";
         PreparedStatement ps = con.prepareStatement(SQL);

@@ -10,6 +10,13 @@ import java.util.ArrayList;
 public class SubprojectMapper {
     Connection con = DBManager.getConnection();
     TaskMapper taskMapper = new TaskMapper();
+    public  SubprojectMapper(){
+
+    }
+    public SubprojectMapper(Connection testConnection) {
+        this.con = testConnection;
+    }
+
 
     public void createSubproject(int projectId, String subprojectTitle, LocalDate startDate, LocalDate deadline) throws DefaultException {
         try {
