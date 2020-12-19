@@ -69,7 +69,7 @@ public class DBTableFixtures {
                     "  project_id int NOT NULL," +
                     "  PRIMARY KEY (id)," +
                     "  UNIQUE KEY id_UNIQUE (id)," +
-                    "  KEY project_id_idx (project_id)," +
+                    "  KEY project_id_idx (project_id), " +
                     "  CONSTRAINT project_id FOREIGN KEY (project_id) REFERENCES project (id) ON DELETE CASCADE ON UPDATE CASCADE" +
                     ");");
 
@@ -140,6 +140,7 @@ public class DBTableFixtures {
             String setDB = "USE projectplannertestdatabase;";
             PreparedStatement ps = connection.prepareStatement(setDB);
             ps.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

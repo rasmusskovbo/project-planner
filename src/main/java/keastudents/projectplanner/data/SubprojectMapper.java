@@ -10,6 +10,13 @@ import java.util.ArrayList;
 public class SubprojectMapper {
     Connection con = DBManager.getConnection();
     TaskMapper taskMapper = new TaskMapper();
+    public  SubprojectMapper(){
+
+    }
+    public SubprojectMapper(Connection testConnection) {
+        this.con = testConnection;
+    }
+
 
     public void createSubproject(int projectId, String subprojectTitle, LocalDate startDate, LocalDate deadline) throws DefaultException {
         try {
@@ -32,8 +39,8 @@ public class SubprojectMapper {
             psObjectInfo.setInt(4, subproject_id);
             psObjectInfo.executeUpdate();
 
-        } catch (SQLException ex) {
-            throw new DefaultException("Unable to create subproject (Project ID unknown or invalid arguments)");
+        } catch (SQLException e) {
+            throw new DefaultException("Unable to create subproject (Project ID unknown or invalid arguments)" + e.getMessage());
         }
     }
 

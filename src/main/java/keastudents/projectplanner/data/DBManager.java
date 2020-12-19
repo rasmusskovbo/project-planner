@@ -31,6 +31,7 @@ public class DBManager {
             String setDB = "USE projectplanner;";
             PreparedStatement ps = connection.prepareStatement(setDB);
             ps.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

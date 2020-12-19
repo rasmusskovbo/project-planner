@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class TaskMapper {
     Connection con = DBManager.getConnection();
 
+    public TaskMapper(Connection testConnection) { this.con = testConnection; }
+    public TaskMapper(){
+
+    }
+
     public void createTask(int subprojectId, String taskTitle, LocalDate startDate, LocalDate deadline, int workHoursNeeded, int extraCosts, int manHourCost) throws DefaultException {
         try {
             String SQL = "INSERT INTO task (subproject_id, workhours_needed, extra_costs, man_hour_cost) VALUES (?, ?, ?, ?)";
@@ -36,7 +41,7 @@ public class TaskMapper {
 
 
         } catch (SQLException ex) {
-            throw new DefaultException("Unable to create task (Task ID unknown or invalid arguments)");
+            throw new DefaultException("Unable to create task (Task ID unknown or invalid arguments)" + ex.getMessage());
         }
     }
 

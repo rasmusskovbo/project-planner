@@ -13,7 +13,7 @@ public class UserMapper {
     }
 
     public UserMapper(Connection connection) {
-        con = connection;
+        this.con = connection;
     }
 
     public void createUser(User user) throws DefaultException {
