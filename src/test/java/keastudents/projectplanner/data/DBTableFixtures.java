@@ -7,7 +7,6 @@ public class DBTableFixtures {
     private String user = "projectplanner";
     private String pw = "1234";
 
-
     private Connection con = null;
 
     public void setUp() throws SQLException {

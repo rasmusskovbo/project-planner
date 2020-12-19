@@ -75,7 +75,6 @@ public class Project {
 
         totalWorkDays = (int) Math.ceil((double) totalWorkHours / baselineHoursPrWorkday); // Rounds up
         estFinishedByDate = startDate.plusDays(totalWorkDays);
-
         deadlineDifference = (int) ChronoUnit.DAYS.between(deadline, estFinishedByDate);
 
         int neededWorkHoursDaily = 0;

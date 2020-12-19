@@ -2,7 +2,7 @@ package keastudents.projectplanner.domain;
 
 import java.time.LocalDate;
 
-public class Task extends Subproject  {
+public class Task extends Subproject {
     private int workHoursNeeded;    // input
     private int extraCosts;         // input
     private int manHourCost;        // input, but baselined on project level

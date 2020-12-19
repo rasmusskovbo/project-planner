@@ -4,7 +4,6 @@ import keastudents.projectplanner.data.DataFacadeImplemented;
 import keastudents.projectplanner.domain.DefaultException;
 import keastudents.projectplanner.domain.DomainController;
 import keastudents.projectplanner.domain.Project;
-import keastudents.projectplanner.domain.UserNotLoggedInException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -48,7 +47,7 @@ public class WebViewController {
             model.addAttribute("projectList", projectsList);
         }
 
-//        domainController.updateProject(projectId);
+        domainController.updateProject(projectId);
         model.addAttribute("project", domainController.getProject(projectId));
 
         return "afterLogin/selectedProjectOverviewPage";
