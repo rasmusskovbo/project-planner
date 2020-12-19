@@ -32,8 +32,8 @@ public class SubprojectMapper {
             psObjectInfo.setInt(4, subproject_id);
             psObjectInfo.executeUpdate();
 
-        } catch (SQLException ex) {
-            throw new DefaultException("Unable to create subproject (Project ID unknown or invalid arguments)");
+        } catch (SQLException e) {
+            throw new DefaultException("Unable to create subproject (Project ID unknown or invalid arguments)" + e.getMessage());
         }
     }
 
