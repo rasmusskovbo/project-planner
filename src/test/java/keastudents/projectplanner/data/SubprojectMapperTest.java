@@ -27,7 +27,7 @@ class SubprojectMapperTest {
 
    @Test
     void createSubproject_newSubprojectSuccessfullyAddedToDB() throws SQLException, DefaultException {
-              con = fixture.getTestConnection();
+        con = fixture.getTestConnection();
         subprojectMapper.createSubproject(1, "Test subprojects 1", LocalDate.of(2021,01,01), LocalDate.of(2021,01,30));
         String SQL = "SELECT COUNT(*) FROM subproject;";
         PreparedStatement ps = con.prepareStatement(SQL);
