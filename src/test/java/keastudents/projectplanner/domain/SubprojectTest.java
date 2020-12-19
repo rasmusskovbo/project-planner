@@ -13,23 +13,23 @@ class SubprojectTest {
 
     @Test
     void sortTasks_successfully() {
-        ArrayList<Subproject> subprojects = new ArrayList<Subproject>();
-        Subproject subproject1 = new Subproject("Garden", LocalDate.of(2020,12,1));
-        Subproject subproject2 = new Subproject("House", LocalDate.of(2020,11,3));
-        Subproject subproject3 = new Subproject("Carport", LocalDate.of(2020,12,3));
+        ArrayList<Task> tasks = new ArrayList<Task>();
+        Task task1 = new Task("Garden", LocalDate.of(2020,12,1));
+        Task task2 = new Task("House", LocalDate.of(2020,11,3));
+        Task task3 = new Task("Carport", LocalDate.of(2020,12,3));
 
-        subprojects.add(subproject1);
-        subprojects.add(subproject2);
-        subprojects.add(subproject3);
+        tasks.add(task1);
+        tasks.add(task2);
+        tasks.add(task3);
         //Sorts from lowest-highest date
-        Collections.sort(subprojects);
+        Collections.sort(tasks);
 
-        ArrayList<Subproject> expectedSortedSubprojects = new ArrayList<Subproject>();
-        expectedSortedSubprojects.add(subproject2);
-        expectedSortedSubprojects.add(subproject1);
-        expectedSortedSubprojects.add(subproject3);
+        ArrayList<Task> expectedSortedTasks = new ArrayList<Task>();
+        expectedSortedTasks.add(task2);
+        expectedSortedTasks.add(task1);
+        expectedSortedTasks.add(task3);
 
-        assertEquals(subprojects, expectedSortedSubprojects);
+        assertEquals(tasks, expectedSortedTasks);
     }
 
     @Test
