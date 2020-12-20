@@ -40,6 +40,14 @@ public class ValidationService {
         return deadlineFormatted;
     }
 
+    public int validateInt(String input) {
+        if (input == null || input.equals("")) {
+            return 0;
+        } else {
+            return Integer.parseInt(input);
+        }
+    }
+
     // Orn-Iliya
     // Formats input String date to LocalDate format
     public LocalDate localDateFormatter(String date) {

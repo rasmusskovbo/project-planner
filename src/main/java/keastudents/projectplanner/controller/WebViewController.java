@@ -53,7 +53,7 @@ public class WebViewController {
 
         return "afterLogin/selectedProjectOverviewPage";
     }
-
+    
     // Adds/changes active user project to session object
     @PostMapping("/selectProject")
     public String selectProject(WebRequest request) {

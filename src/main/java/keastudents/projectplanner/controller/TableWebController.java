@@ -48,8 +48,10 @@ public class TableWebController {
 
         LocalDate startDateFormatted = domainController.validationService.localDateFormatter(projectStartDate);
         LocalDate deadlineFormatted = domainController.validationService.validateDeadline(projectDeadline);
+        int projectBaselineManHourCostFormatted = domainController.validationService.validateInt(projectBaselineManHourCost);
+        int projectBaselineHoursPrWorkdayFormatted = domainController.validationService.validateInt(projectBaselineHoursPrWorkday);
 
-        domainController.editProject(Integer.parseInt(projectId), projectTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(projectBaselineManHourCost), Integer.parseInt(projectBaselineHoursPrWorkday));
+        domainController.editProject(Integer.parseInt(projectId), projectTitle, startDateFormatted, deadlineFormatted, projectBaselineManHourCostFormatted, projectBaselineHoursPrWorkdayFormatted);
 
         return "redirect:/selectedProjectOverview";
     }
@@ -114,12 +116,15 @@ public class TableWebController {
         String taskDeadline = request.getParameter("taskDeadline");
         String taskWorkHoursNeeded = request.getParameter("taskWorkHoursNeeded");
         String taskManHourCost = request.getParameter("taskManHourCost");
-        String taskExtraCosts = request.getParameter("taskExtraCosts");
+        String taskExtraCost = request.getParameter("taskExtraCosts");
 
         LocalDate startDateFormatted = domainController.validationService.localDateFormatter(taskStartDate);
         LocalDate deadlineFormatted = domainController.validationService.validateDeadline(taskDeadline);
+        int taskWorkHoursNeededFormatted = domainController.validationService.validateInt(taskWorkHoursNeeded);
+        int taskManHourCostFormatted = domainController.validationService.validateInt(taskManHourCost);
+        int taskExtraCostFormatted = domainController.validationService.validateInt(taskExtraCost);
 
-        domainController.createTask(Integer.parseInt(subprojectId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCosts), Integer.parseInt(taskManHourCost));
+        domainController.createTask(Integer.parseInt(subprojectId), taskTitle, startDateFormatted, deadlineFormatted, taskWorkHoursNeededFormatted, taskExtraCostFormatted, taskManHourCostFormatted);
 
         return "redirect:/selectedProjectOverview";
     }
@@ -136,8 +141,11 @@ public class TableWebController {
 
         LocalDate startDateFormatted = domainController.validationService.localDateFormatter(taskStartDate);
         LocalDate deadlineFormatted = domainController.validationService.validateDeadline(taskDeadline);
+        int taskWorkHoursNeededFormatted = domainController.validationService.validateInt(taskWorkHoursNeeded);
+        int taskManHourCostFormatted = domainController.validationService.validateInt(taskManHourCost);
+        int taskExtraCostFormatted = domainController.validationService.validateInt(taskExtraCost);
 
-        domainController.editTask(Integer.parseInt(taskId), taskTitle, startDateFormatted, deadlineFormatted, Integer.parseInt(taskWorkHoursNeeded), Integer.parseInt(taskExtraCost), Integer.parseInt(taskManHourCost));
+        domainController.editTask(Integer.parseInt(taskId), taskTitle, startDateFormatted, deadlineFormatted, taskWorkHoursNeededFormatted, taskExtraCostFormatted, taskManHourCostFormatted);
 
         return "redirect:/selectedProjectOverview";
     }
@@ -155,7 +163,7 @@ public class TableWebController {
     @ExceptionHandler(Exception.class)
     public String anotherError(Model model, Exception exception) {
         model.addAttribute("message",exception.getMessage());
-        return "afterLogin/exceptionPage";
+        return "exceptionPage";
     }
 
 }
