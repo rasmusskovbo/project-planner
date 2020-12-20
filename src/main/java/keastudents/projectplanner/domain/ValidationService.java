@@ -1,3 +1,4 @@
+// Rasmus
 package keastudents.projectplanner.domain;
 
 import java.time.LocalDate;
@@ -39,6 +40,7 @@ public class ValidationService {
         return deadlineFormatted;
     }
 
+    // Orn-Iliya
     // Formats input String date to LocalDate format
     public LocalDate localDateFormatter(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

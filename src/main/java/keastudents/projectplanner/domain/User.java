@@ -1,3 +1,4 @@
+// Rasmus, Wafaa, Orn-Iliya, Bilal
 package keastudents.projectplanner.domain;
 
 public class User {

@@ -1,3 +1,4 @@
+// Wafaa
 package keastudents.projectplanner.data;
 
 import keastudents.projectplanner.domain.DefaultException;
@@ -70,23 +71,23 @@ class SubprojectMapperTest {
 
         assertEquals(1, result);
 
-    }   @Test
+    }
+
+    @Test
     void updateSubprojects() throws SQLException, DefaultException {
         con = fixture.getTestConnection();
 
         subprojectMapper.createSubproject(1, "Test subprojects 1", LocalDate.of(2021,01,01), LocalDate.of(2021,01,30));
 
-        ArrayList<Subproject> subprojects = new ArrayList<Subproject>();
-        Subproject subproject1 = new Subproject();
-        subprojectMapper.getSubprojects(1).set(0,subproject1);
-        subprojects.add(subproject1);
-        subproject1.setId(1);
-        subproject1.setTitle("update s");
-        subproject1.setStartDate("2021-01-01");
-        subproject1.setDeadline("2021-12-31");
-        subproject1.setDeadlineDifference(365);
+        ArrayList<Subproject> subprojects = new ArrayList<>();
+        Subproject subproject = new Subproject();
+        subproject.setId(1);
+        subproject.setTotalWorkDays(10);
+        subproject.setTotalWorkHours(80);
+        subproject.setDeadlineDifference(365);
+        subprojects.add(subproject);
 
-       subprojectMapper.updateSubprojects(subproject1.getSubprojects());
+        subprojectMapper.updateSubprojects(subprojects);
 
         String SQL = "SELECT * FROM subproject " +
                 "LEFT JOIN project_object_info ON project_object_info.subproject_id = subproject.id " +
@@ -95,12 +96,12 @@ class SubprojectMapperTest {
         ResultSet rs = ps.executeQuery();
 
         rs.next();
-        int sampleResult1 = rs.getInt(1);
-        String sampleResult2 = rs.getString("Title");
+        int sampleResult1 = rs.getInt("total_work_days");
+        int sampleResult2 = rs.getInt("total_work_hours");
         int sampleResult3 = rs.getInt("deadline_difference");
 
-        assertEquals(1, sampleResult1);
-        assertEquals("update s", sampleResult2);
+        assertEquals(10, sampleResult1);
+        assertEquals(80, sampleResult2);
         assertEquals(365, sampleResult3);
     }
 

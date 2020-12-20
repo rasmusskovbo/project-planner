@@ -1,3 +1,4 @@
+// Rasmus
 package keastudents.projectplanner.controller;
 
 public class UserNotLoggedInException extends Exception {
