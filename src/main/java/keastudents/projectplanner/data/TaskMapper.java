@@ -57,7 +57,7 @@ public class TaskMapper {
             ps.setInt(1, workHoursNeeded);
             ps.setInt(2, extraCosts);
             ps.setInt(3, manHourCost);
-            ps.setInt(5, taskId);
+            ps.setInt(4, taskId);
             ps.executeUpdate();
 
             String objectSQL = "UPDATE project_object_info "+
