@@ -1,4 +1,4 @@
-package keastudents.projectplanner.domain;
+package keastudents.projectplanner.controller;
 
 public class UserNotLoggedInException extends Exception {
 

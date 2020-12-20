@@ -51,7 +51,7 @@ public class TaskMapper {
 
         try {
             SQL = "UPDATE task "+
-                    "SET workhours_needed = ?, extra_costs = ?, man_hour_cost = ?" +
+                    "SET workhours_needed = ?, extra_costs = ?, man_hour_cost = ? " +
                     "WHERE id = ?";
             ps = con.prepareStatement(SQL);
             ps.setInt(1, workHoursNeeded);
