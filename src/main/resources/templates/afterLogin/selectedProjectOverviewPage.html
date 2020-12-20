@@ -199,7 +199,7 @@
                                                                     </td>
 
                                                                     <td colspan="2" class="task-number-column-wrapper">
-                                                                        <input type="number" name="taskWorkHoursNeeded" value="0">
+                                                                        <input type="number" name="taskWorkHoursNeeded" min="1" value="1" required>
                                                                     </td>
 
                                                                     <td colspan="2" class="task-number-column-wrapper">
@@ -234,7 +234,7 @@
                                                                             <h2><input type="date" name="taskDeadline" min="2000-01-01" max="2099-01-01" th:value="${task.deadline}"></h2>
                                                                         </td>
                                                                         <td colspan="2" class="task-number-column-wrapper">
-                                                                            <h2><input type="number" name="taskWorkHoursNeeded" th:value="${task.workHoursNeeded}"></h2>
+                                                                            <h2><input type="number" name="taskWorkHoursNeeded" th:value="${task.workHoursNeeded}" min="1" required></h2>
                                                                         </td>
                                                                         <td colspan="2" class="task-number-column-wrapper">
                                                                             <h2><input type="number" name="taskManHourCost" th:value="${task.manHourCost}"></h2>
@@ -312,7 +312,7 @@
 
                                     <div>
                                         <h2><label for="projectBaselineHoursPrWorkday">work hours per day</label></h2>
-                                        <input type="number" id="projectBaselineHoursPrWorkday" name="projectBaselineHoursPrWorkday" max="24" th:value="${project.baselineHoursPrWorkday}">
+                                        <input type="number" id="projectBaselineHoursPrWorkday" name="projectBaselineHoursPrWorkday" min="1" max="24" th:value="${project.baselineHoursPrWorkday}">
                                     </div>
 
                                     <input type="submit" class="button" onclick="return confirm('Save Changes?')" value="Edit Project">
@@ -430,7 +430,7 @@
 
                 <div>
                     <h2><label for="workHoursPerDay">work hours per day</label></h2>
-                    <input type="number" id="workHoursPerDay" name="projectWorkHoursPerDay" max="24" value="0" required>
+                    <input type="number" id="workHoursPerDay" name="projectWorkHoursPerDay" min="1" max="24" value="8" required>
                 </div>
 
                 <input type="submit" class="button" onclick="return confirm('Create Project?')" value="Create Project">

@@ -71,10 +71,9 @@ public class Project {
 
     public void calculateProjectData() {
         calculateSubprojects();
-        // Resetting variables to avoid addition with saved values in database
-        totalWorkDays = 0;
 
         totalWorkDays = (int) Math.ceil((double) totalWorkHours / baselineHoursPrWorkday); // Rounds up
+
         estFinishedByDate = startDate.plusDays(totalWorkDays);
         deadlineDifference = (int) ChronoUnit.DAYS.between(deadline, estFinishedByDate);
 

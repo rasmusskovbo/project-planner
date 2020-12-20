@@ -141,6 +141,7 @@ public class TableWebController {
 
         LocalDate startDateFormatted = domainController.validationService.localDateFormatter(taskStartDate);
         LocalDate deadlineFormatted = domainController.validationService.validateDeadline(taskDeadline);
+        System.out.println(taskWorkHoursNeeded);
         int taskWorkHoursNeededFormatted = domainController.validationService.validateInt(taskWorkHoursNeeded);
         int taskManHourCostFormatted = domainController.validationService.validateInt(taskManHourCost);
         int taskExtraCostFormatted = domainController.validationService.validateInt(taskExtraCost);
