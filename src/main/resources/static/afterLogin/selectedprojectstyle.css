@@ -75,8 +75,13 @@ span {
     font-weight: 900;
 }
 
-.span-subproject-row-wrapper i, .span-task-row-wrapper i {
-    margin-left: 1vw;
+.span-subproject-row-wrapper i {
+    margin-left: 2vw;
+    font-size: 1vw;
+}
+
+.span-task-row-wrapper i {
+    margin-left: 4vw;
     font-size: 1vw;
 }
 
@@ -137,4 +142,8 @@ span {
     padding: 0.2vw 0 0.2vw 0.2vw;
     border-style: none;
     background-color: transparent;
+}
+
+.add-button {
+    text-align: center;
 }
