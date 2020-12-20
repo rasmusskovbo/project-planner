@@ -1,6 +1,7 @@
 package keastudents.projectplanner.data;
 
 import keastudents.projectplanner.domain.DefaultException;
+import keastudents.projectplanner.domain.Subproject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -84,5 +85,21 @@ class TaskMapperTest {
 
         assertEquals(2, result);
 
+    }
+    @Test
+    void setTask() throws SQLException {
+        con = fixture.getTestConnection();
+
+        String SQL = "SELECT * FROM project " +
+                "LEFT JOIN project_object_info ON project_object_info.project_id = project.id " +
+                "WHERE project_id = 1";
+        PreparedStatement ps = con.prepareStatement(SQL);
+        ResultSet rs = ps.executeQuery();
+
+        rs.next();
+
+        Subproject subproject = subprojectMapper.setSubproject(rs);
+
+        assertEquals("Test projekt", subproject.getTitle());
     }
 }
